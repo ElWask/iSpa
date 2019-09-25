@@ -6,3 +6,6 @@ Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.csproj.GenerateResource.Cache
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.csproj.CoreCompileInputs.cache
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.exe
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.pdb
+Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.csprojResolveAssemblyReference.cache
+Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.Main.resources
+Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.Login.resources
