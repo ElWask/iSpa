@@ -9,3 +9,14 @@ Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.pdb
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.csprojResolveAssemblyReference.cache
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.Main.resources
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.Login.resources
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\bin\Debug\iSpa.exe.config
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\bin\Debug\iSpa.exe
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\bin\Debug\iSpa.pdb
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csprojAssemblyReference.cache
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Login.resources
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Main.resources
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Properties.Resources.resources
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csproj.GenerateResource.cache
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csproj.CoreCompileInputs.cache
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.exe
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.pdb
