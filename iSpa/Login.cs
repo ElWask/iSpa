@@ -21,6 +21,10 @@ namespace iSpa
         private Button button2;
         private Button button1;
         private Boolean isEyeClosed;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
 
         public Login()
         {
@@ -70,8 +74,10 @@ namespace iSpa
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(186, 21);
             this.textBox1.TabIndex = 14;
-            this.textBox1.Text = "Username";
+            this.textBox1.Text = "admin";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.GotFocus += new System.EventHandler(this.RemoveText);
+            this.textBox1.LostFocus += new System.EventHandler(this.AddText);
             // 
             // label3
             // 
@@ -80,9 +86,8 @@ namespace iSpa
             this.label3.ForeColor = System.Drawing.Color.Red;
             this.label3.Location = new System.Drawing.Point(47, 349);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(241, 15);
+            this.label3.Size = new System.Drawing.Size(0, 15);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Erreur de mot de passe, veuillez réessayer";
             // 
             // button1
             // 
@@ -124,7 +129,7 @@ namespace iSpa
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(186, 21);
             this.textBox2.TabIndex = 18;
-            this.textBox2.Text = "Password";
+            this.textBox2.Text = "admin";
             this.textBox2.UseSystemPasswordChar = true;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.GotFocus += new System.EventHandler(this.RemoveText);
@@ -135,15 +140,16 @@ namespace iSpa
             this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.button2.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
             this.button2.ForeColor = System.Drawing.Color.Red;
             this.button2.Location = new System.Drawing.Point(373, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(30, 30);
             this.button2.TabIndex = 20;
-            this.button2.Text = "x";
+            this.button2.Text = "r";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // pictureBox1
             // 
@@ -165,7 +171,6 @@ namespace iSpa
             this.pictureBox2.Size = new System.Drawing.Size(34, 34);
             this.pictureBox2.TabIndex = 22;
             this.pictureBox2.TabStop = false;
-
             // 
             // pictureBox3
             // 
@@ -239,10 +244,22 @@ namespace iSpa
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Console.WriteLine(textBox1.Text+ textBox2.Text);
+            if(!controlAccess(textBox1.Text, textBox2.Text))
+            {
+                label3.Text = "Erreur d'identifiant, veuillez réessayer";
+                return;
+            }
             Form main = new Main();
             this.Hide();
             main.ShowDialog();
             this.Close();
+        }
+
+        private bool controlAccess(string usr, string pass)
+        {
+            if (usr.Equals("admin") && pass.Equals("admin")) return true;
+            return false;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -251,18 +268,20 @@ namespace iSpa
         }
         public void RemoveText(object sender, EventArgs e)
         {
+            TextBox txtBox = sender as TextBox;
             Console.WriteLine("remove");
-            if (this.textBox2.Text == "Password")
+            if (txtBox.Text == "admin")
             {
-                this.textBox2.Text = "";
+                txtBox.Text = "";
             }
         }
 
         public void AddText(object sender, EventArgs e)
         {
             Console.WriteLine("add");
+            TextBox txtBox = sender as TextBox;
             if (string.IsNullOrWhiteSpace(this.textBox2.Text))
-                this.textBox2.Text = "Password";
+                txtBox.Text = "admin";
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
@@ -272,14 +291,18 @@ namespace iSpa
 
         private void PictureBox4_Click(object sender, EventArgs e)
         {
+            string workingDirectory = Environment.CurrentDirectory;
+            string dir = System.IO.Directory.GetParent(workingDirectory).Parent.FullName;
             if (!this.isEyeClosed)
             {
-                this.pictureBox4.Image = Image.FromFile("C:/Users/Charly/Documents/Cours/_HEG/Genie Logiciel/iSpa/img/eye closed.png");
+                string eyeClosed = dir + "/img/eye closed.png";
+                this.pictureBox4.Image = Image.FromFile(eyeClosed);
                 this.textBox2.UseSystemPasswordChar = false;
             }
             else
             {
-                this.pictureBox4.Image = Image.FromFile("C:/Users/Charly/Documents/Cours/_HEG/Genie Logiciel/iSpa/img/eye.png");
+                string eye = dir + "/img/eye.png";
+                this.pictureBox4.Image = Image.FromFile(eye);
                 this.textBox2.UseSystemPasswordChar = true;
             }
             this.isEyeClosed = !this.isEyeClosed;
@@ -288,6 +311,11 @@ namespace iSpa
         private void PictureBox5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
