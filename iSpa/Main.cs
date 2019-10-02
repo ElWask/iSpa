@@ -35,11 +35,13 @@ namespace iSpa
             DataSet data = new DataSet();
             System.IO.StreamReader sr = new System.IO.StreamReader(fileName);
 
+            string headerLine = sr.ReadLine();
+            string[] headers = headerLine.Split(delimit.ToCharArray());
             data.Tables.Add(tableName);
-            data.Tables[tableName].Columns.Add("Date");
-            data.Tables[tableName].Columns.Add("Heure");
-            data.Tables[tableName].Columns.Add("Client");
-            data.Tables[tableName].Columns.Add("Type");
+            foreach(String h in headers)
+            {
+                data.Tables[tableName].Columns.Add(h);
+            }
 
             string allData = sr.ReadToEnd();
             string[] rows = allData.Split("\r".ToCharArray());
@@ -50,6 +52,12 @@ namespace iSpa
                 data.Tables[tableName].Rows.Add(items);
             }
             this.dataGridView1.DataSource = data.Tables[0].DefaultView;
+            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dataGridView1.Columns["Date"].DefaultCellStyle.Format = "dd.MM.yyyy";
+            this.dataGridView1.Columns["Date"].ValueType = typeof(DateTime);
+            this.dataGridView1.Columns["Date"].DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.dataGridView1.Sort(this.dataGridView1.Columns[0], ListSortDirection.Ascending);
         }
 
         private void Form2_Load(object sender, EventArgs e)
