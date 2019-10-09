@@ -28,249 +28,246 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.agenda = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.client = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.produits = new System.Windows.Forms.TabPage();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.fournisseurs = new System.Windows.Forms.TabPage();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.facturation = new System.Windows.Forms.TabPage();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.tabControl1.SuspendLayout();
-            this.agenda.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.client.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.produits.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            this.fournisseurs.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            this.facturation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            this.closeBtn = new System.Windows.Forms.Button();
+            this.picEdit = new System.Windows.Forms.PictureBox();
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblWelcome = new System.Windows.Forms.Label();
+            this.pictLogo = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnFacture = new System.Windows.Forms.Button();
+            this.btnProduit = new System.Windows.Forms.Button();
+            this.btnAgenda = new System.Windows.Forms.Button();
+            this.btnClient = new System.Windows.Forms.Button();
+            this.btnAgrandir = new System.Windows.Forms.Button();
+            this.btnReduc = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.picEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictLogo)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // closeBtn
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.closeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.closeBtn.FlatAppearance.BorderSize = 0;
+            this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeBtn.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
+            this.closeBtn.ForeColor = System.Drawing.Color.Red;
+            this.closeBtn.Location = new System.Drawing.Point(1171, -1);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(30, 30);
+            this.closeBtn.TabIndex = 21;
+            this.closeBtn.Text = "r";
+            this.closeBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // picEdit
+            // 
+            this.picEdit.Location = new System.Drawing.Point(210, 0);
+            this.picEdit.Name = "picEdit";
+            this.picEdit.Size = new System.Drawing.Size(50, 50);
+            this.picEdit.TabIndex = 23;
+            this.picEdit.TabStop = false;
+            this.picEdit.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // dgv
+            // 
+            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.agenda);
-            this.tabControl1.Controls.Add(this.client);
-            this.tabControl1.Controls.Add(this.produits);
-            this.tabControl1.Controls.Add(this.fournisseurs);
-            this.tabControl1.Controls.Add(this.facturation);
-            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabControl1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(12, 49);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1160, 500);
-            this.tabControl1.TabIndex = 0;
+            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
+            this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Location = new System.Drawing.Point(210, 50);
+            this.dgv.Name = "dgv";
+            this.dgv.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgv.RowHeadersVisible = false;
+            this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgv.Size = new System.Drawing.Size(990, 610);
+            this.dgv.TabIndex = 24;
             // 
-            // agenda
+            // panel1
             // 
-            this.agenda.Controls.Add(this.dataGridView1);
-            this.agenda.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.agenda.Location = new System.Drawing.Point(4, 36);
-            this.agenda.Name = "agenda";
-            this.agenda.Padding = new System.Windows.Forms.Padding(3);
-            this.agenda.Size = new System.Drawing.Size(1152, 460);
-            this.agenda.TabIndex = 0;
-            this.agenda.Text = "Agenda";
-            this.agenda.UseVisualStyleBackColor = true;
-            this.agenda.Click += new System.EventHandler(this.tabPage1_Click);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(191)))), ((int)(((byte)(209)))));
+            this.panel1.Controls.Add(this.lblWelcome);
+            this.panel1.Controls.Add(this.pictLogo);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(210, 660);
+            this.panel1.TabIndex = 25;
             // 
-            // dataGridView1
+            // lblWelcome
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Aqua;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Fuchsia;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dataGridView1.Location = new System.Drawing.Point(6, 6);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(1140, 462);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.lblWelcome.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(0, 130);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(163, 37);
+            this.lblWelcome.TabIndex = 28;
+            this.lblWelcome.Text = "lblWelcome";
             // 
-            // client
+            // pictLogo
             // 
-            this.client.Controls.Add(this.dataGridView2);
-            this.client.Font = new System.Drawing.Font("Arial", 21.75F);
-            this.client.Location = new System.Drawing.Point(4, 36);
-            this.client.Name = "client";
-            this.client.Padding = new System.Windows.Forms.Padding(3);
-            this.client.Size = new System.Drawing.Size(1152, 460);
-            this.client.TabIndex = 1;
-            this.client.Text = "Clients";
-            this.client.UseVisualStyleBackColor = true;
+            this.pictLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictLogo.Image")));
+            this.pictLogo.Location = new System.Drawing.Point(0, 0);
+            this.pictLogo.Name = "pictLogo";
+            this.pictLogo.Size = new System.Drawing.Size(210, 122);
+            this.pictLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictLogo.TabIndex = 27;
+            this.pictLogo.TabStop = false;
             // 
-            // dataGridView2
+            // panel2
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 6);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1140, 462);
-            this.dataGridView2.TabIndex = 3;
+            this.panel2.AutoSize = true;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(122)))), ((int)(((byte)(157)))));
+            this.panel2.Controls.Add(this.btnFacture);
+            this.panel2.Controls.Add(this.btnProduit);
+            this.panel2.Controls.Add(this.btnAgenda);
+            this.panel2.Controls.Add(this.btnClient);
+            this.panel2.Location = new System.Drawing.Point(0, 180);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(210, 480);
+            this.panel2.TabIndex = 26;
             // 
-            // produits
+            // btnFacture
             // 
-            this.produits.Controls.Add(this.dataGridView3);
-            this.produits.Font = new System.Drawing.Font("Arial", 21.75F);
-            this.produits.Location = new System.Drawing.Point(4, 36);
-            this.produits.Name = "produits";
-            this.produits.Padding = new System.Windows.Forms.Padding(3);
-            this.produits.Size = new System.Drawing.Size(1152, 460);
-            this.produits.TabIndex = 2;
-            this.produits.Text = "Produits";
-            this.produits.UseVisualStyleBackColor = true;
+            this.btnFacture.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnFacture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFacture.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnFacture.Location = new System.Drawing.Point(0, 151);
+            this.btnFacture.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFacture.Name = "btnFacture";
+            this.btnFacture.Size = new System.Drawing.Size(210, 50);
+            this.btnFacture.TabIndex = 3;
+            this.btnFacture.Text = "btnFacture";
+            this.btnFacture.UseVisualStyleBackColor = false;
             // 
-            // dataGridView3
+            // btnProduit
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(6, 6);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(1140, 462);
-            this.dataGridView3.TabIndex = 3;
+            this.btnProduit.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnProduit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProduit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnProduit.Location = new System.Drawing.Point(0, 101);
+            this.btnProduit.Margin = new System.Windows.Forms.Padding(0);
+            this.btnProduit.Name = "btnProduit";
+            this.btnProduit.Size = new System.Drawing.Size(210, 50);
+            this.btnProduit.TabIndex = 2;
+            this.btnProduit.Text = "btnProduit";
+            this.btnProduit.UseVisualStyleBackColor = false;
             // 
-            // fournisseurs
+            // btnAgenda
             // 
-            this.fournisseurs.Controls.Add(this.dataGridView4);
-            this.fournisseurs.Font = new System.Drawing.Font("Arial", 21.75F);
-            this.fournisseurs.Location = new System.Drawing.Point(4, 36);
-            this.fournisseurs.Name = "fournisseurs";
-            this.fournisseurs.Padding = new System.Windows.Forms.Padding(3);
-            this.fournisseurs.Size = new System.Drawing.Size(1152, 460);
-            this.fournisseurs.TabIndex = 3;
-            this.fournisseurs.Text = "Fournisseurs";
-            this.fournisseurs.UseVisualStyleBackColor = true;
+            this.btnAgenda.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAgenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgenda.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnAgenda.Location = new System.Drawing.Point(0, 1);
+            this.btnAgenda.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAgenda.Name = "btnAgenda";
+            this.btnAgenda.Size = new System.Drawing.Size(210, 50);
+            this.btnAgenda.TabIndex = 1;
+            this.btnAgenda.Text = "btnAgenda";
+            this.btnAgenda.UseVisualStyleBackColor = false;
+            this.btnAgenda.Click += new System.EventHandler(this.btnAgenda_Click);
             // 
-            // dataGridView4
+            // btnClient
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(6, 6);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(1140, 462);
-            this.dataGridView4.TabIndex = 3;
+            this.btnClient.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnClient.Location = new System.Drawing.Point(0, 51);
+            this.btnClient.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClient.Name = "btnClient";
+            this.btnClient.Size = new System.Drawing.Size(210, 50);
+            this.btnClient.TabIndex = 0;
+            this.btnClient.Text = "btnClient";
+            this.btnClient.UseVisualStyleBackColor = false;
+            this.btnClient.Click += new System.EventHandler(this.btnClient_Click);
             // 
-            // facturation
+            // btnAgrandir
             // 
-            this.facturation.Controls.Add(this.dataGridView5);
-            this.facturation.Font = new System.Drawing.Font("Arial", 21.75F);
-            this.facturation.Location = new System.Drawing.Point(4, 36);
-            this.facturation.Name = "facturation";
-            this.facturation.Size = new System.Drawing.Size(1152, 460);
-            this.facturation.TabIndex = 4;
-            this.facturation.Text = "Facturation";
+            this.btnAgrandir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAgrandir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAgrandir.FlatAppearance.BorderSize = 0;
+            this.btnAgrandir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgrandir.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
+            this.btnAgrandir.ForeColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAgrandir.Location = new System.Drawing.Point(1141, -1);
+            this.btnAgrandir.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAgrandir.Name = "btnAgrandir";
+            this.btnAgrandir.Size = new System.Drawing.Size(30, 30);
+            this.btnAgrandir.TabIndex = 26;
+            this.btnAgrandir.Text = "1";
+            this.btnAgrandir.UseVisualStyleBackColor = true;
+            this.btnAgrandir.Click += new System.EventHandler(this.btnAgrandir_Click);
             // 
-            // dataGridView5
+            // btnReduc
             // 
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(6, 6);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(1140, 462);
-            this.dataGridView5.TabIndex = 4;
-            // 
-            // button2
-            // 
-            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.Red;
-            this.button2.Location = new System.Drawing.Point(1156, -1);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 30);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "r";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 22;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(1103, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox2.TabIndex = 23;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.btnReduc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReduc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReduc.FlatAppearance.BorderSize = 0;
+            this.btnReduc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReduc.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
+            this.btnReduc.ForeColor = System.Drawing.Color.LightSkyBlue;
+            this.btnReduc.Location = new System.Drawing.Point(1111, -1);
+            this.btnReduc.Margin = new System.Windows.Forms.Padding(0);
+            this.btnReduc.Name = "btnReduc";
+            this.btnReduc.Size = new System.Drawing.Size(30, 30);
+            this.btnReduc.TabIndex = 27;
+            this.btnReduc.Text = "0";
+            this.btnReduc.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.ClientSize = new System.Drawing.Size(1184, 661);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(1200, 660);
+            this.Controls.Add(this.btnReduc);
+            this.Controls.Add(this.btnAgrandir);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.dgv);
+            this.Controls.Add(this.picEdit);
+            this.Controls.Add(this.closeBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome";
             this.Load += new System.EventHandler(this.Form2_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.agenda.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.client.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.produits.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            this.fournisseurs.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            this.facturation.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictLogo)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage agenda;
-        private System.Windows.Forms.TabPage client;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.TabPage produits;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.TabPage fournisseurs;
-        private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.TabPage facturation;
-        private System.Windows.Forms.DataGridView dataGridView5;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button closeBtn;
+        private System.Windows.Forms.PictureBox picEdit;
+        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblWelcome;
+        private System.Windows.Forms.PictureBox pictLogo;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnFacture;
+        private System.Windows.Forms.Button btnProduit;
+        private System.Windows.Forms.Button btnAgenda;
+        private System.Windows.Forms.Button btnClient;
+        private System.Windows.Forms.Button btnAgrandir;
+        private System.Windows.Forms.Button btnReduc;
     }
 }
