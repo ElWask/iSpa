@@ -169,6 +169,11 @@ namespace iSpa
             loadClient();
         }
 
+        private void btnReduc_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
         private void btnAgrandir_Click(object sender, EventArgs e)
         {
 
