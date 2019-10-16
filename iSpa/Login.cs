@@ -15,21 +15,21 @@ namespace iSpa
         private bool mouseDown;
         private Point lastLocation;
 
-        private Label label1;
-        private TextBox textBox1;
+        private Label lblTitle;
+        private TextBox txtBoxUsername;
         private Label label3;
         private Panel panel1;
         private Panel panel2;
-        private TextBox textBox2;
-        private Button button2;
-        private Button button1;
+        private TextBox txtBoxPass;
+        private Button btnClose;
+        private Button btnLogin;
         private Boolean isEyeClosed;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox picBoxLogo;
+        private System.Windows.Forms.PictureBox picBoxUser;
+        private System.Windows.Forms.PictureBox picBoxPass;
         private Panel topPanel;
         private Button btnReduc;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox picBoxEye;
 
         public Login()
         {
@@ -39,53 +39,53 @@ namespace iSpa
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.txtBoxUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.txtBoxPass = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.picBoxLogo = new System.Windows.Forms.PictureBox();
+            this.picBoxUser = new System.Windows.Forms.PictureBox();
+            this.picBoxPass = new System.Windows.Forms.PictureBox();
+            this.picBoxEye = new System.Windows.Forms.PictureBox();
             this.topPanel = new System.Windows.Forms.Panel();
             this.btnReduc = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxPass)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxEye)).BeginInit();
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 37F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Location = new System.Drawing.Point(156, 110);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 42);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "iSpa";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Arial", 37F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTitle.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblTitle.Location = new System.Drawing.Point(156, 110);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(91, 42);
+            this.lblTitle.TabIndex = 1;
+            this.lblTitle.Text = "iSpa";
+            this.lblTitle.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // txtBoxUsername
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox1.Location = new System.Drawing.Point(90, 183);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(186, 21);
-            this.textBox1.TabIndex = 14;
-            this.textBox1.Text = "admin";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.GotFocus += new System.EventHandler(this.RemoveText);
-            this.textBox1.LostFocus += new System.EventHandler(this.AddText);
+            this.txtBoxUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
+            this.txtBoxUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBoxUsername.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBoxUsername.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtBoxUsername.Location = new System.Drawing.Point(90, 183);
+            this.txtBoxUsername.Name = "txtBoxUsername";
+            this.txtBoxUsername.Size = new System.Drawing.Size(186, 21);
+            this.txtBoxUsername.TabIndex = 0;
+            this.txtBoxUsername.Text = "Username";
+            this.txtBoxUsername.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtBoxUsername.GotFocus += new System.EventHandler(this.RemoveText);
+            this.txtBoxUsername.LostFocus += new System.EventHandler(this.AddText);
             // 
             // label3
             // 
@@ -97,21 +97,21 @@ namespace iSpa
             this.label3.Size = new System.Drawing.Size(0, 15);
             this.label3.TabIndex = 12;
             // 
-            // button1
+            // btnLogin
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(50, 400);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(300, 42);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Connexion";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnLogin.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLogin.Location = new System.Drawing.Point(50, 400);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(300, 42);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "Connexion";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
@@ -129,85 +129,85 @@ namespace iSpa
             this.panel2.Size = new System.Drawing.Size(300, 1);
             this.panel2.TabIndex = 19;
             // 
-            // textBox2
+            // txtBoxPass
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox2.Location = new System.Drawing.Point(90, 266);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(186, 21);
-            this.textBox2.TabIndex = 18;
-            this.textBox2.Text = "admin";
-            this.textBox2.UseSystemPasswordChar = true;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.textBox2.GotFocus += new System.EventHandler(this.RemoveText);
-            this.textBox2.LostFocus += new System.EventHandler(this.AddText);
+            this.txtBoxPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
+            this.txtBoxPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBoxPass.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBoxPass.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtBoxPass.Location = new System.Drawing.Point(90, 266);
+            this.txtBoxPass.Name = "txtBoxPass";
+            this.txtBoxPass.Size = new System.Drawing.Size(186, 21);
+            this.txtBoxPass.TabIndex = 1;
+            this.txtBoxPass.Text = "Username";
+            this.txtBoxPass.UseSystemPasswordChar = true;
+            this.txtBoxPass.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtBoxPass.GotFocus += new System.EventHandler(this.RemoveText);
+            this.txtBoxPass.LostFocus += new System.EventHandler(this.AddText);
             // 
-            // button2
+            // btnClose
             // 
-            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.Red;
-            this.button2.Location = new System.Drawing.Point(370, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 30);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "r";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnClose.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
+            this.btnClose.ForeColor = System.Drawing.Color.Red;
+            this.btnClose.Location = new System.Drawing.Point(370, 0);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(30, 30);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "r";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.button2_Click);
             // 
-            // pictureBox1
+            // picBoxLogo
             // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(166, 40);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(68, 65);
-            this.pictureBox1.TabIndex = 21;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
+            this.picBoxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("picBoxLogo.Image")));
+            this.picBoxLogo.Location = new System.Drawing.Point(166, 40);
+            this.picBoxLogo.Margin = new System.Windows.Forms.Padding(0);
+            this.picBoxLogo.Name = "picBoxLogo";
+            this.picBoxLogo.Size = new System.Drawing.Size(68, 65);
+            this.picBoxLogo.TabIndex = 21;
+            this.picBoxLogo.TabStop = false;
+            this.picBoxLogo.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
-            // pictureBox2
+            // picBoxUser
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(50, 170);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(34, 34);
-            this.pictureBox2.TabIndex = 22;
-            this.pictureBox2.TabStop = false;
+            this.picBoxUser.Image = ((System.Drawing.Image)(resources.GetObject("picBoxUser.Image")));
+            this.picBoxUser.Location = new System.Drawing.Point(50, 170);
+            this.picBoxUser.Name = "picBoxUser";
+            this.picBoxUser.Size = new System.Drawing.Size(34, 34);
+            this.picBoxUser.TabIndex = 22;
+            this.picBoxUser.TabStop = false;
             // 
-            // pictureBox3
+            // picBoxPass
             // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(50, 253);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(34, 34);
-            this.pictureBox3.TabIndex = 23;
-            this.pictureBox3.TabStop = false;
+            this.picBoxPass.Image = ((System.Drawing.Image)(resources.GetObject("picBoxPass.Image")));
+            this.picBoxPass.Location = new System.Drawing.Point(50, 253);
+            this.picBoxPass.Name = "picBoxPass";
+            this.picBoxPass.Size = new System.Drawing.Size(34, 34);
+            this.picBoxPass.TabIndex = 23;
+            this.picBoxPass.TabStop = false;
             // 
-            // pictureBox4
+            // picBoxEye
             // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(316, 256);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(34, 31);
-            this.pictureBox4.TabIndex = 24;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.PictureBox4_Click);
+            this.picBoxEye.Image = ((System.Drawing.Image)(resources.GetObject("picBoxEye.Image")));
+            this.picBoxEye.Location = new System.Drawing.Point(316, 256);
+            this.picBoxEye.Name = "picBoxEye";
+            this.picBoxEye.Size = new System.Drawing.Size(34, 31);
+            this.picBoxEye.TabIndex = 24;
+            this.picBoxEye.TabStop = false;
+            this.picBoxEye.Click += new System.EventHandler(this.PictureBox4_Click);
             // 
             // topPanel
             // 
             this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
             this.topPanel.Controls.Add(this.btnReduc);
-            this.topPanel.Controls.Add(this.button2);
+            this.topPanel.Controls.Add(this.btnClose);
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(400, 30);
@@ -229,7 +229,7 @@ namespace iSpa
             this.btnReduc.Margin = new System.Windows.Forms.Padding(0);
             this.btnReduc.Name = "btnReduc";
             this.btnReduc.Size = new System.Drawing.Size(30, 30);
-            this.btnReduc.TabIndex = 28;
+            this.btnReduc.TabIndex = 0;
             this.btnReduc.Text = "0";
             this.btnReduc.UseVisualStyleBackColor = true;
             this.btnReduc.Click += new System.EventHandler(this.btnReduc_Click);
@@ -238,17 +238,17 @@ namespace iSpa
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
             this.ClientSize = new System.Drawing.Size(400, 500);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picBoxEye);
+            this.Controls.Add(this.picBoxPass);
+            this.Controls.Add(this.picBoxUser);
+            this.Controls.Add(this.picBoxLogo);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtBoxPass);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.txtBoxUsername);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.topPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Login";
@@ -256,10 +256,10 @@ namespace iSpa
             this.Text = "Login";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Login_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxPass)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxEye)).EndInit();
             this.topPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -288,8 +288,8 @@ namespace iSpa
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(textBox1.Text+ textBox2.Text);
-            if(!controlAccess(textBox1.Text, textBox2.Text))
+            Console.WriteLine(txtBoxUsername.Text+ txtBoxPass.Text);
+            if(!controlAccess(txtBoxUsername.Text, txtBoxPass.Text))
             {
                 label3.Text = "Erreur d'identifiant, veuillez réessayer";
                 return;
@@ -313,8 +313,7 @@ namespace iSpa
         public void RemoveText(object sender, EventArgs e)
         {
             TextBox txtBox = sender as TextBox;
-            Console.WriteLine("remove");
-            if (txtBox.Text == "admin")
+            if (txtBox.Text == "Username")
             {
                 txtBox.Text = "";
             }
@@ -322,10 +321,9 @@ namespace iSpa
 
         public void AddText(object sender, EventArgs e)
         {
-            Console.WriteLine("add");
             TextBox txtBox = sender as TextBox;
-            if (string.IsNullOrWhiteSpace(this.textBox2.Text))
-                txtBox.Text = "admin";
+            if (string.IsNullOrWhiteSpace(this.txtBoxPass.Text))
+                txtBox.Text = "Username";
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
@@ -340,14 +338,14 @@ namespace iSpa
             if (!this.isEyeClosed)
             {
                 string eyeClosed = dir + "/img/eye closed.png";
-                this.pictureBox4.Image = Image.FromFile(eyeClosed);
-                this.textBox2.UseSystemPasswordChar = false;
+                this.picBoxEye.Image = Image.FromFile(eyeClosed);
+                this.txtBoxPass.UseSystemPasswordChar = false;
             }
             else
             {
                 string eye = dir + "/img/eye.png";
-                this.pictureBox4.Image = Image.FromFile(eye);
-                this.textBox2.UseSystemPasswordChar = true;
+                this.picBoxEye.Image = Image.FromFile(eye);
+                this.txtBoxPass.UseSystemPasswordChar = true;
             }
             this.isEyeClosed = !this.isEyeClosed;
         }
