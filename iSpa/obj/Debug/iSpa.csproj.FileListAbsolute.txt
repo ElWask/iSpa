@@ -17,6 +17,6 @@ C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Log
 C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Main.resources
 C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Properties.Resources.resources
 C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csproj.GenerateResource.cache
-C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csproj.CoreCompileInputs.cache
 C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.exe
 C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.pdb
+C:\Users\Charly\Documents\Cours\_HEG\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.AddRow.resources

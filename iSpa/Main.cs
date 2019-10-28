@@ -12,7 +12,13 @@ namespace iSpa
 {
     public partial class Main : Form
     {
+        private bool mouseDown;
+        private Point lastLocation;
+        private String dir = "";
         private Boolean canEdit, isReduc;
+        private DataTable _CurrentDataTable;
+        private String _CurrentTitle;
+        private String[] _CurrentHeader;
         public Main()
         {
             InitializeComponent();
@@ -21,101 +27,63 @@ namespace iSpa
 
         private void RunComponent()
         {
-            loadAgenda();
+            loadComponent();
+            loadDataInGrid("agendas");
         }
 
-        private void loadAgenda()
+        private void loadComponent()
         {
             string workingDirectory = Environment.CurrentDirectory;
-            string dir = System.IO.Directory.GetParent(workingDirectory).Parent.FullName;
+            dir = System.IO.Directory.GetParent(workingDirectory).Parent.FullName;
 
             //load image picture
-
             string edit = dir + "/img/edit.png";
             this.picEdit.Image = Image.FromFile(edit);
+        }
 
+        private void loadDataInGrid(String xFileName)
+        {
+            _CurrentTitle = xFileName;
             // read datas and put them in datagridview1
             string delimit = ",";
             string tableName = "Table";
-            string fileName = dir + "/datas/agenda.csv";
+            string pathName = dir + "/datas/" + xFileName + ".csv";
 
             DataSet data = new DataSet();
-            System.IO.StreamReader sr = new System.IO.StreamReader(fileName);
+            System.IO.StreamReader sr = new System.IO.StreamReader(pathName);
 
             string headerLine = sr.ReadLine();
-            string[] headers = headerLine.Split(delimit.ToCharArray());
+            _CurrentHeader = headerLine.Split(delimit.ToCharArray());
             data.Tables.Add(tableName);
-            foreach(String h in headers)
+            foreach (String h in _CurrentHeader)
             {
                 data.Tables[tableName].Columns.Add(h);
             }
-
-
-
-
+            Console.WriteLine(data.Tables);
             string allData = sr.ReadToEnd();
-            string[] rows = allData.Split("\r".ToCharArray());
-
-            foreach(string r in rows)
-            {
-                string[] items = r.Split(delimit.ToCharArray());
-                data.Tables[tableName].Rows.Add(items);
-            }
-            this.dgv.DataSource = data.Tables[0].DefaultView;
-            this.dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dgv.Sort(this.dgv.Columns[0], ListSortDirection.Ascending);
-            this.dgv.ReadOnly = true;
-        }
-
-        private void loadClient()
-        {
-            string workingDirectory = Environment.CurrentDirectory;
-            string dir = System.IO.Directory.GetParent(workingDirectory).Parent.FullName;
-
-            //load image picture
-
-            string edit = dir + "/img/edit.png";
-            this.picEdit.Image = Image.FromFile(edit);
-
-            // read datas and put them in datagridview1
-            string delimit = ",";
-            string tableName = "Table";
-            string fileName = dir + "/datas/client.csv";
-
-            DataSet data = new DataSet();
-            System.IO.StreamReader sr = new System.IO.StreamReader(fileName);
-
-            string headerLine = sr.ReadLine();
-            string[] headers = headerLine.Split(delimit.ToCharArray());
-            data.Tables.Add(tableName);
-            foreach (String h in headers)
-            {
-                data.Tables[tableName].Columns.Add(h);
-            }
-
-
-
-
-            string allData = sr.ReadToEnd();
-            string[] rows = allData.Split("\r".ToCharArray());
+            string[] rows = allData.Split("\n".ToCharArray());
 
             foreach (string r in rows)
             {
                 string[] items = r.Split(delimit.ToCharArray());
+                if (items.Length != _CurrentHeader.Length)
+                {
+                    Console.WriteLine("Error with row : " + r);
+                    continue;
+                }
+                    
                 data.Tables[tableName].Rows.Add(items);
             }
+            _CurrentDataTable = data.Tables[0];
             this.dgv.DataSource = data.Tables[0].DefaultView;
             this.dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgv.Sort(this.dgv.Columns[0], ListSortDirection.Ascending);
             this.dgv.ReadOnly = true;
         }
-
+         
         private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
 
         private void button2_Click(object sender, EventArgs e)
@@ -161,17 +129,145 @@ namespace iSpa
 
         private void btnAgenda_Click(object sender, EventArgs e)
         {
-            loadAgenda();
+            loadDataInGrid("agendas");
         }
 
         private void btnClient_Click(object sender, EventArgs e)
         {
-            loadClient();
+            loadDataInGrid("clients");
         }
 
         private void btnReduc_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tlpButtons_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictLogo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFacture_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnProduit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tlbMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tlpHeader_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dgv_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnFacture_Click_1(object sender, EventArgs e)
+        {
+            loadDataInGrid("factures");
+        }
+
+        private void tlpHeader_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+        private void tlpHeader_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void tlpHeader_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void tlpHeader_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void tlbMain_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictLogo_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnProduit_Click_1(object sender, EventArgs e)
+        {
+            loadDataInGrid("products");
+        }
+
+        private void lblWelcome_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tlpButtons_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+            loadDataInGrid("users");
+        }
+
+        private void picAdd_Click(object sender, EventArgs e)
+        {
+            Form addRow = new AddRow(this, _CurrentTitle, _CurrentHeader);
+            addRow.ShowDialog();  
+        }
+
+        public void addRow(DateTime xDate, DateTime xhour, String xName, String xType)
+        {
+            String[] items = new String[]{
+                xDate.ToString(),
+                xhour.ToString(),
+                xName,
+                xType,
+            };
+            DataRow newRow = _CurrentDataTable.NewRow();
+            newRow[0] = items[0];
+            newRow[1] = items[1];
+            newRow[2] = items[2];
+            newRow[3] = items[3];
+            _CurrentDataTable.Rows.Add(newRow);
         }
 
         private void btnAgrandir_Click(object sender, EventArgs e)

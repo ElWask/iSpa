@@ -142,6 +142,7 @@ namespace iSpa
             this.txtBoxPass.Text = "Username";
             this.txtBoxPass.UseSystemPasswordChar = true;
             this.txtBoxPass.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtBoxPass.KeyUp += this.textBox2_KeyUp;
             this.txtBoxPass.GotFocus += new System.EventHandler(this.RemoveText);
             this.txtBoxPass.LostFocus += new System.EventHandler(this.AddText);
             // 
@@ -288,16 +289,7 @@ namespace iSpa
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(txtBoxUsername.Text+ txtBoxPass.Text);
-            if(!controlAccess(txtBoxUsername.Text, txtBoxPass.Text))
-            {
-                label3.Text = "Erreur d'identifiant, veuillez réessayer";
-                return;
-            }
-            Form main = new Main();
-            this.Hide();
-            main.ShowDialog();
-            this.Close();
+            loginCred();
         }
 
         private bool controlAccess(string usr, string pass)
@@ -309,6 +301,27 @@ namespace iSpa
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                loginCred();
+            }
+        }
+
+        private void loginCred()
+        {
+            Console.WriteLine(txtBoxUsername.Text + txtBoxPass.Text);
+            if (!controlAccess(txtBoxUsername.Text, txtBoxPass.Text))
+            {
+                label3.Text = "Erreur d'identifiant, veuillez réessayer";
+                return;
+            }
+            Form main = new Main();
+            this.Hide();
+            main.ShowDialog();
+            this.Close();
         }
         public void RemoveText(object sender, EventArgs e)
         {
