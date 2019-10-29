@@ -478,16 +478,86 @@ namespace iSpa
         private void btnSave_Click(object sender, EventArgs e)
         {
             DateTime date, heure;
-            String nom, type;
-            TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate"));
-            date = Convert.ToDateTime(textBox.Text);
-            textBox = _Inputs.Find(x => x.Name.Contains("txtBoxHeure"));
-            heure = Convert.ToDateTime(textBox.Text);
-            textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
-            nom = txtBoxName.Text;
-            textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
-            type = txtBoxType.Text;
-            _MotherForm.addRow(date, heure, nom, type);
+            String nom, type, first_name, last_name, email, adresse, dob, prix, desc, four;
+            long id;
+            Boolean hasPayed, isActif;
+
+            if (_Title.Equals("agenda"))
+            {
+                
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate"));
+                date = Convert.ToDateTime(textBox.Text);
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxHeure"));
+                heure = Convert.ToDateTime(textBox.Text);
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
+                nom = txtBoxName.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
+                type = txtBoxType.Text;
+                _MotherForm.addRow(date, heure, nom, type);
+            }
+
+            if (_Title.Equals("clients"))
+            {
+                //id,first_name,last_name,d.o.b,email,adresse
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxfirst_name"));
+                first_name = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxlast_name"));
+                last_name = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxd.o.b"));
+                dob = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxemail"));
+                email = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxadresse"));
+                adresse = textBox.Text;
+                //_MotherForm.addRow(first_name, last_name, dob, email, adresse);
+            }
+
+            if (_Title.Equals("factures"))
+            {
+                //Date d'ouverture,ID Client,Nom Client,Type,Prix,Payé
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate d'ouverture"));
+                date = Convert.ToDateTime(textBox.Text);
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxID Client"));
+                id = long.Parse(textBox.Text);
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom Client"));
+                nom = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
+                type = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxPrix"));
+                prix = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxPayé"));
+                hasPayed = Convert.ToBoolean(textBox.Text);
+                //_MotherForm.addRow(date, id, nom, type, prix, hasPayed);
+            }
+            if (_Title.Equals("products"))
+            {
+                //id,nom,description,fournisseur,prix
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxid"));
+                id = long.Parse(textBox.Text);
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
+                nom = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxdescription"));
+                desc = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxfournisseur"));
+                four = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxprix"));
+                prix = textBox.Text;
+                //_MotherForm.addRow(id, nom, desc, four, prix);
+            }
+
+            if (_Title.Equals("users"))
+            {
+                //ID Utilisateur,Nom Utilisateur,Type,Actif
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxID Utilisateur"));
+                id = long.Parse(textBox.Text);
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom Utilisateur"));
+                nom = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
+                type = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxActif"));
+                isActif = Convert.ToBoolean(textBox.Text);
+                //_MotherForm.addRow(id, nom, type, isActif);
+            }
         }
     }
 }

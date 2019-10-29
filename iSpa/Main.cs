@@ -28,7 +28,7 @@ namespace iSpa
         private void RunComponent()
         {
             loadComponent();
-            loadDataInGrid("agendas");
+            loadDataInGrid("agenda");
         }
 
         private void loadComponent()
@@ -129,7 +129,7 @@ namespace iSpa
 
         private void btnAgenda_Click(object sender, EventArgs e)
         {
-            loadDataInGrid("agendas");
+            loadDataInGrid("agenda");
         }
 
         private void btnClient_Click(object sender, EventArgs e)

@@ -28,10 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlpHeader = new System.Windows.Forms.TableLayoutPanel();
+            this.picAdd = new System.Windows.Forms.PictureBox();
+            this.closeBtn = new System.Windows.Forms.Button();
+            this.btnAgrandir = new System.Windows.Forms.Button();
+            this.btnReduc = new System.Windows.Forms.Button();
+            this.picEdit = new System.Windows.Forms.PictureBox();
             this.tlbMain = new System.Windows.Forms.TableLayoutPanel();
+            this.dgv = new System.Windows.Forms.DataGridView();
             this.btnClient = new System.Windows.Forms.Button();
             this.btnProduit = new System.Windows.Forms.Button();
             this.btnFacture = new System.Windows.Forms.Button();
@@ -39,20 +45,14 @@
             this.pictLogo = new System.Windows.Forms.PictureBox();
             this.btnAgenda = new System.Windows.Forms.Button();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.btnReduc = new System.Windows.Forms.Button();
-            this.btnAgrandir = new System.Windows.Forms.Button();
-            this.dgv = new System.Windows.Forms.DataGridView();
-            this.picEdit = new System.Windows.Forms.PictureBox();
-            this.closeBtn = new System.Windows.Forms.Button();
             this.btnUsers = new System.Windows.Forms.Button();
-            this.picAdd = new System.Windows.Forms.PictureBox();
             this.tlpHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAdd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEdit)).BeginInit();
             this.tlbMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictLogo)).BeginInit();
             this.tlpButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picEdit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picAdd)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpHeader
@@ -83,6 +83,85 @@
             this.tlpHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tlpHeader_MouseMove);
             this.tlpHeader.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tlpHeader_MouseUp);
             // 
+            // picAdd
+            // 
+            this.picAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picAdd.Image = ((System.Drawing.Image)(resources.GetObject("picAdd.Image")));
+            this.picAdd.Location = new System.Drawing.Point(40, 0);
+            this.picAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.picAdd.Name = "picAdd";
+            this.picAdd.Size = new System.Drawing.Size(40, 40);
+            this.picAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picAdd.TabIndex = 28;
+            this.picAdd.TabStop = false;
+            this.picAdd.Click += new System.EventHandler(this.picAdd_Click);
+            // 
+            // closeBtn
+            // 
+            this.closeBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.closeBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.closeBtn.FlatAppearance.BorderSize = 0;
+            this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeBtn.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
+            this.closeBtn.ForeColor = System.Drawing.Color.Red;
+            this.closeBtn.Location = new System.Drawing.Point(950, 0);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(40, 40);
+            this.closeBtn.TabIndex = 21;
+            this.closeBtn.Text = "r";
+            this.closeBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnAgrandir
+            // 
+            this.btnAgrandir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAgrandir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAgrandir.FlatAppearance.BorderSize = 0;
+            this.btnAgrandir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgrandir.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
+            this.btnAgrandir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(191)))), ((int)(((byte)(209)))));
+            this.btnAgrandir.Location = new System.Drawing.Point(910, 0);
+            this.btnAgrandir.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAgrandir.Name = "btnAgrandir";
+            this.btnAgrandir.Size = new System.Drawing.Size(40, 40);
+            this.btnAgrandir.TabIndex = 26;
+            this.btnAgrandir.Text = "1";
+            this.btnAgrandir.UseVisualStyleBackColor = true;
+            this.btnAgrandir.Click += new System.EventHandler(this.btnAgrandir_Click);
+            // 
+            // btnReduc
+            // 
+            this.btnReduc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReduc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReduc.FlatAppearance.BorderSize = 0;
+            this.btnReduc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReduc.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
+            this.btnReduc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(191)))), ((int)(((byte)(209)))));
+            this.btnReduc.Location = new System.Drawing.Point(870, 0);
+            this.btnReduc.Margin = new System.Windows.Forms.Padding(0);
+            this.btnReduc.Name = "btnReduc";
+            this.btnReduc.Size = new System.Drawing.Size(40, 40);
+            this.btnReduc.TabIndex = 27;
+            this.btnReduc.Text = "0";
+            this.btnReduc.UseVisualStyleBackColor = true;
+            this.btnReduc.Click += new System.EventHandler(this.btnReduc_Click);
+            // 
+            // picEdit
+            // 
+            this.picEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picEdit.Image = ((System.Drawing.Image)(resources.GetObject("picEdit.Image")));
+            this.picEdit.Location = new System.Drawing.Point(0, 0);
+            this.picEdit.Margin = new System.Windows.Forms.Padding(0);
+            this.picEdit.Name = "picEdit";
+            this.picEdit.Size = new System.Drawing.Size(40, 40);
+            this.picEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picEdit.TabIndex = 23;
+            this.picEdit.TabStop = false;
+            this.picEdit.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // tlbMain
             // 
             this.tlbMain.ColumnCount = 1;
@@ -99,6 +178,37 @@
             this.tlbMain.TabIndex = 30;
             this.tlbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.tlbMain_Paint_1);
             // 
+            // dgv
+            // 
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
+            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
+            this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
+            this.dgv.Location = new System.Drawing.Point(3, 43);
+            this.dgv.Name = "dgv";
+            this.dgv.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgv.RowHeadersVisible = false;
+            this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgv.ShowEditingIcon = false;
+            this.dgv.ShowRowErrors = false;
+            this.dgv.Size = new System.Drawing.Size(984, 614);
+            this.dgv.TabIndex = 24;
+            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick_1);
+            // 
             // btnClient
             // 
             this.btnClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
@@ -112,7 +222,7 @@
             this.btnClient.Name = "btnClient";
             this.btnClient.Size = new System.Drawing.Size(210, 51);
             this.btnClient.TabIndex = 0;
-            this.btnClient.Text = "btnClient";
+            this.btnClient.Text = "&Client";
             this.btnClient.UseVisualStyleBackColor = false;
             this.btnClient.Click += new System.EventHandler(this.btnClient_Click);
             // 
@@ -129,7 +239,7 @@
             this.btnProduit.Name = "btnProduit";
             this.btnProduit.Size = new System.Drawing.Size(210, 51);
             this.btnProduit.TabIndex = 2;
-            this.btnProduit.Text = "btnProduit";
+            this.btnProduit.Text = "&Produit";
             this.btnProduit.UseVisualStyleBackColor = false;
             this.btnProduit.Click += new System.EventHandler(this.btnProduit_Click_1);
             // 
@@ -146,7 +256,7 @@
             this.btnFacture.Name = "btnFacture";
             this.btnFacture.Size = new System.Drawing.Size(210, 51);
             this.btnFacture.TabIndex = 3;
-            this.btnFacture.Text = "btnFacture";
+            this.btnFacture.Text = "&Facture";
             this.btnFacture.UseVisualStyleBackColor = false;
             this.btnFacture.Click += new System.EventHandler(this.btnFacture_Click_1);
             // 
@@ -187,7 +297,7 @@
             this.btnAgenda.Name = "btnAgenda";
             this.btnAgenda.Size = new System.Drawing.Size(210, 51);
             this.btnAgenda.TabIndex = 1;
-            this.btnAgenda.Text = "btnAgenda";
+            this.btnAgenda.Text = "&Agenda";
             this.btnAgenda.UseVisualStyleBackColor = false;
             this.btnAgenda.Click += new System.EventHandler(this.btnAgenda_Click);
             // 
@@ -219,102 +329,6 @@
             this.tlpButtons.TabIndex = 29;
             this.tlpButtons.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpButtons_Paint_1);
             // 
-            // btnReduc
-            // 
-            this.btnReduc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnReduc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReduc.FlatAppearance.BorderSize = 0;
-            this.btnReduc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReduc.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
-            this.btnReduc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(191)))), ((int)(((byte)(209)))));
-            this.btnReduc.Location = new System.Drawing.Point(870, 0);
-            this.btnReduc.Margin = new System.Windows.Forms.Padding(0);
-            this.btnReduc.Name = "btnReduc";
-            this.btnReduc.Size = new System.Drawing.Size(40, 40);
-            this.btnReduc.TabIndex = 27;
-            this.btnReduc.Text = "0";
-            this.btnReduc.UseVisualStyleBackColor = true;
-            this.btnReduc.Click += new System.EventHandler(this.btnReduc_Click);
-            // 
-            // btnAgrandir
-            // 
-            this.btnAgrandir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAgrandir.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAgrandir.FlatAppearance.BorderSize = 0;
-            this.btnAgrandir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgrandir.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
-            this.btnAgrandir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(191)))), ((int)(((byte)(209)))));
-            this.btnAgrandir.Location = new System.Drawing.Point(910, 0);
-            this.btnAgrandir.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAgrandir.Name = "btnAgrandir";
-            this.btnAgrandir.Size = new System.Drawing.Size(40, 40);
-            this.btnAgrandir.TabIndex = 26;
-            this.btnAgrandir.Text = "1";
-            this.btnAgrandir.UseVisualStyleBackColor = true;
-            this.btnAgrandir.Click += new System.EventHandler(this.btnAgrandir_Click);
-            // 
-            // dgv
-            // 
-            this.dgv.AllowUserToAddRows = false;
-            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
-            this.dgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgv.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
-            this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
-            this.dgv.Location = new System.Drawing.Point(3, 43);
-            this.dgv.Name = "dgv";
-            this.dgv.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgv.RowHeadersVisible = false;
-            this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgv.ShowEditingIcon = false;
-            this.dgv.ShowRowErrors = false;
-            this.dgv.Size = new System.Drawing.Size(984, 614);
-            this.dgv.TabIndex = 24;
-            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick_1);
-            // 
-            // picEdit
-            // 
-            this.picEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.picEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picEdit.Image = ((System.Drawing.Image)(resources.GetObject("picEdit.Image")));
-            this.picEdit.Location = new System.Drawing.Point(0, 0);
-            this.picEdit.Margin = new System.Windows.Forms.Padding(0);
-            this.picEdit.Name = "picEdit";
-            this.picEdit.Size = new System.Drawing.Size(40, 40);
-            this.picEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picEdit.TabIndex = 23;
-            this.picEdit.TabStop = false;
-            this.picEdit.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // closeBtn
-            // 
-            this.closeBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.closeBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.closeBtn.FlatAppearance.BorderSize = 0;
-            this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeBtn.Font = new System.Drawing.Font("Webdings", 18F, System.Drawing.FontStyle.Bold);
-            this.closeBtn.ForeColor = System.Drawing.Color.Red;
-            this.closeBtn.Location = new System.Drawing.Point(950, 0);
-            this.closeBtn.Margin = new System.Windows.Forms.Padding(0);
-            this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(40, 40);
-            this.closeBtn.TabIndex = 21;
-            this.closeBtn.Text = "r";
-            this.closeBtn.UseVisualStyleBackColor = true;
-            this.closeBtn.Click += new System.EventHandler(this.button2_Click);
-            // 
             // btnUsers
             // 
             this.btnUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
@@ -328,23 +342,9 @@
             this.btnUsers.Name = "btnUsers";
             this.btnUsers.Size = new System.Drawing.Size(210, 51);
             this.btnUsers.TabIndex = 29;
-            this.btnUsers.Text = "btnUsers";
+            this.btnUsers.Text = "&Users";
             this.btnUsers.UseVisualStyleBackColor = false;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
-            // 
-            // picAdd
-            // 
-            this.picAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.picAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picAdd.Image = ((System.Drawing.Image)(resources.GetObject("picAdd.Image")));
-            this.picAdd.Location = new System.Drawing.Point(40, 0);
-            this.picAdd.Margin = new System.Windows.Forms.Padding(0);
-            this.picAdd.Name = "picAdd";
-            this.picAdd.Size = new System.Drawing.Size(40, 40);
-            this.picAdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picAdd.TabIndex = 28;
-            this.picAdd.TabStop = false;
-            this.picAdd.Click += new System.EventHandler(this.picAdd_Click);
             // 
             // Main
             // 
@@ -355,18 +355,19 @@
             this.Controls.Add(this.tlbMain);
             this.Controls.Add(this.tlpButtons);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.tlpHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picAdd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picEdit)).EndInit();
             this.tlbMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictLogo)).EndInit();
             this.tlpButtons.ResumeLayout(false);
             this.tlpButtons.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picAdd)).EndInit();
             this.ResumeLayout(false);
 
         }
