@@ -1,4 +1,6 @@
-﻿namespace iSpa
+﻿using System.Drawing;
+
+namespace iSpa
 {
     partial class Main
     {
@@ -196,6 +198,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
             this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
             this.dgv.Location = new System.Drawing.Point(3, 43);
@@ -208,6 +211,8 @@
             this.dgv.Size = new System.Drawing.Size(984, 614);
             this.dgv.TabIndex = 24;
             this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick_1);
+            this.dgv.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_cellMouseDown);
+            this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cellValueChanged);
             // 
             // btnClient
             // 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +19,7 @@ namespace iSpa
         private Boolean canEdit, isReduc;
         private DataTable _CurrentDataTable;
         private String _CurrentTitle;
-        private String[] _CurrentHeader;
+        private String[] _CurrentHeaders;
         public Main()
         {
             InitializeComponent();
@@ -53,9 +54,9 @@ namespace iSpa
             System.IO.StreamReader sr = new System.IO.StreamReader(pathName);
 
             string headerLine = sr.ReadLine();
-            _CurrentHeader = headerLine.Split(delimit.ToCharArray());
+            _CurrentHeaders = headerLine.Split(delimit.ToCharArray());
             data.Tables.Add(tableName);
-            foreach (String h in _CurrentHeader)
+            foreach (String h in _CurrentHeaders)
             {
                 data.Tables[tableName].Columns.Add(h);
             }
@@ -66,7 +67,7 @@ namespace iSpa
             foreach (string r in rows)
             {
                 string[] items = r.Split(delimit.ToCharArray());
-                if (items.Length != _CurrentHeader.Length)
+                if (items.Length != _CurrentHeaders.Length)
                 {
                     Console.WriteLine("Error with row : " + r);
                     continue;
@@ -250,24 +251,73 @@ namespace iSpa
 
         private void picAdd_Click(object sender, EventArgs e)
         {
-            Form addRow = new AddRow(this, _CurrentTitle, _CurrentHeader);
-            addRow.ShowDialog();  
+            openAddRow();  
+        }
+        private void openAddRow(ArrayList xArrayParam = null)
+        {
+            Form addRow;
+            if (xArrayParam == null)
+            {
+                addRow = new AddRow(this, _CurrentTitle, _CurrentHeaders);
+            }
+            else
+            {
+                addRow = new AddRow(this, _CurrentTitle, _CurrentHeaders,xArrayParam);
+            }
+            
+            addRow.ShowDialog();
         }
 
-        public void addRow(DateTime xDate, DateTime xhour, String xName, String xType)
+        public void addRow(ArrayList xArrParam)
         {
-            String[] items = new String[]{
-                xDate.ToString(),
-                xhour.ToString(),
-                xName,
-                xType,
-            };
             DataRow newRow = _CurrentDataTable.NewRow();
-            newRow[0] = items[0];
-            newRow[1] = items[1];
-            newRow[2] = items[2];
-            newRow[3] = items[3];
+            for(int i=0;i< xArrParam.Count; i++)
+            {
+                newRow[i] = xArrParam[i];
+            }
             _CurrentDataTable.Rows.Add(newRow);
+        }
+
+        private void cellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            Console.WriteLine("cell value changed");
+            Console.WriteLine(e.ColumnIndex+" " + e.RowIndex);
+            Console.WriteLine(dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+            
+        }
+
+        private void dgv_cellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                int rowSelected = e.RowIndex;
+                if (e.RowIndex != -1)
+                {
+                    this.dgv.ClearSelection();
+                    this.dgv.Rows[rowSelected].Selected = true;
+                    
+                    String nom = this.dgv.Rows[rowSelected].Cells[1].Value.ToString() + " " + this.dgv.Rows[rowSelected].Cells[2].Value.ToString();
+                    if (_CurrentTitle.Equals("clients"))
+                    {
+                        addRendezVous(nom);
+                    }
+                    
+                }
+            }
+            else
+            {
+                this.dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            }
+
+        }
+
+        private void addRendezVous(String xNom)
+        {
+            ArrayList arr = new ArrayList();
+            arr.Add(xNom);
+            loadDataInGrid("agenda");
+            openAddRow(arr);
         }
 
         private void btnAgrandir_Click(object sender, EventArgs e)

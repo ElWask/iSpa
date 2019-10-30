@@ -68,7 +68,7 @@ namespace iSpa
             this.lblTitle.Location = new System.Drawing.Point(156, 110);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(91, 42);
-            this.lblTitle.TabIndex = 1;
+            this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "iSpa";
             this.lblTitle.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -81,7 +81,7 @@ namespace iSpa
             this.txtBoxUsername.Location = new System.Drawing.Point(90, 183);
             this.txtBoxUsername.Name = "txtBoxUsername";
             this.txtBoxUsername.Size = new System.Drawing.Size(186, 21);
-            this.txtBoxUsername.TabIndex = 0;
+            this.txtBoxUsername.TabIndex = 1;
             this.txtBoxUsername.Text = "Username";
             this.txtBoxUsername.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.txtBoxUsername.GotFocus += new System.EventHandler(this.RemoveText);
@@ -108,7 +108,7 @@ namespace iSpa
             this.btnLogin.Margin = new System.Windows.Forms.Padding(0);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(300, 42);
-            this.btnLogin.TabIndex = 2;
+            this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Connexion";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.button1_Click);
@@ -138,12 +138,12 @@ namespace iSpa
             this.txtBoxPass.Location = new System.Drawing.Point(90, 266);
             this.txtBoxPass.Name = "txtBoxPass";
             this.txtBoxPass.Size = new System.Drawing.Size(186, 21);
-            this.txtBoxPass.TabIndex = 1;
+            this.txtBoxPass.TabIndex = 2;
             this.txtBoxPass.Text = "Username";
             this.txtBoxPass.UseSystemPasswordChar = true;
             this.txtBoxPass.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.txtBoxPass.KeyUp += this.textBox2_KeyUp;
             this.txtBoxPass.GotFocus += new System.EventHandler(this.RemoveText);
+            this.txtBoxPass.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyUp);
             this.txtBoxPass.LostFocus += new System.EventHandler(this.AddText);
             // 
             // btnClose
@@ -313,6 +313,12 @@ namespace iSpa
         private void loginCred()
         {
             Console.WriteLine(txtBoxUsername.Text + txtBoxPass.Text);
+            label3.Text = "";
+            if (txtBoxUsername.Text.Equals("") || txtBoxPass.Text.Equals(""))
+            {
+                label3.Text = "Erreur d'identifiant, veuillez remplir tout les champs requis";
+                return;
+            }
             if (!controlAccess(txtBoxUsername.Text, txtBoxPass.Text))
             {
                 label3.Text = "Erreur d'identifiant, veuillez réessayer";

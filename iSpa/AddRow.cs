@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,7 @@ namespace iSpa
         private String _Title;
         private String[] _Headers;
         private List<TextBox> _Inputs;
+        private ArrayList _ArrayParam;
 
 
         public AddRow(Main xMain, string xTitle, string[] xHeaders)
@@ -30,6 +32,16 @@ namespace iSpa
             _MotherForm = xMain;
             _Title = xTitle;
             _Headers = xHeaders;
+            _Inputs = new List<TextBox>();
+            loadComponent(_Headers);
+        }
+        public AddRow(Main xMain, string xTitle, string[] xHeaders, ArrayList xArrayParam)
+        {
+            InitializeComponent();
+            _MotherForm = xMain;
+            _Title = xTitle;
+            _Headers = xHeaders;
+            _ArrayParam = xArrayParam;
             _Inputs = new List<TextBox>();
             loadComponent(_Headers);
         }
@@ -310,6 +322,7 @@ namespace iSpa
         private void loadComponent(String[] xHeaders)
         {
             loadLblTxtBox(xHeaders);
+            loadExtraParam();
             
         }
         private void loadLblTxtBox(String[] xHeaders)
@@ -363,6 +376,14 @@ namespace iSpa
 
                 this.tlpBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
                 this.tlpBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            }
+        }
+
+        private void loadExtraParam()
+        {
+            if (_Title.Equals("agenda") && _ArrayParam != null)
+            {
+                Console.WriteLine("Agenda adding :" + _ArrayParam[0] + " " + _Inputs[2]);
             }
         }
 
@@ -481,35 +502,47 @@ namespace iSpa
             String nom, type, first_name, last_name, email, adresse, dob, prix, desc, four;
             long id;
             Boolean hasPayed, isActif;
+            ArrayList arrParam = new ArrayList();
 
             if (_Title.Equals("agenda"))
             {
-                
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate"));
                 date = Convert.ToDateTime(textBox.Text);
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxHeure"));
                 heure = Convert.ToDateTime(textBox.Text);
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
                 nom = txtBoxName.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
                 type = txtBoxType.Text;
-                _MotherForm.addRow(date, heure, nom, type);
+                arrParam.Add(textBox.Text);
+                _MotherForm.addRow(arrParam);
             }
 
             if (_Title.Equals("clients"))
             {
                 //id,first_name,last_name,d.o.b,email,adresse
-                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxfirst_name"));
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtboxid"));
+                id = long.Parse(textBox.Text);
+                arrParam.Add(textBox.Text);
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxfirst_name"));
                 first_name = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxlast_name"));
                 last_name = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxd.o.b"));
                 dob = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxemail"));
                 email = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxadresse"));
                 adresse = textBox.Text;
-                //_MotherForm.addRow(first_name, last_name, dob, email, adresse);
+                arrParam.Add(textBox.Text);
+                _MotherForm.addRow(arrParam);
             }
 
             if (_Title.Equals("factures"))
@@ -517,32 +550,43 @@ namespace iSpa
                 //Date d'ouverture,ID Client,Nom Client,Type,Prix,Payé
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate d'ouverture"));
                 date = Convert.ToDateTime(textBox.Text);
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxID Client"));
                 id = long.Parse(textBox.Text);
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom Client"));
                 nom = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
                 type = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxPrix"));
                 prix = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxPayé"));
                 hasPayed = Convert.ToBoolean(textBox.Text);
-                //_MotherForm.addRow(date, id, nom, type, prix, hasPayed);
+                arrParam.Add(textBox.Text);
+                _MotherForm.addRow(arrParam);
             }
             if (_Title.Equals("products"))
             {
                 //id,nom,description,fournisseur,prix
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxid"));
                 id = long.Parse(textBox.Text);
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
                 nom = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxdescription"));
                 desc = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxfournisseur"));
                 four = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxprix"));
                 prix = textBox.Text;
-                //_MotherForm.addRow(id, nom, desc, four, prix);
+                arrParam.Add(textBox.Text);
+                _MotherForm.addRow(arrParam);
             }
 
             if (_Title.Equals("users"))
@@ -550,14 +594,19 @@ namespace iSpa
                 //ID Utilisateur,Nom Utilisateur,Type,Actif
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxID Utilisateur"));
                 id = long.Parse(textBox.Text);
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom Utilisateur"));
                 nom = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
                 type = textBox.Text;
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxActif"));
                 isActif = Convert.ToBoolean(textBox.Text);
-                //_MotherForm.addRow(id, nom, type, isActif);
+                arrParam.Add(textBox.Text);
+                _MotherForm.addRow(arrParam);
             }
+            this.Close();
         }
     }
 }
