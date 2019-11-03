@@ -22,28 +22,31 @@ namespace iSpa
         private Main _MotherForm;
         private String _Title;
         private String[] _Headers;
+        private int _SizeTable;
         private List<TextBox> _Inputs;
         private ArrayList _ArrayParam;
 
 
-        public AddRow(Main xMain, string xTitle, string[] xHeaders)
+        public AddRow(Main xMain, string xTitle, string[] xHeaders, int xSizeTable)
         {   
             InitializeComponent();
             _MotherForm = xMain;
             _Title = xTitle;
             _Headers = xHeaders;
+            _SizeTable = xSizeTable;
             _Inputs = new List<TextBox>();
-            loadComponent(_Headers);
+            loadComponent();
         }
-        public AddRow(Main xMain, string xTitle, string[] xHeaders, ArrayList xArrayParam)
+        public AddRow(Main xMain, string xTitle, string[] xHeaders, int xSizeTable, ArrayList xArrayParam)
         {
             InitializeComponent();
             _MotherForm = xMain;
             _Title = xTitle;
             _Headers = xHeaders;
+            _SizeTable = xSizeTable;
             _ArrayParam = xArrayParam;
             _Inputs = new List<TextBox>();
-            loadComponent(_Headers);
+            loadComponent();
         }
 
         private void InitializeComponent()
@@ -69,9 +72,12 @@ namespace iSpa
             this.lblHour = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblError = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             this.tlpFooter.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -82,11 +88,11 @@ namespace iSpa
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnCancel.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnCancel.Location = new System.Drawing.Point(25, 30);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(25, 30, 25, 30);
+            this.btnCancel.Location = new System.Drawing.Point(15, 20);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(15, 20, 20, 20);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(150, 40);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Size = new System.Drawing.Size(165, 35);
+            this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Annuler";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.button1_Click);
@@ -149,11 +155,11 @@ namespace iSpa
             this.tlpFooter.Controls.Add(this.btnSave, 1, 0);
             this.tlpFooter.Controls.Add(this.btnCancel, 0, 0);
             this.tlpFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tlpFooter.Location = new System.Drawing.Point(0, 400);
+            this.tlpFooter.Location = new System.Drawing.Point(0, 425);
             this.tlpFooter.Name = "tlpFooter";
             this.tlpFooter.RowCount = 1;
             this.tlpFooter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpFooter.Size = new System.Drawing.Size(400, 100);
+            this.tlpFooter.Size = new System.Drawing.Size(400, 75);
             this.tlpFooter.TabIndex = 26;
             // 
             // btnSave
@@ -164,11 +170,11 @@ namespace iSpa
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnSave.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnSave.Location = new System.Drawing.Point(225, 30);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(25, 30, 25, 30);
+            this.btnSave.Location = new System.Drawing.Point(220, 20);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(20, 20, 15, 20);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(150, 40);
-            this.btnSave.TabIndex = 3;
+            this.btnSave.Size = new System.Drawing.Size(165, 35);
+            this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Enregistrer";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -192,10 +198,10 @@ namespace iSpa
             this.tlpBody.ColumnCount = 2;
             this.tlpBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpBody.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tlpBody.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpBody.Location = new System.Drawing.Point(0, 99);
             this.tlpBody.Name = "tlpBody";
-            this.tlpBody.Size = new System.Drawing.Size(400, 301);
+            this.tlpBody.Size = new System.Drawing.Size(400, 261);
             this.tlpBody.TabIndex = 27;
             this.tlpBody.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
@@ -276,7 +282,7 @@ namespace iSpa
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Controls.Add(this.lblTitle, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -297,12 +303,39 @@ namespace iSpa
             this.lblTitle.Text = "lblTitle";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.lblError, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 363);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(400, 62);
+            this.tableLayoutPanel2.TabIndex = 29;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblError.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(3, 0);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(394, 62);
+            this.lblError.TabIndex = 0;
+            this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblError.Click += new System.EventHandler(this.lblError_Click);
+            // 
             // AddRow
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
             this.ClientSize = new System.Drawing.Size(400, 500);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tlpBody);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tlpFooter);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -315,24 +348,28 @@ namespace iSpa
             this.tlpFooter.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
-        private void loadComponent(String[] xHeaders)
+        private void loadComponent()
         {
-            loadLblTxtBox(xHeaders);
+            loadLblTxtBox();
             loadExtraParam();
             
         }
-        private void loadLblTxtBox(String[] xHeaders)
+        private void loadLblTxtBox()
         {
-            this.tlpBody.RowCount = xHeaders.Length * 2;
+            String[] headers = _Headers;
+            this.tlpBody.RowCount = headers.Length * 2;
             this.lblTitle.Text = _Title.ToUpperInvariant();
 
-            for (int i = 0; i < xHeaders.Length; i++)
+            for (int i = 0; i < headers.Length; i++)
             {
-                String headName = xHeaders[i];
+                String headName = headers[i];
+                
                 // lbl
                 Label newLbl = new Label();
                 newLbl.AutoSize = true;
@@ -357,7 +394,22 @@ namespace iSpa
                 txtBox.Name = "txtBox"+headName;
                 txtBox.Size = new System.Drawing.Size(194, 21);
                 txtBox.TabIndex = 21;
-                txtBox.Text = "Nom du "+headName;
+                txtBox.Text = headName;
+                if (headName.Equals("id") || headName.Equals("ID Utilisateur"))
+                {
+                    txtBox.Text = (_SizeTable+1).ToString();
+                }else if (headName.Equals("d.o.b") || headName.Equals("date") || headName.Equals("Date") || headName.Equals("Date d'ouverture"))
+                {
+                    txtBox.Text = "dd.mm.yyyy";
+                }
+                else if (headName.Equals("Heure"))
+                {
+                    txtBox.Text = "hh:mm";
+                }
+                else if (headName.Equals("Payé") || headName.Equals("Actif"))
+                {
+                    txtBox.Text = "true ou false";
+                }
                 txtBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
                 txtBox.GotFocus += new System.EventHandler(this.RemoveText);
                 this.tlpBody.Controls.Add(txtBox, 1, 2 * i);
@@ -383,7 +435,12 @@ namespace iSpa
         {
             if (_Title.Equals("agenda") && _ArrayParam != null)
             {
-                Console.WriteLine("Agenda adding :" + _ArrayParam[0] + " " + _Inputs[2]);
+                _Inputs[2].Text = _ArrayParam[0].ToString();
+            }
+            if (_Title.Equals("factures") && _ArrayParam != null)
+            {
+                _Inputs[2].Text = _ArrayParam[0].ToString();
+                _Inputs[3].Text = _ArrayParam[1].ToString();
             }
         }
 
@@ -434,10 +491,20 @@ namespace iSpa
         public void RemoveText(object sender, EventArgs e)
         {
             TextBox txtBox = sender as TextBox;
-            if (txtBox.Text == "jj.MM.yyyy" || txtBox.Text == "hh:mm" || txtBox.Text == "Nom du client" || txtBox.Text == "Type de séance" )
+            if (txtBox.Text == "dd.mm.yyyy" || txtBox.Text == "hh:mm" || txtBox.Text == "true ou false")
             {
                 txtBox.Text = "";
+                return;
             }
+            for (int i = 0; i < _Headers.Length; i++)
+            {
+                if (txtBox.Text == _Headers[i])
+                {
+                    txtBox.Text = "";
+                    break;
+                }
+            }
+            
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
@@ -498,25 +565,36 @@ namespace iSpa
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DateTime date, heure;
-            String nom, type, first_name, last_name, email, adresse, dob, prix, desc, four;
-            long id;
-            Boolean hasPayed, isActif;
+            Boolean  isAnyEmpty = false;
             ArrayList arrParam = new ArrayList();
+            errorMessage("");
+
+             isAnyEmpty = _Inputs.Any(x => x.Text.Equals(""));
+            if (isAnyEmpty)
+            {
+                errorMessage("Veuillez remplir tout les élements du formulaire");
+                return;
+            }
 
             if (_Title.Equals("agenda"))
             {
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate"));
-                date = Convert.ToDateTime(textBox.Text);
+                if (!isDateValid(textBox.Text))
+                {
+                    errorMessage("Date non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxHeure"));
-                heure = Convert.ToDateTime(textBox.Text);
+                if (!isDateValid(textBox.Text))
+                {
+                    errorMessage("Heure non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
-                nom = txtBoxName.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
-                type = txtBoxType.Text;
                 arrParam.Add(textBox.Text);
                 _MotherForm.addRow(arrParam);
             }
@@ -524,23 +602,28 @@ namespace iSpa
             if (_Title.Equals("clients"))
             {
                 //id,first_name,last_name,d.o.b,email,adresse
-                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtboxid"));
-                id = long.Parse(textBox.Text);
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxid"));
+                int outInt;
+                if (!int.TryParse(textBox.Text, out outInt))
+                {
+                    errorMessage("id non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
-                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxfirst_name"));
-                first_name = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxPrénom"));
                 arrParam.Add(textBox.Text);
-                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxlast_name"));
-                last_name = textBox.Text;
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxd.o.b"));
-                dob = textBox.Text;
+                if (!isDateValid(textBox.Text))
+                {
+                    errorMessage("Date de naissance non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxemail"));
-                email = textBox.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxadresse"));
-                adresse = textBox.Text;
                 arrParam.Add(textBox.Text);
                 _MotherForm.addRow(arrParam);
             }
@@ -549,22 +632,30 @@ namespace iSpa
             {
                 //Date d'ouverture,ID Client,Nom Client,Type,Prix,Payé
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate d'ouverture"));
-                date = Convert.ToDateTime(textBox.Text);
-                arrParam.Add(textBox.Text);
-                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxID Client"));
-                id = long.Parse(textBox.Text);
+                if (!isDateValid(textBox.Text))
+                {
+                    errorMessage("Date de naissance non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom Client"));
-                nom = textBox.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
-                type = textBox.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxPrix"));
-                prix = textBox.Text;
+                double outDouble;
+                if (double.TryParse(textBox.Text, out outDouble))
+                {
+                    errorMessage("Prix non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxPayé"));
-                hasPayed = Convert.ToBoolean(textBox.Text);
+                if (!(textBox.Text.ToLower() == "true" || textBox.Text.ToLower() == "false"))
+                {
+                    errorMessage("Boolean de paiement non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 _MotherForm.addRow(arrParam);
             }
@@ -572,19 +663,20 @@ namespace iSpa
             {
                 //id,nom,description,fournisseur,prix
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxid"));
-                id = long.Parse(textBox.Text);
+                int outInt;
+                if (!int.TryParse(textBox.Text, out outInt))
+                {
+                    errorMessage("id non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
-                nom = textBox.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxdescription"));
-                desc = textBox.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxfournisseur"));
-                four = textBox.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxprix"));
-                prix = textBox.Text;
                 arrParam.Add(textBox.Text);
                 _MotherForm.addRow(arrParam);
             }
@@ -593,20 +685,46 @@ namespace iSpa
             {
                 //ID Utilisateur,Nom Utilisateur,Type,Actif
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxID Utilisateur"));
-                id = long.Parse(textBox.Text);
+                int outInt;
+                if (!int.TryParse(textBox.Text, out outInt))
+                {
+                    errorMessage("id non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom Utilisateur"));
-                nom = textBox.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
-                type = textBox.Text;
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxActif"));
-                isActif = Convert.ToBoolean(textBox.Text);
+                if (!(textBox.Text.ToLower() == "true" || textBox.Text.ToLower() == "false"))
+                {
+                    errorMessage("Boolean Actif non conforme");
+                    return;
+                }
                 arrParam.Add(textBox.Text);
                 _MotherForm.addRow(arrParam);
             }
             this.Close();
+        }
+        private bool isDateValid(String xDate)
+        {
+            DateTime date;
+            if (!DateTime.TryParse(xDate, out date))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        private void errorMessage(String xMsg)
+        {
+            lblError.Text = xMsg;
+        }
+
+        private void lblError_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

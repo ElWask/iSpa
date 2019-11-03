@@ -45,13 +45,14 @@ namespace iSpa
         private void loadDataInGrid(String xFileName)
         {
             _CurrentTitle = xFileName;
+            lblWelcome.Text = xFileName;
             // read datas and put them in datagridview1
             string delimit = ",";
             string tableName = "Table";
             string pathName = dir + "/datas/" + xFileName + ".csv";
 
             DataSet data = new DataSet();
-            System.IO.StreamReader sr = new System.IO.StreamReader(pathName);
+            System.IO.StreamReader sr = new System.IO.StreamReader(pathName, Encoding.Default,true);
 
             string headerLine = sr.ReadLine();
             _CurrentHeaders = headerLine.Split(delimit.ToCharArray());
@@ -258,11 +259,11 @@ namespace iSpa
             Form addRow;
             if (xArrayParam == null)
             {
-                addRow = new AddRow(this, _CurrentTitle, _CurrentHeaders);
+                addRow = new AddRow(this, _CurrentTitle, _CurrentHeaders, _CurrentDataTable.Rows.Count);
             }
             else
             {
-                addRow = new AddRow(this, _CurrentTitle, _CurrentHeaders,xArrayParam);
+                addRow = new AddRow(this, _CurrentTitle, _CurrentHeaders, _CurrentDataTable.Rows.Count,xArrayParam);
             }
             
             addRow.ShowDialog();
@@ -297,12 +298,20 @@ namespace iSpa
                     this.dgv.ClearSelection();
                     this.dgv.Rows[rowSelected].Selected = true;
                     
-                    String nom = this.dgv.Rows[rowSelected].Cells[1].Value.ToString() + " " + this.dgv.Rows[rowSelected].Cells[2].Value.ToString();
+                    String prenomNom = this.dgv.Rows[rowSelected].Cells[1].Value.ToString() + " " + this.dgv.Rows[rowSelected].Cells[2].Value.ToString();
+                    String nom = this.dgv.Rows[rowSelected].Cells[2].Value.ToString();
+                    String type = this.dgv.Rows[rowSelected].Cells[3].Value.ToString();
                     if (_CurrentTitle.Equals("clients"))
                     {
-                        addRendezVous(nom);
+                        addRendezVous(prenomNom);
+                        return;
                     }
-                    
+                    if (_CurrentTitle.Equals("agenda"))
+                    {
+                        addFacture(nom,type);
+                        return;
+                    }
+
                 }
             }
             else
@@ -317,6 +326,14 @@ namespace iSpa
             ArrayList arr = new ArrayList();
             arr.Add(xNom);
             loadDataInGrid("agenda");
+            openAddRow(arr);
+        }
+        private void addFacture(String xNom,String xType)
+        {
+            ArrayList arr = new ArrayList();
+            arr.Add(xNom);
+            arr.Add(xType);
+            loadDataInGrid("factures");
             openAddRow(arr);
         }
 
