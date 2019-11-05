@@ -79,8 +79,7 @@ namespace iSpa
             this.tlpHeader.RowCount = 1;
             this.tlpHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpHeader.Size = new System.Drawing.Size(990, 40);
-            this.tlpHeader.TabIndex = 25;
-            this.tlpHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpHeader_Paint_1);
+            this.tlpHeader.TabIndex = 1;
             this.tlpHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tlpHeader_MouseDown);
             this.tlpHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tlpHeader_MouseMove);
             this.tlpHeader.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tlpHeader_MouseUp);
@@ -111,10 +110,10 @@ namespace iSpa
             this.closeBtn.Margin = new System.Windows.Forms.Padding(0);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(40, 40);
-            this.closeBtn.TabIndex = 21;
+            this.closeBtn.TabIndex = 2;
             this.closeBtn.Text = "r";
             this.closeBtn.UseVisualStyleBackColor = true;
-            this.closeBtn.Click += new System.EventHandler(this.button2_Click);
+            this.closeBtn.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnAgrandir
             // 
@@ -128,7 +127,7 @@ namespace iSpa
             this.btnAgrandir.Margin = new System.Windows.Forms.Padding(0);
             this.btnAgrandir.Name = "btnAgrandir";
             this.btnAgrandir.Size = new System.Drawing.Size(40, 40);
-            this.btnAgrandir.TabIndex = 26;
+            this.btnAgrandir.TabIndex = 1;
             this.btnAgrandir.Text = "1";
             this.btnAgrandir.UseVisualStyleBackColor = true;
             this.btnAgrandir.Click += new System.EventHandler(this.btnAgrandir_Click);
@@ -145,7 +144,7 @@ namespace iSpa
             this.btnReduc.Margin = new System.Windows.Forms.Padding(0);
             this.btnReduc.Name = "btnReduc";
             this.btnReduc.Size = new System.Drawing.Size(40, 40);
-            this.btnReduc.TabIndex = 27;
+            this.btnReduc.TabIndex = 0;
             this.btnReduc.Text = "0";
             this.btnReduc.UseVisualStyleBackColor = true;
             this.btnReduc.Click += new System.EventHandler(this.btnReduc_Click);
@@ -162,7 +161,7 @@ namespace iSpa
             this.picEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picEdit.TabIndex = 23;
             this.picEdit.TabStop = false;
-            this.picEdit.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.picEdit.Click += new System.EventHandler(this.picEdit_Click);
             // 
             // tlbMain
             // 
@@ -178,7 +177,6 @@ namespace iSpa
             this.tlbMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlbMain.Size = new System.Drawing.Size(990, 660);
             this.tlbMain.TabIndex = 30;
-            this.tlbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.tlbMain_Paint_1);
             // 
             // dgv
             // 
@@ -209,7 +207,6 @@ namespace iSpa
             this.dgv.ShowRowErrors = false;
             this.dgv.Size = new System.Drawing.Size(984, 614);
             this.dgv.TabIndex = 24;
-            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick_1);
             this.dgv.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_cellMouseDown);
             this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cellValueChanged);
             // 
@@ -225,7 +222,7 @@ namespace iSpa
             this.btnClient.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.btnClient.Name = "btnClient";
             this.btnClient.Size = new System.Drawing.Size(210, 51);
-            this.btnClient.TabIndex = 0;
+            this.btnClient.TabIndex = 1;
             this.btnClient.Text = "&Client";
             this.btnClient.UseVisualStyleBackColor = false;
             this.btnClient.Click += new System.EventHandler(this.btnClient_Click);
@@ -262,7 +259,7 @@ namespace iSpa
             this.btnFacture.TabIndex = 3;
             this.btnFacture.Text = "&Facture";
             this.btnFacture.UseVisualStyleBackColor = false;
-            this.btnFacture.Click += new System.EventHandler(this.btnFacture_Click_1);
+            this.btnFacture.Click += new System.EventHandler(this.btnFacture_Click);
             // 
             // lblWelcome
             // 
@@ -275,7 +272,6 @@ namespace iSpa
             this.lblWelcome.TabIndex = 28;
             this.lblWelcome.Text = "Bienvenue";
             this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblWelcome.Click += new System.EventHandler(this.lblWelcome_Click_1);
             // 
             // pictLogo
             // 
@@ -287,7 +283,6 @@ namespace iSpa
             this.pictLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictLogo.TabIndex = 27;
             this.pictLogo.TabStop = false;
-            this.pictLogo.Click += new System.EventHandler(this.pictLogo_Click_1);
             // 
             // btnAgenda
             // 
@@ -301,7 +296,7 @@ namespace iSpa
             this.btnAgenda.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.btnAgenda.Name = "btnAgenda";
             this.btnAgenda.Size = new System.Drawing.Size(210, 51);
-            this.btnAgenda.TabIndex = 1;
+            this.btnAgenda.TabIndex = 0;
             this.btnAgenda.Text = "&Agenda";
             this.btnAgenda.UseVisualStyleBackColor = false;
             this.btnAgenda.Click += new System.EventHandler(this.btnAgenda_Click);
@@ -332,7 +327,6 @@ namespace iSpa
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32F));
             this.tlpButtons.Size = new System.Drawing.Size(210, 660);
             this.tlpButtons.TabIndex = 29;
-            this.tlpButtons.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpButtons_Paint_1);
             // 
             // btnUsers
             // 
@@ -346,7 +340,7 @@ namespace iSpa
             this.btnUsers.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.btnUsers.Name = "btnUsers";
             this.btnUsers.Size = new System.Drawing.Size(210, 51);
-            this.btnUsers.TabIndex = 29;
+            this.btnUsers.TabIndex = 4;
             this.btnUsers.Text = "&Users";
             this.btnUsers.UseVisualStyleBackColor = false;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
@@ -360,11 +354,11 @@ namespace iSpa
             this.Controls.Add(this.tlbMain);
             this.Controls.Add(this.tlpButtons);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Welcome";
-            this.Load += new System.EventHandler(this.Form2_Load);
             this.tlpHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEdit)).EndInit();

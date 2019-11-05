@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace iSpa
         private Point lastLocation;
         private Button btnClose;
         private Button btnCancel;
-        private Panel panelHeader;
+        private Panel pnlTop;
         private Button btnReduc;
         private Main _MotherForm;
         private String _Title;
@@ -51,33 +52,30 @@ namespace iSpa
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddRow));
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.panelHeader = new System.Windows.Forms.Panel();
+            this.pnlTop = new System.Windows.Forms.Panel();
             this.btnReduc = new System.Windows.Forms.Button();
             this.tlpFooter = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.txtBoxDate = new System.Windows.Forms.TextBox();
             this.tlpBody = new System.Windows.Forms.TableLayoutPanel();
             this.txtBoxHour = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.txtBoxName = new System.Windows.Forms.TextBox();
             this.txtBoxType = new System.Windows.Forms.TextBox();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblHour = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpHeader = new System.Windows.Forms.TableLayoutPanel();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpError = new System.Windows.Forms.TableLayoutPanel();
             this.lblError = new System.Windows.Forms.Label();
-            this.panelHeader.SuspendLayout();
+            this.pnlTop.SuspendLayout();
             this.tlpFooter.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tlpHeader.SuspendLayout();
+            this.tlpError.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -95,7 +93,7 @@ namespace iSpa
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Annuler";
             this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.button1_Click);
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnClose
             // 
@@ -115,20 +113,19 @@ namespace iSpa
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // panelHeader
+            // pnlTop
             // 
-            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
-            this.panelHeader.Controls.Add(this.btnReduc);
-            this.panelHeader.Controls.Add(this.btnClose);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(400, 30);
-            this.panelHeader.TabIndex = 25;
-            this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.topPanel_Paint);
-            this.panelHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
-            this.panelHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
-            this.panelHeader.MouseUp += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseUp);
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
+            this.pnlTop.Controls.Add(this.btnReduc);
+            this.pnlTop.Controls.Add(this.btnClose);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(400, 30);
+            this.pnlTop.TabIndex = 25;
+            this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
+            this.pnlTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
+            this.pnlTop.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseUp);
             // 
             // btnReduc
             // 
@@ -179,13 +176,6 @@ namespace iSpa
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 0;
-            // 
             // txtBoxDate
             // 
             this.txtBoxDate.Location = new System.Drawing.Point(0, 0);
@@ -203,7 +193,6 @@ namespace iSpa
             this.tlpBody.Name = "tlpBody";
             this.tlpBody.Size = new System.Drawing.Size(400, 261);
             this.tlpBody.TabIndex = 27;
-            this.tlpBody.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
             // txtBoxHour
             // 
@@ -211,27 +200,6 @@ namespace iSpa
             this.txtBoxHour.Name = "txtBoxHour";
             this.txtBoxHour.Size = new System.Drawing.Size(100, 20);
             this.txtBoxHour.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 100);
-            this.panel2.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 100);
-            this.panel3.TabIndex = 0;
-            // 
-            // panel4
-            // 
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(200, 100);
-            this.panel4.TabIndex = 0;
             // 
             // txtBoxName
             // 
@@ -275,20 +243,20 @@ namespace iSpa
             this.lblHour.Size = new System.Drawing.Size(100, 23);
             this.lblHour.TabIndex = 0;
             // 
-            // tableLayoutPanel1
+            // tlpHeader
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.lblTitle, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(400, 69);
-            this.tableLayoutPanel1.TabIndex = 28;
+            this.tlpHeader.ColumnCount = 3;
+            this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tlpHeader.Controls.Add(this.lblTitle, 1, 0);
+            this.tlpHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tlpHeader.Location = new System.Drawing.Point(0, 30);
+            this.tlpHeader.Name = "tlpHeader";
+            this.tlpHeader.RowCount = 1;
+            this.tlpHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpHeader.Size = new System.Drawing.Size(400, 69);
+            this.tlpHeader.TabIndex = 28;
             // 
             // lblTitle
             // 
@@ -303,18 +271,18 @@ namespace iSpa
             this.lblTitle.Text = "lblTitle";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableLayoutPanel2
+            // tlpError
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.lblError, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 363);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(400, 62);
-            this.tableLayoutPanel2.TabIndex = 29;
+            this.tlpError.ColumnCount = 1;
+            this.tlpError.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpError.Controls.Add(this.lblError, 0, 0);
+            this.tlpError.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tlpError.Location = new System.Drawing.Point(0, 363);
+            this.tlpError.Name = "tlpError";
+            this.tlpError.RowCount = 1;
+            this.tlpError.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpError.Size = new System.Drawing.Size(400, 62);
+            this.tlpError.TabIndex = 29;
             // 
             // lblError
             // 
@@ -327,29 +295,28 @@ namespace iSpa
             this.lblError.Size = new System.Drawing.Size(394, 62);
             this.lblError.TabIndex = 0;
             this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblError.Click += new System.EventHandler(this.lblError_Click);
             // 
             // AddRow
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
             this.ClientSize = new System.Drawing.Size(400, 500);
             this.Controls.Add(this.tlpBody);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tlpError);
+            this.Controls.Add(this.tlpHeader);
             this.Controls.Add(this.tlpFooter);
-            this.Controls.Add(this.panelHeader);
+            this.Controls.Add(this.pnlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddRow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddRow";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.AddRow_Load);
-            this.panelHeader.ResumeLayout(false);
+            this.pnlTop.ResumeLayout(false);
             this.tlpFooter.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.tlpHeader.ResumeLayout(false);
+            this.tlpHeader.PerformLayout();
+            this.tlpError.ResumeLayout(false);
+            this.tlpError.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -444,49 +411,17 @@ namespace iSpa
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddRow_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        private void txtBoxLast_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                addRowCred();
+                saveAndClose();
             }
-        }
-
-        private void addRowCred()
-        {
-            Form main = new Main();
-            this.Hide();
-            main.ShowDialog();
-            this.Close();
         }
         public void RemoveText(object sender, EventArgs e)
         {
@@ -507,32 +442,18 @@ namespace iSpa
             
         }
 
-        private void PictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PictureBox5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void topPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void topPanel_MouseDown(object sender, MouseEventArgs e)
+        private void pnlTop_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
             lastLocation = e.Location;
         }
 
-        private void topPanel_MouseMove(object sender, MouseEventArgs e)
+        private void pnlTop_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown)
             {
@@ -543,7 +464,7 @@ namespace iSpa
             }
         }
 
-        private void topPanel_MouseUp(object sender, MouseEventArgs e)
+        private void pnlTop_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
         }
@@ -553,23 +474,17 @@ namespace iSpa
             WindowState = FormWindowState.Minimized;
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Boolean  isAnyEmpty = false;
+            saveAndClose();
+        }
+        private void saveAndClose()
+        {
+            Boolean isAnyEmpty = false;
             ArrayList arrParam = new ArrayList();
             errorMessage("");
 
-             isAnyEmpty = _Inputs.Any(x => x.Text.Equals(""));
+            isAnyEmpty = _Inputs.Any(x => x.Text.Equals(""));
             if (isAnyEmpty)
             {
                 errorMessage("Veuillez remplir tout les élements du formulaire");
@@ -581,14 +496,14 @@ namespace iSpa
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate"));
                 if (!isDateValid(textBox.Text))
                 {
-                    errorMessage("Date non conforme");
+                    errorMessage("Date non conforme(ex:01.01.2019)");
                     return;
                 }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxHeure"));
-                if (!isDateValid(textBox.Text))
+                if (!isHourValid(textBox.Text))
                 {
-                    errorMessage("Heure non conforme");
+                    errorMessage("Heure non conforme (ex:08:15)");
                     return;
                 }
                 arrParam.Add(textBox.Text);
@@ -617,7 +532,7 @@ namespace iSpa
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxd.o.b"));
                 if (!isDateValid(textBox.Text))
                 {
-                    errorMessage("Date de naissance non conforme");
+                    errorMessage("Date de naissance non conforme (ex:01.01.2019");
                     return;
                 }
                 arrParam.Add(textBox.Text);
@@ -634,7 +549,7 @@ namespace iSpa
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxDate d'ouverture"));
                 if (!isDateValid(textBox.Text))
                 {
-                    errorMessage("Date de naissance non conforme");
+                    errorMessage("Date de naissance non conforme (ex:01.01.2019)");
                     return;
                 }
                 arrParam.Add(textBox.Text);
@@ -646,14 +561,14 @@ namespace iSpa
                 double outDouble;
                 if (double.TryParse(textBox.Text, out outDouble))
                 {
-                    errorMessage("Prix non conforme");
+                    errorMessage("Prix non conforme (ex: 5.00");
                     return;
                 }
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxPayé"));
                 if (!(textBox.Text.ToLower() == "true" || textBox.Text.ToLower() == "false"))
                 {
-                    errorMessage("Boolean de paiement non conforme");
+                    errorMessage("Boolean de paiement non conforme (ex:true ou false");
                     return;
                 }
                 arrParam.Add(textBox.Text);
@@ -670,7 +585,7 @@ namespace iSpa
                     return;
                 }
                 arrParam.Add(textBox.Text);
-                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom"));
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxnom"));
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxdescription"));
                 arrParam.Add(textBox.Text);
@@ -699,7 +614,7 @@ namespace iSpa
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxActif"));
                 if (!(textBox.Text.ToLower() == "true" || textBox.Text.ToLower() == "false"))
                 {
-                    errorMessage("Boolean Actif non conforme");
+                    errorMessage("Boolean Actif non conforme (ex:true ou false)");
                     return;
                 }
                 arrParam.Add(textBox.Text);
@@ -715,16 +630,36 @@ namespace iSpa
                 return false;
             }
 
+            if (!DateTime.TryParseExact(
+                xDate,
+                "dd.MM.yyyy",
+                new CultureInfo("fr-CH"),
+                DateTimeStyles.None,
+                out date))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        private bool isHourValid(String xHour)
+        {
+            DateTime heure;
+            if (!DateTime.TryParseExact(
+                xHour,
+                "HH:mm",
+                new CultureInfo("fr-CH"),
+                DateTimeStyles.None,
+                out heure))
+            {
+                return false;
+            }
+
             return true;
         }
         private void errorMessage(String xMsg)
         {
             lblError.Text = xMsg;
-        }
-
-        private void lblError_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

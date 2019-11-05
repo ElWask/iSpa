@@ -20,8 +20,10 @@ namespace iSpa
         private DataTable _CurrentDataTable;
         private String _CurrentTitle;
         private String[] _CurrentHeaders;
-        public Main()
+        private String _Role;
+        public Main(String xRole)
         {
+            _Role = xRole;
             InitializeComponent();
             RunComponent();
         }
@@ -40,6 +42,8 @@ namespace iSpa
             //load image picture
             string edit = dir + "/img/edit.png";
             this.picEdit.Image = Image.FromFile(edit);
+            if(!_Role.Equals("admin"))
+                this.btnUsers.Visible = false;
         }
 
         private void loadDataInGrid(String xFileName)
@@ -83,12 +87,8 @@ namespace iSpa
             this.dgv.Sort(this.dgv.Columns[0], ListSortDirection.Ascending);
             this.dgv.ReadOnly = true;
         }
-         
-        private void Form2_Load(object sender, EventArgs e)
-        {}
 
-
-        private void button2_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -104,12 +104,7 @@ namespace iSpa
             ;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void picEdit_Click(object sender, EventArgs e)
         {
             string workingDirectory = Environment.CurrentDirectory;
             string dir = System.IO.Directory.GetParent(workingDirectory).Parent.FullName;
@@ -144,60 +139,12 @@ namespace iSpa
             WindowState = FormWindowState.Minimized;
         }
 
-        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void tlpButtons_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictLogo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblWelcome_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnFacture_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnProduit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tlbMain_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tlpHeader_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dgv_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnFacture_Click_1(object sender, EventArgs e)
         {
             loadDataInGrid("factures");
         }
 
-        private void tlpHeader_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
         private void tlpHeader_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
@@ -220,29 +167,9 @@ namespace iSpa
             mouseDown = false;
         }
 
-        private void tlbMain_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictLogo_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnProduit_Click_1(object sender, EventArgs e)
         {
             loadDataInGrid("products");
-        }
-
-        private void lblWelcome_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tlpButtons_Paint_1(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void btnUsers_Click(object sender, EventArgs e)

@@ -17,9 +17,9 @@ namespace iSpa
 
         private Label lblTitle;
         private TextBox txtBoxUsername;
-        private Label label3;
-        private Panel panel1;
-        private Panel panel2;
+        private Label lblError;
+        private Panel pnlLineUsername;
+        private Panel pnlLinePassword;
         private TextBox txtBoxPass;
         private Button btnClose;
         private Button btnLogin;
@@ -27,7 +27,7 @@ namespace iSpa
         private System.Windows.Forms.PictureBox picBoxLogo;
         private System.Windows.Forms.PictureBox picBoxUser;
         private System.Windows.Forms.PictureBox picBoxPass;
-        private Panel topPanel;
+        private Panel pnlTop;
         private Button btnReduc;
         private System.Windows.Forms.PictureBox picBoxEye;
 
@@ -41,23 +41,23 @@ namespace iSpa
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtBoxUsername = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlLineUsername = new System.Windows.Forms.Panel();
+            this.pnlLinePassword = new System.Windows.Forms.Panel();
             this.txtBoxPass = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.picBoxLogo = new System.Windows.Forms.PictureBox();
             this.picBoxUser = new System.Windows.Forms.PictureBox();
             this.picBoxPass = new System.Windows.Forms.PictureBox();
             this.picBoxEye = new System.Windows.Forms.PictureBox();
-            this.topPanel = new System.Windows.Forms.Panel();
+            this.pnlTop = new System.Windows.Forms.Panel();
             this.btnReduc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxEye)).BeginInit();
-            this.topPanel.SuspendLayout();
+            this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -70,7 +70,6 @@ namespace iSpa
             this.lblTitle.Size = new System.Drawing.Size(91, 42);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "iSpa";
-            this.lblTitle.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtBoxUsername
             // 
@@ -83,19 +82,18 @@ namespace iSpa
             this.txtBoxUsername.Size = new System.Drawing.Size(186, 21);
             this.txtBoxUsername.TabIndex = 1;
             this.txtBoxUsername.Text = "Username";
-            this.txtBoxUsername.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.txtBoxUsername.GotFocus += new System.EventHandler(this.RemoveText);
             this.txtBoxUsername.LostFocus += new System.EventHandler(this.AddText);
             // 
-            // label3
+            // lblError
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(47, 349);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 15);
-            this.label3.TabIndex = 12;
+            this.lblError.AutoSize = true;
+            this.lblError.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(47, 349);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 15);
+            this.lblError.TabIndex = 12;
             // 
             // btnLogin
             // 
@@ -111,23 +109,23 @@ namespace iSpa
             this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Connexion";
             this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.button1_Click);
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // panel1
+            // pnlLineUsername
             // 
-            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.Location = new System.Drawing.Point(50, 210);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(300, 1);
-            this.panel1.TabIndex = 16;
+            this.pnlLineUsername.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlLineUsername.Location = new System.Drawing.Point(50, 210);
+            this.pnlLineUsername.Name = "pnlLineUsername";
+            this.pnlLineUsername.Size = new System.Drawing.Size(300, 1);
+            this.pnlLineUsername.TabIndex = 16;
             // 
-            // panel2
+            // pnlLinePassword
             // 
-            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel2.Location = new System.Drawing.Point(50, 293);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(300, 1);
-            this.panel2.TabIndex = 19;
+            this.pnlLinePassword.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlLinePassword.Location = new System.Drawing.Point(50, 293);
+            this.pnlLinePassword.Name = "pnlLinePassword";
+            this.pnlLinePassword.Size = new System.Drawing.Size(300, 1);
+            this.pnlLinePassword.TabIndex = 19;
             // 
             // txtBoxPass
             // 
@@ -141,9 +139,8 @@ namespace iSpa
             this.txtBoxPass.TabIndex = 2;
             this.txtBoxPass.Text = "Username";
             this.txtBoxPass.UseSystemPasswordChar = true;
-            this.txtBoxPass.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.txtBoxPass.GotFocus += new System.EventHandler(this.RemoveText);
-            this.txtBoxPass.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyUp);
+            this.txtBoxPass.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBoxPass_KeyUp);
             this.txtBoxPass.LostFocus += new System.EventHandler(this.AddText);
             // 
             // btnClose
@@ -162,7 +159,7 @@ namespace iSpa
             this.btnClose.TabIndex = 1;
             this.btnClose.Text = "r";
             this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.button2_Click);
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // picBoxLogo
             // 
@@ -174,7 +171,6 @@ namespace iSpa
             this.picBoxLogo.Size = new System.Drawing.Size(68, 65);
             this.picBoxLogo.TabIndex = 21;
             this.picBoxLogo.TabStop = false;
-            this.picBoxLogo.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
             // picBoxUser
             // 
@@ -202,21 +198,20 @@ namespace iSpa
             this.picBoxEye.Size = new System.Drawing.Size(34, 31);
             this.picBoxEye.TabIndex = 24;
             this.picBoxEye.TabStop = false;
-            this.picBoxEye.Click += new System.EventHandler(this.PictureBox4_Click);
+            this.picBoxEye.Click += new System.EventHandler(this.picBoxEye_Click);
             // 
-            // topPanel
+            // pnlTop
             // 
-            this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
-            this.topPanel.Controls.Add(this.btnReduc);
-            this.topPanel.Controls.Add(this.btnClose);
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(400, 30);
-            this.topPanel.TabIndex = 25;
-            this.topPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.topPanel_Paint);
-            this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseDown);
-            this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseMove);
-            this.topPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.topPanel_MouseUp);
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(138)))), ((int)(((byte)(178)))));
+            this.pnlTop.Controls.Add(this.btnReduc);
+            this.pnlTop.Controls.Add(this.btnClose);
+            this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(400, 30);
+            this.pnlTop.TabIndex = 25;
+            this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
+            this.pnlTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
+            this.pnlTop.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseUp);
             // 
             // btnReduc
             // 
@@ -243,51 +238,31 @@ namespace iSpa
             this.Controls.Add(this.picBoxPass);
             this.Controls.Add(this.picBoxUser);
             this.Controls.Add(this.picBoxLogo);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pnlLinePassword);
             this.Controls.Add(this.txtBoxPass);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlLineUsername);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.txtBoxUsername);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.topPanel);
+            this.Controls.Add(this.pnlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxEye)).EndInit();
-            this.topPanel.ResumeLayout(false);
+            this.pnlTop.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             loginCred();
         }
@@ -295,14 +270,11 @@ namespace iSpa
         private bool controlAccess(string usr, string pass)
         {
             if (usr.Equals("admin") && pass.Equals("admin")) return true;
+            if (usr.Equals("user") && pass.Equals("user")) return true;
             return false;
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        private void txtBoxPass_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -313,18 +285,18 @@ namespace iSpa
         private void loginCred()
         {
             Console.WriteLine(txtBoxUsername.Text + txtBoxPass.Text);
-            label3.Text = "";
+            lblError.Text = "";
             if (txtBoxUsername.Text.Equals("") || txtBoxPass.Text.Equals(""))
             {
-                label3.Text = "Erreur d'identifiant, veuillez remplir tout les champs requis";
+                lblError.Text = "Erreur d'identifiant, veuillez remplir tout les champs requis";
                 return;
             }
             if (!controlAccess(txtBoxUsername.Text, txtBoxPass.Text))
             {
-                label3.Text = "Erreur d'identifiant, veuillez réessayer";
+                lblError.Text = "Erreur d'identifiant, veuillez réessayer";
                 return;
             }
-            Form main = new Main();
+            Form main = new Main(txtBoxUsername.Text);
             this.Hide();
             main.ShowDialog();
             this.Close();
@@ -345,12 +317,7 @@ namespace iSpa
                 txtBox.Text = "Username";
         }
 
-        private void PictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PictureBox4_Click(object sender, EventArgs e)
+        private void picBoxEye_Click(object sender, EventArgs e)
         {
             string workingDirectory = Environment.CurrentDirectory;
             string dir = System.IO.Directory.GetParent(workingDirectory).Parent.FullName;
@@ -369,27 +336,18 @@ namespace iSpa
             this.isEyeClosed = !this.isEyeClosed;
         }
 
-        private void PictureBox5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void topPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        private void topPanel_MouseDown(object sender, MouseEventArgs e)
+        private void pnlTop_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
             lastLocation = e.Location;
         }
 
-        private void topPanel_MouseMove(object sender, MouseEventArgs e)
+        private void pnlTop_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown)
             {
@@ -400,7 +358,7 @@ namespace iSpa
             }
         }
 
-        private void topPanel_MouseUp(object sender, MouseEventArgs e)
+        private void pnlTop_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
         }
@@ -409,5 +367,6 @@ namespace iSpa
         {
             WindowState = FormWindowState.Minimized;
         }
+
     }
 }

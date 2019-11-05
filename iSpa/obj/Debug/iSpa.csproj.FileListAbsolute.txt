@@ -21,3 +21,15 @@ Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.csproj.CoreCompileInputs.cache
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.exe
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.pdb
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.csprojResolveAssemblyReference.cache
+Z:\docs\Genie Logiciel\iSpa\iSpa\bin\Debug\iSpa.exe.config
+Z:\docs\Genie Logiciel\iSpa\iSpa\bin\Debug\iSpa.exe
+Z:\docs\Genie Logiciel\iSpa\iSpa\bin\Debug\iSpa.pdb
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csprojResolveAssemblyReference.cache
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.AddRow.resources
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Login.resources
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Main.resources
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.Properties.Resources.resources
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csproj.GenerateResource.Cache
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csproj.CoreCompileInputs.cache
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.exe
+Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.pdb
