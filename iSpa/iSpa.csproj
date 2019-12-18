@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +51,11 @@
     </Compile>
     <Compile Include="AddRow.Designer.cs">
       <DependentUpon>AddRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetISpa.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetISpa.xsd</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -83,6 +89,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="DataSetISpa.xsc">
+      <DependentUpon>DataSetISpa.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetISpa.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetISpa.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSetISpa.xss">
+      <DependentUpon>DataSetISpa.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

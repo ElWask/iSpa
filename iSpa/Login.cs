@@ -269,6 +269,11 @@ namespace iSpa
 
         private bool controlAccess(string usr, string pass)
         {
+            DataSetISpa datas = new DataSetISpa();
+            //DataRow foundRow = datas.VW_USER.Rows.Find(s);
+            DataRow[] foundRows;
+            foundRows = datas.VW_USER.Select("XUSER Like 'A%'");
+
             if (usr.Equals("admin") && pass.Equals("admin")) return true;
             if (usr.Equals("user") && pass.Equals("user")) return true;
             return false;

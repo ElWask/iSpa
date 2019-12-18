@@ -54,34 +54,69 @@ namespace iSpa
             string delimit = ",";
             string tableName = "Table";
             string pathName = dir + "/datas/" + xFileName + ".csv";
-
-            DataSet data = new DataSet();
+            //DataSet data = new DataSet();
             System.IO.StreamReader sr = new System.IO.StreamReader(pathName, Encoding.Default,true);
 
-            string headerLine = sr.ReadLine();
-            _CurrentHeaders = headerLine.Split(delimit.ToCharArray());
-            data.Tables.Add(tableName);
-            foreach (String h in _CurrentHeaders)
+            //bdd access
+            DataSetISpa dataISpa = new DataSetISpa();
+            Console.WriteLine("file name" + xFileName);
+            switch (xFileName)
             {
-                data.Tables[tableName].Columns.Add(h);
-            }
-            Console.WriteLine(data.Tables);
-            string allData = sr.ReadToEnd();
-            string[] rows = allData.Split("\n".ToCharArray());
-
-            foreach (string r in rows)
+                case "agenda":
+                    DataSetISpaTableAdapters.VW_AGENDATableAdapter liste1 = new DataSetISpaTableAdapters.VW_AGENDATableAdapter();
+                    liste1.Fill(dataISpa.VW_AGENDA);
+                    _CurrentDataTable = dataISpa.VW_AGENDA;
+                    this.dgv.DataSource = dataISpa.VW_AGENDA.DefaultView;
+                    break;
+                case "clients":
+                    DataSetISpaTableAdapters.VW_CLIENTTableAdapter liste2 = new DataSetISpaTableAdapters.VW_CLIENTTableAdapter();
+                    liste2.Fill(dataISpa.VW_CLIENT);
+                    _CurrentDataTable = dataISpa.VW_CLIENT;
+                    this.dgv.DataSource = dataISpa.VW_CLIENT.DefaultView;
+                    break;
+                case "products":
+                    DataSetISpaTableAdapters.VW_PRODUITTableAdapter liste3 = new DataSetISpaTableAdapters.VW_PRODUITTableAdapter();
+                    liste3.Fill(dataISpa.VW_PRODUIT);
+                    _CurrentDataTable = dataISpa.VW_PRODUIT;
+                    this.dgv.DataSource = dataISpa.VW_PRODUIT.DefaultView;
+                    break;
+                case "factures":
+                    DataSetISpaTableAdapters.VW_FACTURETableAdapter liste4 = new DataSetISpaTableAdapters.VW_FACTURETableAdapter();
+                    liste4.Fill(dataISpa.VW_FACTURE);
+                    _CurrentDataTable = dataISpa.VW_FACTURE;
+                    this.dgv.DataSource = dataISpa.VW_FACTURE.DefaultView;
+                    break;
+                case "users":
+                    DataSetISpaTableAdapters.VW_USERTableAdapter liste5 = new DataSetISpaTableAdapters.VW_USERTableAdapter();
+                    liste5.Fill(dataISpa.VW_USER);
+                    _CurrentDataTable = dataISpa.VW_USER;
+                    this.dgv.DataSource = dataISpa.VW_USER.DefaultView;
+                    break;
+                default:
+                    DataSetISpaTableAdapters.VW_AGENDATableAdapter liste6 = new DataSetISpaTableAdapters.VW_AGENDATableAdapter();
+                    liste6.Fill(dataISpa.VW_AGENDA);
+                    _CurrentDataTable = dataISpa.VW_AGENDA;
+                    this.dgv.DataSource = dataISpa.VW_AGENDA.DefaultView;
+                    Console.WriteLine("Default case");
+                    break;
+            };
+            Console.WriteLine("START");
+            String[] arrHeader = new String[10];
+            int i = 0;
+            foreach(DataTable tab in dataISpa.Tables)
             {
-                string[] items = r.Split(delimit.ToCharArray());
-                if (items.Length != _CurrentHeaders.Length)
+                foreach(DataColumn col in tab.Columns)
                 {
-                    Console.WriteLine("Error with row : " + r);
-                    continue;
+                    arrHeader[i] = col.ColumnName;
+
                 }
-                    
-                data.Tables[tableName].Rows.Add(items);
             }
-            _CurrentDataTable = data.Tables[0];
-            this.dgv.DataSource = data.Tables[0].DefaultView;
+            Console.WriteLine("salut" + arrHeader[0]+ arrHeader[1]+ arrHeader[2]+ arrHeader[3] + arrHeader[4] + arrHeader[5]);
+
+            _CurrentHeaders = arrHeader;
+
+            //_CurrentDataTable = data.Tables[0];
+            //this.dgv.DataSource = data.Tables[0].DefaultView;
             this.dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgv.Sort(this.dgv.Columns[0], ListSortDirection.Ascending);
