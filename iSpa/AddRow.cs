@@ -336,7 +336,7 @@ namespace iSpa
             for (int i = 0; i < headers.Length; i++)
             {
                 String headName = headers[i];
-                
+                if (headName is null) break;
                 // lbl
                 Label newLbl = new Label();
                 newLbl.AutoSize = true;
@@ -362,18 +362,19 @@ namespace iSpa
                 txtBox.Size = new System.Drawing.Size(194, 21);
                 txtBox.TabIndex = 21;
                 txtBox.Text = headName;
-                if (headName.Equals("id") || headName.Equals("ID Utilisateur"))
+                if (headName.Equals("XPRIXUNITAIRE"))
                 {
-                    txtBox.Text = (_SizeTable+1).ToString();
-                }else if (headName.Equals("d.o.b") || headName.Equals("date") || headName.Equals("Date") || headName.Equals("Date d'ouverture"))
+                    txtBox.Text = "0";
+                }
+                else if (headName.Equals("XDOB") || headName.Equals("XDATE"))
                 {
                     txtBox.Text = "dd.mm.yyyy";
                 }
-                else if (headName.Equals("Heure"))
+                else if (headName.Equals("XHEURE"))
                 {
                     txtBox.Text = "hh:mm";
                 }
-                else if (headName.Equals("Payé") || headName.Equals("Actif"))
+                else if (headName.Equals("XPAYE") || headName.Equals("XACTIF"))
                 {
                     txtBox.Text = "true ou false";
                 }
@@ -598,27 +599,40 @@ namespace iSpa
 
             if (_Title.Equals("users"))
             {
-                //ID Utilisateur,Nom Utilisateur,Type,Actif
-                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxID Utilisateur"));
-                int outInt;
-                if (!int.TryParse(textBox.Text, out outInt))
-                {
-                    errorMessage("id non conforme");
-                    return;
-                }
-                arrParam.Add(textBox.Text);
-                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom Utilisateur"));
-                arrParam.Add(textBox.Text);
-                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxType"));
-                arrParam.Add(textBox.Text);
-                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxActif"));
+                DataSet1TableAdapters.USER_SPATableAdapter datasetTableAdapter = new DataSet1TableAdapters.USER_SPATableAdapter();
+                DataSet1 dataSet1 = new DataSet1();
+                DataSet1.USER_SPARow newUserRow;
+                // init new user
+                newUserRow = dataSet1.USER_SPA.NewUSER_SPARow();
+
+                //set ID
+                newUserRow.USR_ID = dataSet1.USER_SPA.Rows.Count+1;
+
+                // set attributes from form
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXNOM"));
+                newUserRow.USR_NOM = textBox.Text;
+
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXPASSWORD"));
+                newUserRow.USR_PWD = textBox.Text;
+
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXTYPE"));
+                newUserRow.USR_TYPE = textBox.Text;
+
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXACTIF"));
                 if (!(textBox.Text.ToLower() == "true" || textBox.Text.ToLower() == "false"))
                 {
                     errorMessage("Boolean Actif non conforme (ex:true ou false)");
                     return;
                 }
-                arrParam.Add(textBox.Text);
-                _MotherForm.addRow(arrParam);
+
+                newUserRow.USR_ACTIF = textBox.Text == "true" ? 1 : 0;
+
+                //add to dataset
+                dataSet1.USER_SPA.Rows.Add(newUserRow);
+                //save to datatable
+                datasetTableAdapter.Update(dataSet1.USER_SPA);
+                
+               // _MotherForm.addRow(arrParam);
             }
             this.Close();
         }

@@ -270,12 +270,17 @@ namespace iSpa
         private bool controlAccess(string usr, string pass)
         {
             DataSetISpa datas = new DataSetISpa();
-            //DataRow foundRow = datas.VW_USER.Rows.Find(s);
-            DataRow[] foundRows;
-            foundRows = datas.VW_USER.Select("XUSER Like 'A%'");
+            DataSetISpaTableAdapters.VW_USERTableAdapter liste1 = new DataSetISpaTableAdapters.VW_USERTableAdapter();
+            liste1.Fill(datas.VW_USER);
 
-            if (usr.Equals("admin") && pass.Equals("admin")) return true;
-            if (usr.Equals("user") && pass.Equals("user")) return true;
+            foreach (DataSetISpa.VW_USERRow user in liste1.GetData())
+            {
+                if ((usr.Equals(user.XNOM.Trim()) && pass.Equals(user.XPASSWORD.Trim()))){
+                    Console.WriteLine("cred ok " + user.XNOM + " " + user.XPASSWORD);
+                    return true;
+                }  
+            }
+            Console.WriteLine("cred not ok " + usr + " " + pass);
             return false;
         }
 

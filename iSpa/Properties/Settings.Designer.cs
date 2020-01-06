@@ -33,5 +33,16 @@ namespace iSpa.Properties {
                 return ((string)(this["ConnectionISpa"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HEGLOCAL;Persist Security Info=True;User ID=iSpa_data;Password=iSpa_d" +
+            "ata;Unicode=True")]
+        public string ConnectionDatasiSpa {
+            get {
+                return ((string)(this["ConnectionDatasiSpa"]));
+            }
+        }
     }
 }

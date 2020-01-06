@@ -67,6 +67,7 @@ namespace iSpa
                     liste1.Fill(dataISpa.VW_AGENDA);
                     _CurrentDataTable = dataISpa.VW_AGENDA;
                     this.dgv.DataSource = dataISpa.VW_AGENDA.DefaultView;
+
                     break;
                 case "clients":
                     DataSetISpaTableAdapters.VW_CLIENTTableAdapter liste2 = new DataSetISpaTableAdapters.VW_CLIENTTableAdapter();
@@ -103,14 +104,14 @@ namespace iSpa
             Console.WriteLine("START");
             String[] arrHeader = new String[10];
             int i = 0;
-            foreach(DataTable tab in dataISpa.Tables)
-            {
-                foreach(DataColumn col in tab.Columns)
-                {
-                    arrHeader[i] = col.ColumnName;
 
-                }
+            foreach(DataColumn col in _CurrentDataTable.Columns)
+            {
+                arrHeader[i] = col.ColumnName;
+                i++;
+
             }
+ 
             Console.WriteLine("salut" + arrHeader[0]+ arrHeader[1]+ arrHeader[2]+ arrHeader[3] + arrHeader[4] + arrHeader[5]);
 
             _CurrentHeaders = arrHeader;
