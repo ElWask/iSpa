@@ -32,9 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,23 +58,13 @@
     <Compile Include="AddRow.Designer.cs">
       <DependentUpon>AddRow.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataSet1.Designer.cs">
+    <Compile Include="DataSetISpaData.cs">
+      <DependentUpon>DataSetISpaData.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetISpaData.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSetDatasISpa.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetDatasISpa.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSetISpa.cs">
-      <DependentUpon>DataSetISpa.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSetISpa.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetISpa.xsd</DependentUpon>
+      <DependentUpon>DataSetISpaData.xsd</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -102,38 +98,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
+    <None Include="DataSetISpaData.xsc">
+      <DependentUpon>DataSetISpaData.xsd</DependentUpon>
     </None>
-    <None Include="DataSet1.xsd">
+    <None Include="DataSetISpaData.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetISpaData.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSetDatasISpa.xsc">
-      <DependentUpon>DataSetDatasISpa.xsd</DependentUpon>
-    </None>
-    <None Include="DataSetDatasISpa.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetDatasISpa.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DataSetDatasISpa.xss">
-      <DependentUpon>DataSetDatasISpa.xsd</DependentUpon>
-    </None>
-    <None Include="DataSetISpa.xsc">
-      <DependentUpon>DataSetISpa.xsd</DependentUpon>
-    </None>
-    <None Include="DataSetISpa.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetISpa.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DataSetISpa.xss">
-      <DependentUpon>DataSetISpa.xsd</DependentUpon>
+    <None Include="DataSetISpaData.xss">
+      <DependentUpon>DataSetISpaData.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

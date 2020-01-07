@@ -44,5 +44,15 @@ namespace iSpa.Properties {
                 return ((string)(this["ConnectionDatasiSpa"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("DATA SOURCE=HEGLOCAL;PASSWORD=iSpa_data;USER ID=ISPA_DATA")]
+        public string ConnectionISpaData {
+            get {
+                return ((string)(this["ConnectionISpaData"]));
+            }
+        }
     }
 }

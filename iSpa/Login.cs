@@ -269,11 +269,16 @@ namespace iSpa
 
         private bool controlAccess(string usr, string pass)
         {
-            DataSetISpa datas = new DataSetISpa();
-            DataSetISpaTableAdapters.VW_USERTableAdapter liste1 = new DataSetISpaTableAdapters.VW_USERTableAdapter();
+
+            DataSetISpaData datas = new DataSetISpaData();
+            DataSetISpaDataTableAdapters.QueriesTableAdapter requ =new DataSetISpaDataTableAdapters.QueriesTableAdapter();
+            decimal? resultat = requ.PKG_INSERTUSER_USERGET(usr);
+            Console.WriteLine("resultat : "+resultat);
+
+            DataSetISpaDataTableAdapters.VW_USERTableAdapter liste1 = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
             liste1.Fill(datas.VW_USER);
 
-            foreach (DataSetISpa.VW_USERRow user in liste1.GetData())
+            foreach (DataSetISpaData.VW_USERRow user in liste1.GetData())
             {
                 if ((usr.Equals(user.XNOM.Trim()) && pass.Equals(user.XPASSWORD.Trim()))){
                     Console.WriteLine("cred ok " + user.XNOM + " " + user.XPASSWORD);

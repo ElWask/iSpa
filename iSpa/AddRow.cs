@@ -599,24 +599,19 @@ namespace iSpa
 
             if (_Title.Equals("users"))
             {
-                DataSet1TableAdapters.USER_SPATableAdapter datasetTableAdapter = new DataSet1TableAdapters.USER_SPATableAdapter();
-                DataSet1 dataSet1 = new DataSet1();
-                DataSet1.USER_SPARow newUserRow;
-                // init new user
-                newUserRow = dataSet1.USER_SPA.NewUSER_SPARow();
-
-                //set ID
-                newUserRow.USR_ID = dataSet1.USER_SPA.Rows.Count+1;
+                DataSetISpaData datas = new DataSetISpaData();
+                DataSetISpaDataTableAdapters.QueriesTableAdapter requ = new DataSetISpaDataTableAdapters.QueriesTableAdapter();
+                ArrayList arr = new ArrayList();
+                
 
                 // set attributes from form
                 TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXNOM"));
-                newUserRow.USR_NOM = textBox.Text;
-
+                arr.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXPASSWORD"));
-                newUserRow.USR_PWD = textBox.Text;
+                arr.Add(textBox.Text);
 
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXTYPE"));
-                newUserRow.USR_TYPE = textBox.Text;
+                arr.Add(textBox.Text);
 
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXACTIF"));
                 if (!(textBox.Text.ToLower() == "true" || textBox.Text.ToLower() == "false"))
@@ -624,15 +619,12 @@ namespace iSpa
                     errorMessage("Boolean Actif non conforme (ex:true ou false)");
                     return;
                 }
-
-                newUserRow.USR_ACTIF = textBox.Text == "true" ? 1 : 0;
-
-                //add to dataset
-                dataSet1.USER_SPA.Rows.Add(newUserRow);
-                //save to datatable
-                datasetTableAdapter.Update(dataSet1.USER_SPA);
-                
-               // _MotherForm.addRow(arrParam);
+                arr.Add(textBox.Text == "true" ? 1 : 0);
+                //insert user with package
+                decimal? resultat = requ.PKG_INSERTUSER_USERINSERT(arr[0].ToString(), arr[1].ToString(), arr[2].ToString(), Convert.ToDecimal(arr[3].ToString()));
+                Console.WriteLine(resultat);
+                //refresh current table
+                _MotherForm.addRow(arrParam);
             }
             this.Close();
         }

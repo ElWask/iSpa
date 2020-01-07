@@ -137,7 +137,6 @@ namespace iSpa
 
             clientId = value.ToString();
             Console.WriteLine("client id "+clientId);
-            ;
         }
 
         private void picEdit_Click(object sender, EventArgs e)
