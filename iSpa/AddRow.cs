@@ -600,7 +600,6 @@ namespace iSpa
             if (_Title.Equals("users"))
             {
                 DataSetISpaData datas = new DataSetISpaData();
-                DataSetISpaDataTableAdapters.QueriesTableAdapter requ = new DataSetISpaDataTableAdapters.QueriesTableAdapter();
                 ArrayList arr = new ArrayList();
                 
 
@@ -620,9 +619,11 @@ namespace iSpa
                     return;
                 }
                 arr.Add(textBox.Text == "true" ? 1 : 0);
-                //insert user with package
-                decimal? resultat = requ.PKG_INSERTUSER_USERINSERT(arr[0].ToString(), arr[1].ToString(), arr[2].ToString(), Convert.ToDecimal(arr[3].ToString()));
-                Console.WriteLine(resultat);
+
+                //insert user with query
+                DataSetISpaDataTableAdapters.VW_USERTableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
+                tableAdapter.InsertQuery(arr[0].ToString(), arr[1].ToString(), arr[2].ToString(),1);
+
                 //refresh current table
                 _MotherForm.addRow(arrParam);
             }

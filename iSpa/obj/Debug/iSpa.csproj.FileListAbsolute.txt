@@ -33,3 +33,4 @@ Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.csproj.CoreCompileInputs.cache
 Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.exe
 Z:\docs\Genie Logiciel\iSpa\iSpa\obj\Debug\iSpa.pdb
 Z:\docs\agl\iSpa\iSpa\obj\Debug\iSpa.csprojResolveAssemblyReference.cache
+Z:\docs\agl\iSpa\iSpa\bin\Debug\Oracle.ManagedDataAccess.dll

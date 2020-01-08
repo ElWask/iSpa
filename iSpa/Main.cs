@@ -58,43 +58,43 @@ namespace iSpa
             System.IO.StreamReader sr = new System.IO.StreamReader(pathName, Encoding.Default,true);
 
             //bdd access
-            DataSetISpa dataISpa = new DataSetISpa();
+            DataSetISpaData dataISpa = new DataSetISpaData();
             Console.WriteLine("file name" + xFileName);
             switch (xFileName)
             {
                 case "agenda":
-                    DataSetISpaTableAdapters.VW_AGENDATableAdapter liste1 = new DataSetISpaTableAdapters.VW_AGENDATableAdapter();
+                    DataSetISpaDataTableAdapters.VW_AGENDATableAdapter liste1 = new DataSetISpaDataTableAdapters.VW_AGENDATableAdapter();
                     liste1.Fill(dataISpa.VW_AGENDA);
                     _CurrentDataTable = dataISpa.VW_AGENDA;
                     this.dgv.DataSource = dataISpa.VW_AGENDA.DefaultView;
 
                     break;
                 case "clients":
-                    DataSetISpaTableAdapters.VW_CLIENTTableAdapter liste2 = new DataSetISpaTableAdapters.VW_CLIENTTableAdapter();
+                    DataSetISpaDataTableAdapters.VW_CLIENTTableAdapter liste2 = new DataSetISpaDataTableAdapters.VW_CLIENTTableAdapter();
                     liste2.Fill(dataISpa.VW_CLIENT);
                     _CurrentDataTable = dataISpa.VW_CLIENT;
                     this.dgv.DataSource = dataISpa.VW_CLIENT.DefaultView;
                     break;
                 case "products":
-                    DataSetISpaTableAdapters.VW_PRODUITTableAdapter liste3 = new DataSetISpaTableAdapters.VW_PRODUITTableAdapter();
+                    DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter liste3 = new DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter();
                     liste3.Fill(dataISpa.VW_PRODUIT);
                     _CurrentDataTable = dataISpa.VW_PRODUIT;
                     this.dgv.DataSource = dataISpa.VW_PRODUIT.DefaultView;
                     break;
                 case "factures":
-                    DataSetISpaTableAdapters.VW_FACTURETableAdapter liste4 = new DataSetISpaTableAdapters.VW_FACTURETableAdapter();
+                    DataSetISpaDataTableAdapters.VW_FACTURETableAdapter liste4 = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
                     liste4.Fill(dataISpa.VW_FACTURE);
                     _CurrentDataTable = dataISpa.VW_FACTURE;
                     this.dgv.DataSource = dataISpa.VW_FACTURE.DefaultView;
                     break;
                 case "users":
-                    DataSetISpaTableAdapters.VW_USERTableAdapter liste5 = new DataSetISpaTableAdapters.VW_USERTableAdapter();
+                    DataSetISpaDataTableAdapters.VW_USERTableAdapter liste5 = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
                     liste5.Fill(dataISpa.VW_USER);
                     _CurrentDataTable = dataISpa.VW_USER;
                     this.dgv.DataSource = dataISpa.VW_USER.DefaultView;
                     break;
                 default:
-                    DataSetISpaTableAdapters.VW_AGENDATableAdapter liste6 = new DataSetISpaTableAdapters.VW_AGENDATableAdapter();
+                    DataSetISpaDataTableAdapters.VW_AGENDATableAdapter liste6 = new DataSetISpaDataTableAdapters.VW_AGENDATableAdapter();
                     liste6.Fill(dataISpa.VW_AGENDA);
                     _CurrentDataTable = dataISpa.VW_AGENDA;
                     this.dgv.DataSource = dataISpa.VW_AGENDA.DefaultView;
@@ -240,13 +240,51 @@ namespace iSpa
             }
             _CurrentDataTable.Rows.Add(newRow);
         }
+        
+            private void dgv_cellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Equals(e.FormattedValue.ToString()))
+                return;
+            DataSetISpaData datas = new DataSetISpaData();
+            Console.WriteLine(_CurrentTitle);
 
+            String[] arr = new String[dgv.Rows[e.RowIndex].Cells.Count];
+            for (int i = 0; i < dgv.Rows[e.RowIndex].Cells.Count; i++)
+            {
+                arr[i] = dgv.Rows[e.RowIndex].Cells[i].ToString();
+            }
+            arr[e.ColumnIndex] = e.FormattedValue.ToString();
+            switch (_CurrentTitle)
+            {
+                case "agenda":
+                    DataSetISpaDataTableAdapters.VW_AGENDATableAdapter tableAdapter1 = new DataSetISpaDataTableAdapters.VW_AGENDATableAdapter();
+                    break;
+                case "clients":
+                    DataSetISpaDataTableAdapters.VW_CLIENTTableAdapter tableAdapte2 = new DataSetISpaDataTableAdapters.VW_CLIENTTableAdapter();
+                    break;
+                case "produits":
+                    DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter tableAdapter3 = new DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter();
+                    break;
+                case "facture":
+                    DataSetISpaDataTableAdapters.VW_FACTURETableAdapter tableAdapte4 = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
+                    break;
+                case "users":
+                    DataSetISpaDataTableAdapters.VW_USERTableAdapter tableAdapter5 = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
+                    int answ = tableAdapter5.UpdateQuery(arr[0], arr[1], arr[2], Convert.ToDecimal(arr[3]), arr[4]);
+
+                    Console.WriteLine("old value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                    Console.WriteLine("new value " + e.FormattedValue);
+                    Console.WriteLine("answ " + answ);
+                    break;
+            }
+
+
+            Console.WriteLine("cell value changed");
+            Console.WriteLine(e.ColumnIndex + " " + e.RowIndex);
+        }
         private void cellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            Console.WriteLine("cell value changed");
-            Console.WriteLine(e.ColumnIndex+" " + e.RowIndex);
-            Console.WriteLine(dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
-            
+
         }
 
         private void dgv_cellMouseDown(object sender, DataGridViewCellMouseEventArgs e)

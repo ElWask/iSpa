@@ -269,21 +269,19 @@ namespace iSpa
 
         private bool controlAccess(string usr, string pass)
         {
+            DataSetISpaDataTableAdapters.VW_USERTableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
+            DataSetISpaData.VW_USERDataTable dataTable = tableAdapter.GetDataByUser(usr);
+            if (dataTable.Rows.Count == 0)
+                return false;
 
-            DataSetISpaData datas = new DataSetISpaData();
-            DataSetISpaDataTableAdapters.QueriesTableAdapter requ =new DataSetISpaDataTableAdapters.QueriesTableAdapter();
-            decimal? resultat = requ.PKG_INSERTUSER_USERGET(usr);
-            Console.WriteLine("resultat : "+resultat);
-
-            DataSetISpaDataTableAdapters.VW_USERTableAdapter liste1 = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
-            liste1.Fill(datas.VW_USER);
-
-            foreach (DataSetISpaData.VW_USERRow user in liste1.GetData())
+            DataRow row = dataTable.Rows[0];
+            if (row != null)
             {
-                if ((usr.Equals(user.XNOM.Trim()) && pass.Equals(user.XPASSWORD.Trim()))){
-                    Console.WriteLine("cred ok " + user.XNOM + " " + user.XPASSWORD);
+                if (row["XNOM"].ToString().Trim() == usr.Trim() && row["XPASSWORD"].ToString().Trim() == pass.Trim())
+                {
+                    Console.WriteLine("cred ok " + usr + " " + pass);
                     return true;
-                }  
+                }
             }
             Console.WriteLine("cred not ok " + usr + " " + pass);
             return false;

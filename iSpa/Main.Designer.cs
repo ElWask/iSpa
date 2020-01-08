@@ -209,6 +209,7 @@ namespace iSpa
             this.dgv.TabIndex = 24;
             this.dgv.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_cellMouseDown);
             this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cellValueChanged);
+            this.dgv.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgv_cellValidating);
             // 
             // btnClient
             // 
