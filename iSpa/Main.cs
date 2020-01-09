@@ -21,6 +21,9 @@ namespace iSpa
         private String _CurrentTitle;
         private String[] _CurrentHeaders;
         private String _Role;
+        private object _OldValue;
+        private int _OldValuePos;
+
         public Main(String xRole)
         {
             _Role = xRole;
@@ -50,9 +53,9 @@ namespace iSpa
         {
             _CurrentTitle = xFileName;
             lblWelcome.Text = xFileName;
+            this.canEdit = false;
+            this.changeEditButton();
             // read datas and put them in datagridview1
-            string delimit = ",";
-            string tableName = "Table";
             string pathName = dir + "/datas/" + xFileName + ".csv";
             //DataSet data = new DataSet();
             System.IO.StreamReader sr = new System.IO.StreamReader(pathName, Encoding.Default,true);
@@ -116,8 +119,6 @@ namespace iSpa
 
             _CurrentHeaders = arrHeader;
 
-            //_CurrentDataTable = data.Tables[0];
-            //this.dgv.DataSource = data.Tables[0].DefaultView;
             this.dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgv.Sort(this.dgv.Columns[0], ListSortDirection.Ascending);
@@ -141,10 +142,15 @@ namespace iSpa
 
         private void picEdit_Click(object sender, EventArgs e)
         {
+            this.changeEditButton();
+        }
+
+        private void changeEditButton()
+        {
             string workingDirectory = Environment.CurrentDirectory;
             string dir = System.IO.Directory.GetParent(workingDirectory).Parent.FullName;
 
-            if (!this.canEdit)
+            if (this.canEdit)
             {
                 string noEdit = dir + "/img/no edit.png";
                 this.picEdit.Image = Image.FromFile(noEdit);
@@ -158,7 +164,6 @@ namespace iSpa
             }
             this.canEdit = !this.canEdit;
         }
-
         private void btnAgenda_Click(object sender, EventArgs e)
         {
             loadDataInGrid("agenda");
@@ -243,7 +248,12 @@ namespace iSpa
         
             private void dgv_cellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Equals(e.FormattedValue.ToString()))
+            _OldValue = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            _OldValuePos = e.ColumnIndex;
+        }
+        private void cellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Equals(_OldValue.ToString()))
                 return;
             DataSetISpaData datas = new DataSetISpaData();
             Console.WriteLine(_CurrentTitle);
@@ -251,40 +261,107 @@ namespace iSpa
             String[] arr = new String[dgv.Rows[e.RowIndex].Cells.Count];
             for (int i = 0; i < dgv.Rows[e.RowIndex].Cells.Count; i++)
             {
-                arr[i] = dgv.Rows[e.RowIndex].Cells[i].ToString();
+                arr[i] = dgv.Rows[e.RowIndex].Cells[i].Value.ToString();
             }
-            arr[e.ColumnIndex] = e.FormattedValue.ToString();
+            int posKey;
+            String primaryKey;
+            int[] posKeys;
+            String[] primaryKeys;
+
             switch (_CurrentTitle)
             {
                 case "agenda":
+                    // pos 0 1 et 2 Sont les valeurs de la cle primaire
+                    primaryKeys = new String[3];
+
+                    primaryKeys[0] = arr[0];
+                    primaryKeys[1] = arr[1];
+                    primaryKeys[2] = arr[2];
+
+                    for (int i = 0; i < primaryKeys.Length; i++)
+                    {
+                        if (i == _OldValuePos)
+                        {
+                            primaryKeys[i] = _OldValue.ToString();
+                        }
+                    }
+
                     DataSetISpaDataTableAdapters.VW_AGENDATableAdapter tableAdapter1 = new DataSetISpaDataTableAdapters.VW_AGENDATableAdapter();
+                    tableAdapter1.UpdateQuery(Convert.ToDateTime(arr[0]), Convert.ToDateTime(arr[1]), arr[2], arr[3], Convert.ToDateTime(primaryKeys[0].ToString()), Convert.ToDateTime(primaryKeys[1].ToString()), primaryKeys[2].ToString());
+                    Console.WriteLine("old value " + _OldValue);
+                    Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                     break;
                 case "clients":
+                    
+                    // pos 3 est la valeur de la cle primaire
+                    posKey = 3;
+                    primaryKey = arr[posKey];
+                    if (_OldValuePos == posKey)
+                    {
+                        primaryKey = _OldValue.ToString();
+                    }
                     DataSetISpaDataTableAdapters.VW_CLIENTTableAdapter tableAdapte2 = new DataSetISpaDataTableAdapters.VW_CLIENTTableAdapter();
+                    tableAdapte2.UpdateQuery(arr[0], arr[1], Convert.ToDateTime(arr[2]), arr[3], arr[4], primaryKey.ToString());
+                    Console.WriteLine("old value " + _OldValue);
+                    Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                     break;
-                case "produits":
+                case "products":
+                    // pos 0 et 2 Sont les valeurs de la cle primaire
+                    primaryKeys = new String[3];
+
+                    primaryKeys[0] = arr[0];
+                    primaryKeys[2] = arr[2];
+
+                    for (int i = 0; i < primaryKeys.Length; i++)
+                    {
+                        if (i == _OldValuePos)
+                        {
+                            primaryKeys[i] = _OldValue.ToString();
+                        }
+                    }
+
                     DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter tableAdapter3 = new DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter();
+                    tableAdapter3.UpdateQuery(arr[0], arr[1], arr[2], Convert.ToDecimal(arr[3]), primaryKeys[0].ToString(), primaryKeys[2].ToString());
+                    Console.WriteLine("old value " + _OldValue);
+                    Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                     break;
-                case "facture":
+                case "factures":
+                    // pos 0 1 et 2 Sont les valeurs de la cle primaire
+                    primaryKeys = new String[3];
+
+                    primaryKeys[0] = arr[0];
+                    primaryKeys[1] = arr[1];
+                    primaryKeys[2] = arr[2];
+
+                    for(int i = 0; i< primaryKeys.Length; i++)
+                    {
+                        if (i == _OldValuePos)
+                        {
+                            primaryKeys[i] = _OldValue.ToString();
+                        }
+                    }
+
                     DataSetISpaDataTableAdapters.VW_FACTURETableAdapter tableAdapte4 = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
+                    tableAdapte4.UpdateQuery(arr[0], arr[1], arr[2], arr[3], arr[4], Convert.ToDecimal(arr[5]), primaryKeys[0].ToString(), primaryKeys[1].ToString(), primaryKeys[2].ToString());
+                    Console.WriteLine("old value " + _OldValue);
+                    Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+
                     break;
                 case "users":
+                    // pos 0 est la valeur de la cle primaire
+                    posKey = 0;
+                    primaryKey = arr[posKey];
+                    if(_OldValuePos == posKey)
+                    {
+                        primaryKey = _OldValue.ToString();
+                    }
                     DataSetISpaDataTableAdapters.VW_USERTableAdapter tableAdapter5 = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
-                    int answ = tableAdapter5.UpdateQuery(arr[0], arr[1], arr[2], Convert.ToDecimal(arr[3]), arr[4]);
+                    tableAdapter5.UpdateQuery(arr[0], arr[1], arr[2], Convert.ToDecimal(arr[3]), primaryKey.ToString());
+                    Console.WriteLine("old value " + _OldValue);
+                    Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
 
-                    Console.WriteLine("old value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
-                    Console.WriteLine("new value " + e.FormattedValue);
-                    Console.WriteLine("answ " + answ);
                     break;
             }
-
-
-            Console.WriteLine("cell value changed");
-            Console.WriteLine(e.ColumnIndex + " " + e.RowIndex);
-        }
-        private void cellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void dgv_cellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
