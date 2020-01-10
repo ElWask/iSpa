@@ -515,7 +515,9 @@ namespace iSpa
 
                 //insert agenda with query
                 DataSetISpaDataTableAdapters.VW_AGENDATableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_AGENDATableAdapter();
-                tableAdapter.InsertQuery(Convert.ToDateTime(arrParam[0]), Convert.ToDateTime(arrParam[1]), arrParam[2].ToString(), arrParam[3].ToString());
+                tableAdapter.InsertQuery(Convert.ToDateTime(arrParam[0]), Convert.ToDateTime(arrParam[1]) , arrParam[2].ToString(), arrParam[3].ToString());
+
+                //tableAdapter.InsertQuery(Convert.ToDateTime(arrParam[0]), Convert.ToDateTime(arrParam[1]), arrParam[2].ToString(), arrParam[3].ToString());
 
                 _MotherForm.addRow(arrParam);
             }
@@ -556,6 +558,13 @@ namespace iSpa
                     errorMessage("Date de naissance non conforme (ex:01.01.2019)");
                     return;
                 }
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXHEURE"));
+                if (!isHourValid(textBox.Text))
+                {
+                    errorMessage("Heure non conforme (ex:08:15)");
+                    return;
+                }
+                arrParam.Add(textBox.Text);
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXNOMCLIENT"));
                 arrParam.Add(textBox.Text);
@@ -565,7 +574,7 @@ namespace iSpa
                 double outDouble;
                 if (double.TryParse(textBox.Text, out outDouble))
                 {
-                    errorMessage("Prix non conforme (ex: 5.00");
+                    errorMessage("Prix non conforme (ex: 5,00");
                     return;
                 }
                 arrParam.Add(textBox.Text);
@@ -577,9 +586,12 @@ namespace iSpa
                 }
                 arrParam.Add(textBox.Text);
 
+                DateTime date1 = Convert.ToDateTime(arrParam[0]);
+                DateTime time1 = Convert.ToDateTime(arrParam[1]);
+
                 //insert factures with query
-                DataSetISpaDataTableAdapters.VW_FACTURETableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
-                tableAdapter.InsertQuery(arrParam[0].ToString(), arrParam[1].ToString(), arrParam[2].ToString(), arrParam[3].ToString(), arrParam[4].ToString(), Convert.ToDecimal(arrParam[5]));
+                DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter();
+                tableAdapter.InsertQuery(date1, time1, arrParam[2].ToString(), arrParam[3].ToString(), arrParam[4].ToString(), Convert.ToDecimal(arrParam[5]));
 
                 _MotherForm.addRow(arrParam);
             }

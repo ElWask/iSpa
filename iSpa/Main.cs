@@ -85,10 +85,10 @@ namespace iSpa
                     this.dgv.DataSource = dataISpa.VW_PRODUIT.DefaultView;
                     break;
                 case "factures":
-                    DataSetISpaDataTableAdapters.VW_FACTURETableAdapter liste4 = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
-                    liste4.Fill(dataISpa.VW_FACTURE);
-                    _CurrentDataTable = dataISpa.VW_FACTURE;
-                    this.dgv.DataSource = dataISpa.VW_FACTURE.DefaultView;
+                    DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter liste4 = new DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter();
+                    liste4.Fill(dataISpa.VW_FACTURE1);
+                    _CurrentDataTable = dataISpa.VW_FACTURE1;
+                    this.dgv.DataSource = dataISpa.VW_FACTURE1.DefaultView;
                     break;
                 case "users":
                     DataSetISpaDataTableAdapters.VW_USERTableAdapter liste5 = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
@@ -111,6 +111,15 @@ namespace iSpa
             foreach(DataColumn col in _CurrentDataTable.Columns)
             {
                 arrHeader[i] = col.ColumnName;
+                if (col.ColumnName == "XHEURE")
+                {
+                    this.dgv.Columns[i].DefaultCellStyle.Format = "HH:mm";
+                }
+                if (col.ColumnName == "XDATE"|| col.ColumnName == "XDOB")
+                {
+                    this.dgv.Columns[i].DefaultCellStyle.Format = "dd.MM.yyyy";
+                }
+
                 i++;
 
             }
@@ -287,7 +296,13 @@ namespace iSpa
                     }
 
                     DataSetISpaDataTableAdapters.VW_AGENDATableAdapter tableAdapter1 = new DataSetISpaDataTableAdapters.VW_AGENDATableAdapter();
-                    tableAdapter1.UpdateQuery(Convert.ToDateTime(arr[0]), Convert.ToDateTime(arr[1]), arr[2], arr[3], Convert.ToDateTime(primaryKeys[0].ToString()), Convert.ToDateTime(primaryKeys[1].ToString()), primaryKeys[2].ToString());
+                    DateTime date = Convert.ToDateTime(arr[0]);
+                    DateTime time = Convert.ToDateTime(arr[1]);
+
+                    DateTime dateKey = Convert.ToDateTime(primaryKeys[0]);
+                    DateTime timeKey = Convert.ToDateTime(primaryKeys[1]);
+
+                    tableAdapter1.UpdateQuery(date, time, arr[2].ToString(), arr[3].ToString(), dateKey, timeKey, primaryKeys[2].ToString());
                     Console.WriteLine("old value " + _OldValue);
                     Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                     break;
@@ -340,9 +355,14 @@ namespace iSpa
                             primaryKeys[i] = _OldValue.ToString();
                         }
                     }
+                    DateTime date2 = Convert.ToDateTime(arr[0]);
+                    DateTime time2 = Convert.ToDateTime(arr[1]);
 
-                    DataSetISpaDataTableAdapters.VW_FACTURETableAdapter tableAdapte4 = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
-                    tableAdapte4.UpdateQuery(arr[0], arr[1], arr[2], arr[3], arr[4], Convert.ToDecimal(arr[5]), primaryKeys[0].ToString(), primaryKeys[1].ToString(), primaryKeys[2].ToString());
+                    DateTime dateKey2 = Convert.ToDateTime(primaryKeys[0]);
+                    DateTime timeKey2 = Convert.ToDateTime(primaryKeys[1]);
+
+                    DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter tableAdapte4 = new DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter();
+                    tableAdapte4.UpdateQuery(date2, time2, arr[2].ToString(), arr[3].ToString(), arr[4].ToString(), Convert.ToDecimal(arr[5]), dateKey2, timeKey2, primaryKeys[2].ToString());
                     Console.WriteLine("old value " + _OldValue);
                     Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
 
