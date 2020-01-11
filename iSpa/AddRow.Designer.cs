@@ -45,13 +45,9 @@
 
         private System.Windows.Forms.TableLayoutPanel tlpFooter;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtBoxDate;
         private System.Windows.Forms.TableLayoutPanel tlpBody;
         private System.Windows.Forms.TextBox txtBoxHour;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox txtBoxName;
         private System.Windows.Forms.TextBox txtBoxType;
         private System.Windows.Forms.Label lblDate;

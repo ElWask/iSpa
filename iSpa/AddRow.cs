@@ -515,8 +515,8 @@ namespace iSpa
 
                 //insert agenda with query
                 DataSetISpaDataTableAdapters.VW_AGENDATableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_AGENDATableAdapter();
-                tableAdapter.InsertQuery(Convert.ToDateTime(arrParam[0]), Convert.ToDateTime(arrParam[1]) , arrParam[2].ToString(), arrParam[3].ToString());
-
+                int resp = tableAdapter.InsertQuery(Convert.ToDateTime(arrParam[0]), Convert.ToDateTime(arrParam[1]) , arrParam[2].ToString(), arrParam[3].ToString());
+                Console.WriteLine(resp);
                 //tableAdapter.InsertQuery(Convert.ToDateTime(arrParam[0]), Convert.ToDateTime(arrParam[1]), arrParam[2].ToString(), arrParam[3].ToString());
 
                 _MotherForm.addRow(arrParam);
@@ -558,6 +558,7 @@ namespace iSpa
                     errorMessage("Date de naissance non conforme (ex:01.01.2019)");
                     return;
                 }
+                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXHEURE"));
                 if (!isHourValid(textBox.Text))
                 {
@@ -565,33 +566,36 @@ namespace iSpa
                     return;
                 }
                 arrParam.Add(textBox.Text);
-                arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXNOMCLIENT"));
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXTYPE"));
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXPRIX"));
+                String val = textBox.Text;
+                val.Replace(',', '.');
                 double outDouble;
-                if (double.TryParse(textBox.Text, out outDouble))
+                if (!double.TryParse(textBox.Text, out outDouble))
                 {
-                    errorMessage("Prix non conforme (ex: 5,00");
+                    errorMessage("Prix non conforme (ex: 5.50)");
                     return;
                 }
-                arrParam.Add(textBox.Text);
+                val.Replace('.', ',');
+                arrParam.Add(val);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXPAYE"));
                 if (!(textBox.Text.ToLower() == "true" || textBox.Text.ToLower() == "false"))
                 {
                     errorMessage("Boolean de paiement non conforme (ex:true ou false");
                     return;
                 }
-                arrParam.Add(textBox.Text);
+                arrParam.Add(textBox.Text == "true" ? 1 : 0);
 
                 DateTime date1 = Convert.ToDateTime(arrParam[0]);
                 DateTime time1 = Convert.ToDateTime(arrParam[1]);
 
                 //insert factures with query
-                DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter();
+                DataSetISpaDataTableAdapters.VW_FACTURETableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
                 tableAdapter.InsertQuery(date1, time1, arrParam[2].ToString(), arrParam[3].ToString(), arrParam[4].ToString(), Convert.ToDecimal(arrParam[5]));
+
 
                 _MotherForm.addRow(arrParam);
             }
@@ -605,11 +609,20 @@ namespace iSpa
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXFOURNISSEUR"));
                 arrParam.Add(textBox.Text);
                 textBox = _Inputs.Find(x => x.Name.Contains("txtBoxXPRIX"));
-                arrParam.Add(textBox.Text);
+                String val = textBox.Text;
+                val.Replace(',', '.');
+                double outDouble;
+                if (!double.TryParse(textBox.Text, out outDouble))
+                {
+                    errorMessage("Prix non conforme (ex: 5.50)");
+                    return;
+                }
+                val.Replace('.', ',');
+                arrParam.Add(val);
 
                 //insert product with query
                 DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter();
-                tableAdapter.InsertQuery(arrParam[0].ToString(), arrParam[1].ToString(), arrParam[2].ToString(), Convert.ToDecimal(arrParam[3]));
+                tableAdapter.InsertQuery(arrParam[0].ToString(), arrParam[1].ToString(), arrParam[2].ToString(), arrParam[3].ToString());
 
                 _MotherForm.addRow(arrParam);
             }

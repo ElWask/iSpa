@@ -85,10 +85,10 @@ namespace iSpa
                     this.dgv.DataSource = dataISpa.VW_PRODUIT.DefaultView;
                     break;
                 case "factures":
-                    DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter liste4 = new DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter();
-                    liste4.Fill(dataISpa.VW_FACTURE1);
-                    _CurrentDataTable = dataISpa.VW_FACTURE1;
-                    this.dgv.DataSource = dataISpa.VW_FACTURE1.DefaultView;
+                    DataSetISpaDataTableAdapters.VW_FACTURETableAdapter liste4 = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
+                    liste4.Fill(dataISpa.VW_FACTURE);
+                    _CurrentDataTable = dataISpa.VW_FACTURE;
+                    this.dgv.DataSource = dataISpa.VW_FACTURE.DefaultView;
                     break;
                 case "users":
                     DataSetISpaDataTableAdapters.VW_USERTableAdapter liste5 = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
@@ -336,7 +336,7 @@ namespace iSpa
                     }
 
                     DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter tableAdapter3 = new DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter();
-                    tableAdapter3.UpdateQuery(arr[0], arr[1], arr[2], Convert.ToDecimal(arr[3]), primaryKeys[0].ToString(), primaryKeys[2].ToString());
+                    tableAdapter3.UpdateQuery(arr[0], arr[1], arr[2], arr[3].ToString().Trim(), primaryKeys[0].ToString(), primaryKeys[2].ToString());
                     Console.WriteLine("old value " + _OldValue);
                     Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                     break;
@@ -361,7 +361,7 @@ namespace iSpa
                     DateTime dateKey2 = Convert.ToDateTime(primaryKeys[0]);
                     DateTime timeKey2 = Convert.ToDateTime(primaryKeys[1]);
 
-                    DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter tableAdapte4 = new DataSetISpaDataTableAdapters.VW_FACTURE1TableAdapter();
+                    DataSetISpaDataTableAdapters.VW_FACTURETableAdapter tableAdapte4 = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
                     tableAdapte4.UpdateQuery(date2, time2, arr[2].ToString(), arr[3].ToString(), arr[4].ToString(), Convert.ToDecimal(arr[5]), dateKey2, timeKey2, primaryKeys[2].ToString());
                     Console.WriteLine("old value " + _OldValue);
                     Console.WriteLine("new value " + dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
