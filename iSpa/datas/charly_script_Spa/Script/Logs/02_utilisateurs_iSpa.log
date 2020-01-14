@@ -1,0 +1,150 @@
+SQL> @.\02_utilisateurs_iSpa.sql
+SQL> -- ====================================================================
+SQL> -- Script : 02_utilisateurs_iSpa.sql
+SQL> -- Objet  : CrÃ©ation des utilisateurs BDD iSpa sur SGBD Oracle en Local (HEGLOCAL)
+SQL> --
+SQL> -- Mise Ã  jour des versions
+SQL> -- Version  Visa	Date	  Commentaires
+SQL> -- -----  ------ --------	  ------------------------------------------
+SQL> -- 1.0	  CS   12.11.19    CrÃ©ation utilisateurs
+SQL> -- ====================================================================
+SQL> -- =============================================================================================
+SQL> -- Suppression des rÃ´les, utilisateurs et profil
+SQL> -- =============================================================================================
+SQL> -- Suppression des utilisateurs
+SQL> DROP USER iSpa_data CASCADE;
+
+Utilisateur supprimé.
+
+SQL> DROP USER iSpa_user CASCADE;
+DROP USER iSpa_user CASCADE
+*
+ERREUR à la ligne 1 :
+ORA-01940: impossible de supprimer un utilisateur qui est connecté 
+
+
+SQL> 
+SQL> -- Suppression des rÃ´les
+SQL> DROP ROLE role_iSpa_data CASCADE;
+
+Rôle supprimé.
+
+SQL> DROP ROLE role_iSpa_user CASCADE;
+
+Rôle supprimé.
+
+SQL> 
+SQL> -- Suppression du profil
+SQL> DROP PROFILE iSpa_profil;
+DROP PROFILE iSpa_profil
+*
+ERREUR à la ligne 1 :
+ORA-02382: Le profil ISPA_PROFIL a des utilisateurs, impossible d'effectuer la suppression sans CASCADE 
+
+
+SQL> 
+SQL> -- =============================================================================================
+SQL> -- CrÃ©ation du profil
+SQL> -- =============================================================================================
+SQL> -- CrÃ©ation du profil iSpa_profil
+SQL> CREATE PROFILE iSpa_profil LIMIT
+  2  	     SESSIONS_PER_USER 3
+  3  	     FAILED_LOGIN_ATTEMPTS 3
+  4  	     PASSWORD_LOCK_TIME 1/24
+  5  	     PASSWORD_LIFE_TIME 180
+  6  	     PASSWORD_REUSE_TIME 180
+  7  	     PASSWORD_REUSE_MAX UNLIMITED
+  8  	     PASSWORD_GRACE_TIME 7;
+CREATE PROFILE iSpa_profil LIMIT
+*
+ERREUR à la ligne 1 :
+ORA-02379: le profil ISPA_PROFIL existe déjà 
+
+
+SQL> 
+SQL> -- =============================================================================================
+SQL> -- CrÃ©ation du rÃ´le role_iSpa_data (rÃ´le de l'utilisateur propriÃ©taire des objets de la base)
+SQL> -- =============================================================================================
+SQL> -- Creation du rÃ´le role_iSpa_data
+SQL> CREATE ROLE role_iSpa_data;
+
+Rôle créé.
+
+SQL> 
+SQL> -- droit de se connecter Ã  la BDD
+SQL> GRANT CONNECT TO role_iSpa_data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> -- droit de crÃ©er des triggers, sÃ©quence, tables, packages, ...
+SQL> GRANT RESOURCE TO role_iSpa_data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> -- droit de crÃ©er des vues
+SQL> GRANT CREATE VIEW TO role_iSpa_data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> -- droit de crÃ©er des synonymes
+SQL> -- GRANT CREATE ANY SYNONYM TO role_iSpa_data;
+SQL> -- ! fonctionne mais donne trop de privilÃ¨ges, Ã  Ã©viter
+SQL> 
+SQL> -- ===============================
+SQL> -- CrÃ©ation du rÃ´le role_iSpa_user (rÃ´le de l'utilisateur de l'application)
+SQL> -- ===============================
+SQL> -- Creation du rÃ´le role_iSpa_user
+SQL> CREATE ROLE role_iSpa_user;
+
+Rôle créé.
+
+SQL> 
+SQL> -- droit de se connecter Ã  la BDD
+SQL> GRANT CREATE SESSION TO role_iSpa_user;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> -- ===================================
+SQL> -- CrÃ©ation de l'utilisateur iSpa_data (propriÃ©taire des objets de schÃ©ma de la base)
+SQL> -- ===================================
+SQL> -- Creation de l'utilisateur iSpa_data
+SQL> CREATE USER iSpa_data
+  2  	     PROFILE iSpa_profil
+  3  	     IDENTIFIED BY iSpa_data
+  4  	     DEFAULT TABLESPACE USERS
+  5  	     TEMPORARY TABLESPACE TEMP
+  6  ;
+
+Utilisateur créé.
+
+SQL> GRANT role_iSpa_data TO iSpa_data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> ALTER USER iSpa_data quota unlimited ON USERS;
+
+Utilisateur modifié.
+
+SQL> 
+SQL> --===================================
+SQL> --CrÃ©ation de l'utilisateur iSpa_user (utilisateur de l'application)
+SQL> --===================================
+SQL> CREATE USER iSpa_user
+  2  	     PROFILE iSpa_profil
+  3  	     IDENTIFIED BY iSpa_user
+  4  ;
+CREATE USER iSpa_user
+            *
+ERREUR à la ligne 1 :
+ORA-01920: nom utilisateur 'ISPA_USER' en conflit avec autre nom utilisateur ou de rôle 
+
+
+SQL> GRANT role_iSpa_user TO iSpa_user;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> SPOOL OFF

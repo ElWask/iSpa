@@ -1,0 +1,254 @@
+SQL> @.\03_tables_iSpa.sql
+SQL> ï»¿-- ====================================================================
+SP2-0734: commande inconnue au début de "ï»¿-- ====..." - le reste de la ligne est ignoré.
+SQL> -- Script : 03_tables_iSpa.sql
+SQL> -- Objet  : CrÃ©ation et suppression des tables iSpa
+SQL> -- ====================================================================
+SQL> -- -----------------------------------------------------------------------------
+SQL> -- 	    GÃ©nÃ©ration d'une base de donnÃ©es pour
+SQL> -- 		     Oracle Version 10g
+SQL> -- 		       (12/11/2019 21:05:25)
+SQL> -- -----------------------------------------------------------------------------
+SQL> --      Nom de la base : MLR1
+SQL> --      Projet : Espace de travail
+SQL> --      Auteur : DSI
+SQL> --      Date de derniÃ¨re modification : 12/11/2019 21:04:24
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> DROP TABLE PRODUCT_SPA CASCADE CONSTRAINTS;
+DROP TABLE PRODUCT_SPA CASCADE CONSTRAINTS
+           *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+SQL> 
+SQL> DROP TABLE USER_SPA CASCADE CONSTRAINTS;
+DROP TABLE USER_SPA CASCADE CONSTRAINTS
+           *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+SQL> 
+SQL> DROP TABLE AGENDA_SPA CASCADE CONSTRAINTS;
+DROP TABLE AGENDA_SPA CASCADE CONSTRAINTS
+           *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+SQL> 
+SQL> DROP TABLE CLIENT_SPA CASCADE CONSTRAINTS;
+DROP TABLE CLIENT_SPA CASCADE CONSTRAINTS
+           *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+SQL> 
+SQL> DROP TABLE FACTURE_SPA CASCADE CONSTRAINTS;
+DROP TABLE FACTURE_SPA CASCADE CONSTRAINTS
+           *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+SQL> 
+SQL> DROP TABLE A_ETE_VENDUE_PAR CASCADE CONSTRAINTS;
+DROP TABLE A_ETE_VENDUE_PAR CASCADE CONSTRAINTS
+           *
+ERREUR à la ligne 1 :
+ORA-00942: Table ou vue inexistante 
+
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       TABLE : PRODUCT_SPA
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> CREATE TABLE PRODUCT_SPA
+  2  	(
+  3  	 PROD_ID NUMBER(4)  NOT NULL,
+  4  	 PROD_NOM CHAR(32)  NULL,
+  5  	 PROD_DESC CHAR(32)  NULL,
+  6  	 PROD_FOURNISSEUR CHAR(32)  NULL,
+  7  	 PROD_PRIX CHAR(32)  NULL
+  8  ,	 CONSTRAINT PK_PRODUCT_SPA PRIMARY KEY (PROD_ID)
+  9  	) ;
+
+Table créée.
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       TABLE : USER_SPA
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> CREATE TABLE USER_SPA
+  2  	(
+  3  	 USR_ID NUMBER(4)  NOT NULL,
+  4  	 USR_NOM CHAR(32)  NULL,
+  5  	 USR_PWD CHAR(32)  NULL,
+  6  	 USR_TYPE CHAR(32)  NULL,
+  7  	 USR_ACTIF NUMBER(1)  NULL
+  8  ,	 CONSTRAINT PK_USER_SPA PRIMARY KEY (USR_ID)
+  9  	) ;
+
+Table créée.
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       TABLE : AGENDA_SPA
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> CREATE TABLE AGENDA_SPA
+  2  	(
+  3  	 AGE_ID NUMBER(4)  NOT NULL,
+  4  	 CLI_ID NUMBER(4)  NULL,
+  5  	 USR_ID NUMBER(4)   NULL,
+  6  	 AGE_DATE DATE	NULL,
+  7  	 AGE_HEURE DATE  NULL,
+  8  	 AGE_NOMCLIENT CHAR(32)  NULL,
+  9  	 AGE_TYPE CHAR(32)  NULL
+ 10  ,	 CONSTRAINT PK_AGENDA_SPA PRIMARY KEY (AGE_ID)
+ 11  	) ;
+
+Table créée.
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       INDEX DE LA TABLE AGENDA_SPA
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> CREATE UNIQUE INDEX I_FK_AGENDA_SPA_CLIENT_SPA
+  2  	  ON AGENDA_SPA (CLI_ID ASC)
+  3  	 ;
+
+Index créé.
+
+SQL> 
+SQL> CREATE UNIQUE INDEX I_FK_AGENDA_SPA_USER_SPA
+  2  	  ON AGENDA_SPA (USR_ID ASC)
+  3  	 ;
+
+Index créé.
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       TABLE : CLIENT_SPA
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> CREATE TABLE CLIENT_SPA
+  2  	(
+  3  	 CLI_ID NUMBER(4)  NOT NULL,
+  4  	 CLI_PRENOM CHAR(32)  NULL,
+  5  	 CLI_NOM CHAR(32)  NULL,
+  6  	 CLI_DOB DATE  NULL,
+  7  	 CLI_EMAIL CHAR(32)  NULL,
+  8  	 CLI_ADRESSE CHAR(32)  NULL
+  9  ,	 CONSTRAINT PK_CLIENT_SPA PRIMARY KEY (CLI_ID)
+ 10  	) ;
+
+Table créée.
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       TABLE : FACTURE_SPA
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> CREATE TABLE FACTURE_SPA
+  2  	(
+  3  	 FACT_ID NUMBER(4)  NOT NULL,
+  4  	 AGE_ID NUMBER(4)  NOT NULL,
+  5  	 FACT_DATE DATE  NULL,
+  6  	 FACT_HEURE DATE  NULL,
+  7  	 FACT_NOMCLIENT CHAR(32)  NULL,
+  8  	 FACT_TYPESEANCE CHAR(32)  NULL,
+  9  	 FACT_PRIX CHAR(32)  NULL,
+ 10  	 FACT_PAYE NUMBER(1)  NULL
+ 11  ,	 CONSTRAINT PK_FACTURE_SPA PRIMARY KEY (FACT_ID)
+ 12  	) ;
+
+Table créée.
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       INDEX DE LA TABLE FACTURE_SPA
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> CREATE UNIQUE INDEX I_FK_FACTURE_SPA_AGENDA_SPA
+  2  	  ON FACTURE_SPA (AGE_ID ASC)
+  3  	 ;
+
+Index créé.
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       TABLE : A_ETE_VENDUE_PAR
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> CREATE TABLE A_ETE_VENDUE_PAR
+  2  	(
+  3  	 PROD_ID NUMBER(4)  NOT NULL,
+  4  	 FACT_ID CHAR(32)  NOT NULL,
+  5  	 FACT_PROD_QTY NUMBER(2)  NULL,
+  6  	 FACT_PROD_PRIX_UNIT NUMBER(10,2)  NULL
+  7  ,	 CONSTRAINT PK_A_ETE_VENDUE_PAR PRIMARY KEY (PROD_ID, FACT_ID)
+  8  	) ;
+
+Table créée.
+
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> --       CREATION DES REFERENCES DE TABLE
+SQL> -- -----------------------------------------------------------------------------
+SQL> 
+SQL> 
+SQL> ALTER TABLE AGENDA_SPA ADD (
+  2  	  CONSTRAINT FK_AGENDA_SPA_CLIENT_SPA
+  3  	       FOREIGN KEY (CLI_ID)
+  4  		    REFERENCES CLIENT_SPA (CLI_ID))   ;
+
+Table modifiée.
+
+SQL> 
+SQL> ALTER TABLE AGENDA_SPA ADD (
+  2  	  CONSTRAINT FK_AGENDA_SPA_USER_SPA
+  3  	       FOREIGN KEY (USR_ID)
+  4  		    REFERENCES USER_SPA (USR_ID))   ;
+
+Table modifiée.
+
+SQL> 
+SQL> ALTER TABLE FACTURE_SPA ADD (
+  2  	  CONSTRAINT FK_FACTURE_SPA_AGENDA_SPA
+  3  	       FOREIGN KEY (AGE_ID)
+  4  		    REFERENCES AGENDA_SPA (AGE_ID))   ;
+
+Table modifiée.
+
+SQL> 
+SQL> ALTER TABLE A_ETE_VENDUE_PAR ADD (
+  2  	  CONSTRAINT FK_A_ETE_VENDUE_PAR_PRODUCT_SP
+  3  	       FOREIGN KEY (PROD_ID)
+  4  		    REFERENCES PRODUCT_SPA (PROD_ID))	;
+
+Table modifiée.
+
+SQL> 
+SQL> ALTER TABLE A_ETE_VENDUE_PAR ADD (
+  2  	  CONSTRAINT FK_A_ETE_VENDUE_PAR_FACTURE_SP
+  3  	       FOREIGN KEY (FACT_ID)
+  4  		    REFERENCES FACTURE_SPA (FACT_ID))	;
+          FOREIGN KEY (FACT_ID)
+                       *
+ERREUR à la ligne 3 :
+ORA-02267: type de colonne incompatible avec type de colonne référencé 
+
+
+SQL> 
+SQL> 
+SQL> -- -----------------------------------------------------------------------------
+SQL> -- 	       FIN DE GENERATION
+SQL> -- -----------------------------------------------------------------------------
+SQL> SPOOL OFF

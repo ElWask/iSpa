@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditPass.Designer.cs">
+      <DependentUpon>EditPass.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddRow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EditPass.resx">
+      <DependentUpon>EditPass.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddRow.resx">
       <DependentUpon>AddRow.cs</DependentUpon>
     </EmbeddedResource>

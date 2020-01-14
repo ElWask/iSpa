@@ -330,6 +330,7 @@ namespace iSpa
         private void loadLblTxtBox()
         {
             String[] headers = _Headers;
+            List<String> niceHeaders = getNiceHeaders(_Headers);
             this.tlpBody.RowCount = headers.Length * 2;
             this.lblTitle.Text = _Title.ToUpperInvariant();
 
@@ -347,7 +348,15 @@ namespace iSpa
                 newLbl.Name = "lbl" + headName;
                 newLbl.Size = new System.Drawing.Size(194, 25);
                 newLbl.TabIndex = 25;
-                newLbl.Text = headName;
+                newLbl.Text = niceHeaders[i];
+                if (headName.Equals("XNOMCLIENT"))
+                {
+                    newLbl.Text = "Nom du client";
+                }
+                if (headName.Equals("XTYPESEANCE"))
+                {
+                    newLbl.Text = "Type de séance";
+                }
                 newLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 this.tlpBody.Controls.Add(newLbl, 0, 2*i);
                 // txtBox
@@ -361,7 +370,7 @@ namespace iSpa
                 txtBox.Name = "txtBox"+headName;
                 txtBox.Size = new System.Drawing.Size(194, 21);
                 txtBox.TabIndex = 21;
-                txtBox.Text = headName;
+                txtBox.Text = niceHeaders[i];
                 if (headName.Equals("XPRIXUNITAIRE"))
                 {
                     txtBox.Text = "0";
@@ -373,6 +382,13 @@ namespace iSpa
                 else if (headName.Equals("XHEURE"))
                 {
                     txtBox.Text = "hh:mm";
+                }
+                else if (headName.Equals("XTYPE"))
+                {
+                    if (_Title.Equals("users"))
+                    {
+                        txtBox.Text = "admin ou user";
+                    }
                 }
                 else if (headName.Equals("XPAYE") || headName.Equals("XACTIF"))
                 {
@@ -397,6 +413,18 @@ namespace iSpa
                 this.tlpBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
                 this.tlpBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             }
+        }
+
+        private List<string> getNiceHeaders(string[] headers)
+        {
+            List<string> niceHeaders = new List<string>();
+            foreach (String title in headers)
+            {
+                if (title is null)
+                    break;
+                niceHeaders.Add(title.ToLower().TrimStart('x'));
+            }
+            return niceHeaders;
         }
 
         private void loadExtraParam()
@@ -656,6 +684,65 @@ namespace iSpa
 
                 //refresh current table
                 _MotherForm.addRow(arrParam);
+            }
+            if (_Title.Equals("changer de mot de passe"))
+            {
+                String username;
+                lblError.Text = "";
+                TextBox textBox = _Inputs.Find(x => x.Name.Contains("txtBoxAncien mot de passe"));
+                String oldPass = textBox.Text.Trim();
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNouveau mot de passe"));
+                String newPass = textBox.Text.Trim();
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxRépéter nouveau mot de passe"));
+                String secondNewPass = textBox.Text.Trim();
+
+                DataSetISpaDataTableAdapters.VW_USERTableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
+                DataSetISpaData.VW_USERDataTable dataTable;
+
+                textBox = _Inputs.Find(x => x.Name.Contains("txtBoxNom utilisateur"));
+                if (textBox is null)
+                {
+                    username = _ArrayParam[0].ToString();
+                    dataTable = tableAdapter.GetDataByUser(username);
+                }
+                else
+                {
+                    username = textBox.Text.Trim();
+                    dataTable = tableAdapter.GetDataByUser(username);
+                }
+                
+                if (dataTable.Rows.Count == 0)
+                {
+                    errorMessage("Votre compte à été supprimé de la base, veuillez contacter l'admin");
+                    return;
+                }
+                    
+
+                DataRow row = dataTable.Rows[0];
+                if (row != null)
+                {
+                    if (row["XNOM"].ToString().Trim().Equals(username.Trim()) && row["XPASSWORD"].ToString().Trim().Equals(oldPass.Trim()))
+                    {
+                        if (row["XACTIF"].ToString().Trim() == "0")
+                        {
+                            errorMessage("Votre compte à été désactivé, veuillez contacter l'admin");
+                            return;
+                        }
+                        Console.WriteLine("cred ok " + username + " " + oldPass);
+                        if (!newPass.Equals(secondNewPass))
+                        {
+                            errorMessage("Vous n'avez pas écrit le même nouveau mot de passe");
+                            return;
+                        }
+                        tableAdapter.UpdateQuery(username,newPass, row["XTYPE"].ToString().Trim(),Convert.ToDecimal(row["XACTIF"]),username);
+                        this.Close();
+                        return;
+                    }
+                    errorMessage("Erreur de votre ancien mot de passe, veuillez réessayer");
+                    return;
+                }
+                errorMessage("Votre compte à été supprimé de la base, veuillez contacter l'admin");
+                return;
             }
             this.Close();
         }

@@ -30,8 +30,8 @@ namespace iSpa
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tlpHeader = new System.Windows.Forms.TableLayoutPanel();
             this.picAdd = new System.Windows.Forms.PictureBox();
             this.closeBtn = new System.Windows.Forms.Button();
@@ -48,6 +48,8 @@ namespace iSpa
             this.btnAgenda = new System.Windows.Forms.Button();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnUsers = new System.Windows.Forms.Button();
+            this.btnChangePass = new System.Windows.Forms.Button();
+            this.picDel = new System.Windows.Forms.PictureBox();
             this.tlpHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEdit)).BeginInit();
@@ -55,22 +57,25 @@ namespace iSpa
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictLogo)).BeginInit();
             this.tlpButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picDel)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpHeader
             // 
             this.tlpHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(59)))), ((int)(((byte)(76)))));
-            this.tlpHeader.ColumnCount = 6;
+            this.tlpHeader.ColumnCount = 7;
+            this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpHeader.Controls.Add(this.picDel, 2, 0);
             this.tlpHeader.Controls.Add(this.picAdd, 0, 0);
-            this.tlpHeader.Controls.Add(this.closeBtn, 5, 0);
-            this.tlpHeader.Controls.Add(this.btnAgrandir, 4, 0);
-            this.tlpHeader.Controls.Add(this.btnReduc, 3, 0);
+            this.tlpHeader.Controls.Add(this.closeBtn, 6, 0);
+            this.tlpHeader.Controls.Add(this.btnAgrandir, 5, 0);
+            this.tlpHeader.Controls.Add(this.btnReduc, 4, 0);
             this.tlpHeader.Controls.Add(this.picEdit, 0, 0);
             this.tlpHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpHeader.Location = new System.Drawing.Point(0, 0);
@@ -89,7 +94,7 @@ namespace iSpa
             this.picAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picAdd.Image = ((System.Drawing.Image)(resources.GetObject("picAdd.Image")));
-            this.picAdd.Location = new System.Drawing.Point(40, 0);
+            this.picAdd.Location = new System.Drawing.Point(0, 0);
             this.picAdd.Margin = new System.Windows.Forms.Padding(0);
             this.picAdd.Name = "picAdd";
             this.picAdd.Size = new System.Drawing.Size(40, 40);
@@ -154,7 +159,7 @@ namespace iSpa
             this.picEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picEdit.Image = ((System.Drawing.Image)(resources.GetObject("picEdit.Image")));
-            this.picEdit.Location = new System.Drawing.Point(0, 0);
+            this.picEdit.Location = new System.Drawing.Point(40, 0);
             this.picEdit.Margin = new System.Windows.Forms.Padding(0);
             this.picEdit.Name = "picEdit";
             this.picEdit.Size = new System.Drawing.Size(40, 40);
@@ -208,8 +213,8 @@ namespace iSpa
             this.dgv.Size = new System.Drawing.Size(984, 614);
             this.dgv.TabIndex = 24;
             this.dgv.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_cellMouseDown);
-            this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cellValueChanged);
             this.dgv.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgv_cellValidating);
+            this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cellValueChanged);
             // 
             // btnClient
             // 
@@ -314,6 +319,7 @@ namespace iSpa
             this.tlpButtons.Controls.Add(this.btnClient, 0, 3);
             this.tlpButtons.Controls.Add(this.btnFacture, 0, 5);
             this.tlpButtons.Controls.Add(this.btnUsers, 0, 6);
+            this.tlpButtons.Controls.Add(this.btnChangePass, 0, 7);
             this.tlpButtons.Dock = System.Windows.Forms.DockStyle.Left;
             this.tlpButtons.Location = new System.Drawing.Point(0, 0);
             this.tlpButtons.Name = "tlpButtons";
@@ -346,6 +352,33 @@ namespace iSpa
             this.btnUsers.UseVisualStyleBackColor = false;
             this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
+            // btnChangePass
+            // 
+            this.btnChangePass.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnChangePass.FlatAppearance.BorderSize = 0;
+            this.btnChangePass.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnChangePass.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChangePass.Location = new System.Drawing.Point(3, 627);
+            this.btnChangePass.Name = "btnChangePass";
+            this.btnChangePass.Size = new System.Drawing.Size(204, 30);
+            this.btnChangePass.TabIndex = 29;
+            this.btnChangePass.Text = "Changer de mot de passe";
+            this.btnChangePass.UseVisualStyleBackColor = true;
+            this.btnChangePass.Click += new System.EventHandler(this.btnChangePass_Click);
+            // 
+            // picDel
+            // 
+            this.picDel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picDel.Image = ((System.Drawing.Image)(resources.GetObject("picDel.Image")));
+            this.picDel.Location = new System.Drawing.Point(80, 0);
+            this.picDel.Margin = new System.Windows.Forms.Padding(0);
+            this.picDel.Name = "picDel";
+            this.picDel.Size = new System.Drawing.Size(40, 40);
+            this.picDel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picDel.TabIndex = 30;
+            this.picDel.TabStop = false;
+            this.picDel.Click += new System.EventHandler(this.picDel_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -368,6 +401,7 @@ namespace iSpa
             ((System.ComponentModel.ISupportInitialize)(this.pictLogo)).EndInit();
             this.tlpButtons.ResumeLayout(false);
             this.tlpButtons.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picDel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -390,5 +424,7 @@ namespace iSpa
         private System.Windows.Forms.TableLayoutPanel tlpButtons;
         private System.Windows.Forms.Button btnUsers;
         private System.Windows.Forms.PictureBox picAdd;
+        private System.Windows.Forms.Button btnChangePass;
+        private System.Windows.Forms.PictureBox picDel;
     }
 }

@@ -1,0 +1,113 @@
+SQL> @.\05_vues_iSpa.sql
+SQL> -- ======================================================================
+SQL> --  Script: 05_vues_iSpa.sql
+SQL> --  Objet : CrÃ©ation des vues schÃ©ma de la base iSpa
+SQL> --  Objectif : crÃ©er des vues et tester l'interrogation et la mise-Ã -jour Ã  travers ces vues.
+SQL> -- ======================================================================
+SQL> 
+SQL> -- ====================================================
+SQL> -- CrÃ©ation des VUES
+SQL> -- ====================================================
+SQL> -- ====================================================
+SQL> -- Vue d'affichage des produits
+SQL> -- ====================================================
+SQL> CREATE OR REPLACE VIEW vw_produit(xNom, xDescription, xFournisseur, xPrix) AS
+  2  	    SELECT PROD_NOM, PROD_DESC, PROD_FOURNISSEUR, PROD_PRIX
+  3  	    FROM PRODUCT_SPA
+  4  	      ORDER BY PROD_NOM
+  5  ;
+
+Vue créée.
+
+SQL> GRANT SELECT, INSERT, UPDATE, DELETE ON vw_produit TO iSpa_user;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> -- ====================================================
+SQL> -- Vue d'affichage des users
+SQL> -- ====================================================
+SQL> CREATE OR REPLACE VIEW vw_user(xNom, xPassword, xType, xActif) AS
+  2  	    SELECT USR_NOM, USR_PWD, USR_TYPE, USR_ACTIF
+  3  	    FROM USER_SPA
+  4  	      ORDER BY USR_NOM
+  5  ;
+
+Vue créée.
+
+SQL> GRANT SELECT, INSERT, UPDATE, DELETE ON vw_user TO iSpa_user;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> -- ====================================================
+SQL> -- Vue d'affichage des agendas
+SQL> -- ====================================================
+SQL> CREATE OR REPLACE VIEW vw_agenda(xDate, xHeure, xNomClient, xType) AS
+  2  	   SELECT AGE_DATE, AGE_HEURE, AGE_NOMCLIENT, AGE_TYPE
+  3  	   FROM AGENDA_SPA
+  4  	   --INNER JOIN CLIENT_SPA ON CLIENT_SPA.CLI_ID = AGENDA_SPA.CLI_ID
+  5  	   --INNER JOIN USER_SPA ON USER_SPA.USR_ID = AGENDA_SPA.USR_ID
+  6  	      ORDER BY AGE_DATE
+  7  ;
+
+Vue créée.
+
+SQL> GRANT SELECT, INSERT, UPDATE, DELETE ON vw_agenda TO iSpa_user;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> -- ====================================================
+SQL> -- Vue d'affichage des clients
+SQL> -- ====================================================
+SQL> CREATE OR REPLACE VIEW vw_client(xPrenom, xNom, xDob, xEmail, xAdresse) AS
+  2  	    SELECT CLI_PRENOM, CLI_NOM, CLI_DOB, CLI_EMAIL, CLI_ADRESSE
+  3  	    FROM CLIENT_SPA
+  4  	      ORDER BY CLI_PRENOM
+  5  ;
+
+Vue créée.
+
+SQL> GRANT SELECT, INSERT, UPDATE, DELETE ON vw_client TO iSpa_user;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> -- ====================================================
+SQL> -- Vue d'affichage des factures
+SQL> -- ====================================================
+SQL> CREATE OR REPLACE VIEW vw_facture( xDate, xHeure, xNomClient, xTypeSeance, xPrix, xPaye) AS
+  2  	    SELECT FACT_DATE, FACT_HEURE, FACT_NOMCLIENT, FACT_TYPESEANCE, FACT_PRIX, FACT_PAYE
+  3  	    FROM FACTURE_SPA
+  4  	    INNER JOIN AGENDA_SPA ON FACTURE_SPA.AGE_ID = AGENDA_SPA.AGE_ID
+  5  	      ORDER BY FACT_DATE
+  6  ;
+
+Vue créée.
+
+SQL> GRANT SELECT, INSERT, UPDATE, DELETE ON vw_facture TO iSpa_user;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> -- ====================================================
+SQL> -- Vue d'affichage des users
+SQL> -- ====================================================
+SQL> CREATE OR REPLACE VIEW vw_vendue_par(xQuantite, xPrixUnitaire) AS
+  2  	   SELECT FACT_PROD_QTY, FACT_PROD_PRIX_UNIT
+  3  	   FROM A_ETE_VENDUE_PAR
+  4  	   INNER JOIN PRODUCT_SPA ON PRODUCT_SPA.PROD_ID = A_ETE_VENDUE_PAR.PROD_ID
+  5  	   INNER JOIN FACTURE_SPA ON FACTURE_SPA.FACT_ID = A_ETE_VENDUE_PAR.FACT_ID
+  6  ;
+
+Vue créée.
+
+SQL> GRANT SELECT, INSERT, UPDATE, DELETE ON vw_vendue_par TO iSpa_user;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> -- SELECT * FROM vw_ami;
+SQL> -- SELECT * FROM vw_ingredient;
+SQL> -- SELECT * FROM vw_recette;
+SQL> -- SELECT * FROM vw_achat;
+SQL> 
+SQL> SPOOL OFF

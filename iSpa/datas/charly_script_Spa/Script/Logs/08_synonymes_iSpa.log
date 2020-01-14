@@ -1,0 +1,58 @@
+SQL> @.\08_synonymes_iSpa.sql;
+SQL> -- ======================================================================
+SQL> --  Script: 07_synonymes_iSpa.sql
+SQL> --  Objet : CrÃ©ation des synonymes de la base iSpa
+SQL> -- ======================================================================
+SQL> 
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.vw_produit FOR iSpa_data.vw_produit;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.vw_user FOR iSpa_data.vw_user;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.vw_agenda FOR iSpa_data.vw_agenda;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.vw_client FOR iSpa_data.vw_client;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.vw_facture FOR iSpa_data.vw_facture;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.vw_vendue_par FOR iSpa_data.vw_vendue_par;
+
+Synonyme créé.
+
+SQL> 
+SQL> 
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.pkg_insert_Blob FOR iSpa_data.pkg_insertBlob;
+
+Synonyme créé.
+
+SQL> 
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.sq_product FOR iSpa_data.sq_product;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.sq_user FOR iSpa_data.sq_user;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.sq_agenda FOR iSpa_data.sq_agenda;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.sq_client FOR iSpa_data.sq_client;
+
+Synonyme créé.
+
+SQL> CREATE OR REPLACE SYNONYM iSpa_user.sq_facture FOR iSpa_data.sq_facture;
+
+Synonyme créé.
+
+SQL> SPOOL OFF

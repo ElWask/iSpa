@@ -1,0 +1,311 @@
+SQL> @.\07_package_iSpa.sql;
+SQL> create or replace package pkg_insertProduct
+  2  AS
+  3  	    FUNCTION ProductInsert(xName IN VARCHAR, xDesc IN VARCHAR, xFournisseur IN VARCHAR, xPrix IN NUMBER)RETURN NUMBER;
+  4  	    FUNCTION ProductGet(xName IN VARCHAR)RETURN NUMBER;
+  5  	    FUNCTION ProductSetData(xName IN VARCHAR, xDesc IN VARCHAR, xFournisseur IN VARCHAR, xPrix IN NUMBER)RETURN NUMBER;
+  6  END pkg_insertProduct;
+  7  /
+
+Package créé.
+
+SQL> create or replace package body pkg_insertProduct
+  2  AS
+  3  
+  4  FUNCTION ProductInsert(xName IN VARCHAR, xDesc IN VARCHAR, xFournisseur IN VARCHAR, xPrix IN VARCHAR )RETURN NUMBER
+  5  AS
+  6  	v_insert_confirmed NUMBER;
+  7  	v_id NUMBER;
+  8  BEGIN
+  9  	      SELECT PRODUCT_SPA.PROD_ID INTO v_id FROM PRODUCT_SPA WHERE PRODUCT_SPA.PROD_NOM = xName;
+ 10  	      IF v_id  is null THEN
+ 11  		 insert into PRODUCT_SPA  (PROD_NOM, PROD_DESC, PROD_FOURNISSEUR, PROD_PRIX ) values  (xName, xDesc, xFournisseur, xPrix);
+ 12  		 v_insert_confirmed := 1;
+ 13  	      ELSE
+ 14  		 v_insert_confirmed := 0;
+ 15  	      END IF;
+ 16  	      RETURN v_insert_confirmed;
+ 17  END ProductInsert;
+ 18  
+ 19  FUNCTION ProductGet(xName IN VARCHAR)RETURN NUMBER
+ 20  AS
+ 21  	      v_id NUMBER;
+ 22  BEGIN
+ 23  	      SELECT PRODUCT_SPA.PROD_ID INTO v_id FROM PRODUCT_SPA WHERE PRODUCT_SPA.PROD_NOM = xName;
+ 24  	      RETURN v_id;
+ 25  END ProductGet;
+ 26  
+ 27  FUNCTION ProductSetData(xName IN VARCHAR, xDesc IN VARCHAR, xFournisseur IN VARCHAR, xPrix IN VARCHAR)RETURN NUMBER
+ 28  AS
+ 29  	      v_edit_confirmed NUMBER;
+ 30  	      v_id NUMBER;
+ 31  BEGIN
+ 32  	      SELECT PRODUCT_SPA.PROD_ID INTO v_id FROM PRODUCT_SPA WHERE PRODUCT_SPA.PROD_NOM = xName;
+ 33  	      IF v_id  is not null THEN
+ 34  		 UPDATE PRODUCT_SPA SET PROD_NOM = xName, PROD_DESC = xDesc, PROD_FOURNISSEUR = xFournisseur, PROD_PRIX = xPrix WHERE PRODUCT_SPA.PROD_ID = v_id;
+ 35  		 v_edit_confirmed := 1;
+ 36  	      ELSE
+ 37  		 v_edit_confirmed := 0;
+ 38  	      END IF;
+ 39  	      RETURN v_edit_confirmed;
+ 40  END ProductSetData;
+ 41  END pkg_insertProduct;
+ 42  /
+
+Avertissement : Corps de package créé avec erreurs de compilation.
+
+SQL> GRANT EXECUTE ON pkg_insertProduct TO role_iSpa_Data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> create or replace package pkg_insertUser
+  2  AS
+  3  	    FUNCTION UserInsert(xUsername IN VARCHAR, xPassword IN VARCHAR, xType IN VARCHAR, xActif IN NUMBER)RETURN NUMBER;
+  4  	    FUNCTION UserGet(xUsername IN VARCHAR)RETURN NUMBER;
+  5  	    FUNCTION UserSetData(xUsername IN VARCHAR, xPassword IN VARCHAR, xType IN VARCHAR, xActif IN NUMBER)RETURN NUMBER;
+  6  END pkg_insertUser;
+  7  /
+
+Package créé.
+
+SQL> create or replace package body pkg_insertUser
+  2  AS
+  3  
+  4  FUNCTION UserInsert(xUsername IN VARCHAR, xPassword IN VARCHAR, xType IN VARCHAR, xActif IN NUMBER)RETURN NUMBER
+  5  AS
+  6  	v_insert_confirmed NUMBER;
+  7  	v_id NUMBER;
+  8  BEGIN
+  9  	      SELECT USER_SPA.USR_ID INTO v_id FROM USER_SPA WHERE USER_SPA.USR_NOM = xUsername;
+ 10  	      IF v_id  is null THEN
+ 11  		 insert into USER_SPA  (USR_NOM, USR_PWD, USR_TYPE, USR_ACTIF) values  (xUsername, xPassword, xType, xActif);
+ 12  		 v_insert_confirmed := 1;
+ 13  	      ELSE
+ 14  		 v_insert_confirmed := 0;
+ 15  	      END IF;
+ 16  	      RETURN v_insert_confirmed;
+ 17  END UserInsert;
+ 18  
+ 19  FUNCTION UserGet(xUsername IN VARCHAR)RETURN NUMBER
+ 20  AS
+ 21  	      v_id NUMBER;
+ 22  BEGIN
+ 23  	      SELECT USR_ID INTO v_id FROM USER_SPA WHERE USR_NOM = xUsername;
+ 24  	      RETURN v_id;
+ 25  END UserGet;
+ 26  
+ 27  FUNCTION UserSetData(xUsername IN VARCHAR, xPassword IN VARCHAR, xType IN VARCHAR, xActif IN NUMBER)RETURN NUMBER
+ 28  AS
+ 29  	      v_edit_confirmed NUMBER;
+ 30  	      v_id NUMBER;
+ 31  BEGIN
+ 32  	      SELECT USER_SPA.USR_ID INTO v_id FROM USER_SPA WHERE USER_SPA.USR_NOM = xUsername;
+ 33  	      IF v_id  is not null THEN
+ 34  		 UPDATE USER_SPA SET USR_NOM = xUsername, USR_PWD = xPassword, USR_TYPE = xType, USR_ACTIF = xActif WHERE USER_SPA.USR_ID = v_id;
+ 35  		 v_edit_confirmed := 1;
+ 36  	      ELSE
+ 37  		 v_edit_confirmed := 0;
+ 38  	      END IF;
+ 39  	      RETURN v_edit_confirmed;
+ 40  END UserSetData;
+ 41  END pkg_insertUser;
+ 42  /
+
+Corps de package créé.
+
+SQL> GRANT EXECUTE ON pkg_insertUser TO role_iSpa_Data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> create or replace package pkg_insertAgenda
+  2  AS
+  3  	    FUNCTION AgendaInsert(xIdClient IN VARCHAR, xIdUser IN VARCHAR, xDate IN VARCHAR, xHeure IN VARCHAR, xNomClient IN VARCHAR, xType IN VARCHAR, xPrix IN NUMBER)RETURN NUMBER;
+  4  	    FUNCTION AgendaSetData(xIdClient IN VARCHAR, xIdUser IN VARCHAR, xDate IN VARCHAR, xHeure IN VARCHAR, xNomClient IN VARCHAR, xType IN VARCHAR, xPrix IN NUMBER)RETURN NUMBER;
+  5  END pkg_insertAgenda;
+  6  /
+
+Package créé.
+
+SQL> create or replace package body pkg_insertAgenda
+  2  AS
+  3  
+  4  FUNCTION AgendaInsert(xIdClient IN VARCHAR, xIdUser IN VARCHAR, xDate IN VARCHAR, xHeure IN VARCHAR, xNomClient IN VARCHAR, xType IN VARCHAR, xPrix IN NUMBER)RETURN NUMBER
+  5  AS
+  6  	v_insert_confirmed NUMBER;
+  7  	v_id NUMBER;
+  8  BEGIN
+  9  	      SELECT AGENDA_SPA.AGE_ID INTO v_id FROM AGENDA_SPA WHERE AGENDA_SPA.AGE_DATE = xDate AND AGENDA_SPA.AGE_HEURE = xHeure AND AGENDA_SPA.AGE_NOMCLIENT = xNomClient AND AGENDA_SPA.AGE_TYPE = xType;
+ 10  	      IF v_id  is null THEN
+ 11  		 insert into AGENDA_SPA  (CLI_ID, USR_ID, AGE_DATE, AGE_HEURE, AGE_NOMCLIENT, AGE_TYPE) values (xIdClient, xIdUser, xDate, xHeure, xType, xNomClient);
+ 12  		 v_insert_confirmed := 1;
+ 13  	      ELSE
+ 14  		 v_insert_confirmed := 0;
+ 15  	      END IF;
+ 16  	      RETURN v_insert_confirmed;
+ 17  END AgendaInsert;
+ 18  
+ 19  FUNCTION AgendaSetData( xIdClient IN VARCHAR, xIdUser IN VARCHAR, xDate IN VARCHAR, xHeure IN VARCHAR, xNomClient IN VARCHAR, xType IN VARCHAR, xPrix IN NUMBER)RETURN NUMBER
+ 20  AS
+ 21  	      v_edit_confirmed NUMBER;
+ 22  	      v_id NUMBER;
+ 23  BEGIN
+ 24  	      SELECT AGENDA_SPA.AGE_ID INTO v_id FROM AGENDA_SPA WHERE AGENDA_SPA.AGE_DATE = xDate AND AGENDA_SPA.AGE_HEURE = xHeure AND AGENDA_SPA.AGE_NOMCLIENT = xNomClient AND AGENDA_SPA.AGE_TYPE = xType;
+ 25  	      IF v_id  is not null THEN
+ 26  		 UPDATE AGENDA_SPA SET CLI_ID = xIdClient, USR_ID = xIdUser, AGE_DATE = xDate, AGE_HEURE = xHeure, AGE_NOMCLIENT = xNomClient WHERE USR_ID = v_id;
+ 27  		 v_edit_confirmed := 1;
+ 28  	      ELSE
+ 29  		 v_edit_confirmed := 0;
+ 30  	      END IF;
+ 31  	      RETURN v_edit_confirmed;
+ 32  END AgendaSetData;
+ 33  END pkg_insertAgenda;
+ 34  /
+
+Corps de package créé.
+
+SQL> sho err
+Pas d'erreur.
+SQL> /
+
+Corps de package créé.
+
+SQL> GRANT EXECUTE ON pkg_insertAgenda TO role_iSpa_Data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> 
+SQL> create or replace package pkg_insertClient
+  2  AS
+  3  	    FUNCTION ClientInsert(xName IN VARCHAR, xLastName IN VARCHAR, xDob IN DATE, xEmail IN VARCHAR, xAdresse IN VARCHAR)RETURN NUMBER;
+  4  	    FUNCTION ClientGet(xName IN VARCHAR, xLastName IN VARCHAR)RETURN NUMBER;
+  5  	    FUNCTION ClientSetData(xName IN VARCHAR, xLastName IN VARCHAR, xDob IN DATE, xEmail IN VARCHAR, xAdresse IN VARCHAR)RETURN NUMBER;
+  6  END pkg_insertClient;
+  7  /
+
+Package créé.
+
+SQL> create or replace package body pkg_insertClient
+  2  AS
+  3  
+  4  FUNCTION ClientInsert(xName IN VARCHAR, xLastName IN VARCHAR, xDob IN DATE, xEmail IN VARCHAR, xAdresse IN VARCHAR)RETURN NUMBER
+  5  AS
+  6  	v_insert_confirmed NUMBER;
+  7  	v_id NUMBER;
+  8  BEGIN
+  9  	      SELECT CLIENT_SPA.CLI_ID INTO v_id FROM CLIENT_SPA WHERE CLIENT_SPA.CLI_PRENOM = xName AND CLIENT_SPA.CLI_NOM = xLastName AND CLIENT_SPA.CLI_DOB = xDob ;
+ 10  	      IF v_id  is null THEN
+ 11  		 insert into CLIENT_SPA  (CLI_PRENOM, CLI_NOM, CLI_DOB, CLI_EMAIL, CLI_ADRESSE) values	(xName, xLastName, xDob, xEmail, xAdresse);
+ 12  		 v_insert_confirmed := 1;
+ 13  	      ELSE
+ 14  		 v_insert_confirmed := 0;
+ 15  	      END IF;
+ 16  	      RETURN v_insert_confirmed;
+ 17  END ClientInsert;
+ 18  
+ 19  FUNCTION ClientGet(xName IN VARCHAR, xLastName IN VARCHAR)RETURN NUMBER
+ 20  AS
+ 21  	      v_id NUMBER;
+ 22  BEGIN
+ 23  	      SELECT CLIENT_SPA.CLI_ID INTO v_id FROM CLIENT_SPA WHERE CLIENT_SPA.CLI_PRENOM = xName AND CLIENT_SPA.CLI_NOM = xLastName;
+ 24  	      RETURN v_id;
+ 25  END ClientGet;
+ 26  
+ 27  FUNCTION ClientSetData(xName IN VARCHAR, xLastName IN VARCHAR, xDob IN DATE, xEmail IN VARCHAR, xAdresse IN VARCHAR)RETURN NUMBER
+ 28  AS
+ 29  	      v_edit_confirmed NUMBER;
+ 30  	      v_id NUMBER;
+ 31  BEGIN
+ 32  	      SELECT CLIENT_SPA.CLI_ID INTO v_id FROM CLIENT_SPA WHERE CLIENT_SPA.CLI_NOM = xName;
+ 33  	      IF v_id  is not null THEN
+ 34  		 UPDATE CLIENT_SPA SET CLI_NOM = xLastName, CLI_PRENOM = xName, CLI_DOB = xDob WHERE CLI_ID = v_id;
+ 35  		 v_edit_confirmed := 1;
+ 36  	      ELSE
+ 37  		 v_edit_confirmed := 0;
+ 38  	      END IF;
+ 39  	      RETURN v_edit_confirmed;
+ 40  END ClientSetData;
+ 41  END pkg_insertClient;
+ 42  /
+
+Corps de package créé.
+
+SQL> sho err
+Pas d'erreur.
+SQL> /
+
+Corps de package créé.
+
+SQL> GRANT EXECUTE ON pkg_insertClient TO role_iSpa_Data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> 
+SQL> create or replace package pkg_insertFacture
+  2  AS
+  3  	    FUNCTION FactureInsert(xAgeId IN NUMBER, xDate in DATE, xHeure in DATE, xNomClient IN VARCHAR, xTypeSeance IN VARCHAR, xPrix IN NUMBER, xPaye IN NUMBER)RETURN NUMBER;
+  4  	    FUNCTION FactureGet(xDate in DATE, xHeure in DATE, xNomClient IN VARCHAR)RETURN NUMBER;
+  5  	    FUNCTION FactureSetData(xAgeId IN NUMBER, xDate in DATE, xHeure in DATE, xNomClient IN VARCHAR, xTypeSeance IN VARCHAR, xPrix IN NUMBER, xPaye IN NUMBER)RETURN NUMBER;
+  6  END pkg_insertFacture;
+  7  /
+
+Package créé.
+
+SQL> create or replace package body pkg_insertFacture
+  2  AS
+  3  
+  4  FUNCTION FactureInsert(xAgeId IN NUMBER, xDate in DATE, xHeure in DATE, xNomClient IN VARCHAR, xTypeSeance IN VARCHAR, xPrix IN NUMBER, xPaye IN NUMBER)RETURN NUMBER
+  5  AS
+  6  	v_insert_confirmed NUMBER;
+  7  	v_id NUMBER;
+  8  BEGIN
+  9  	      SELECT FACT_ID INTO v_id FROM FACTURE_SPA WHERE FACT_DATE = xDate AND FACT_HEURE = xHeure AND FACT_NOMCLIENT = xNomClient ;
+ 10  	      IF v_id  is null THEN
+ 11  		 insert into FACTURE_SPA  (AGE_ID,FACT_DATE, FACT_HEURE, FACT_NOMCLIENT, FACT_TYPESEANCE, FACT_PRIX,FACT_PAYE) values  (xAgeId, xDate, xHeure, xNomClient, xTypeSeance, xPrix, xPaye);
+ 12  		 v_insert_confirmed := 1;
+ 13  	      ELSE
+ 14  		 v_insert_confirmed := 0;
+ 15  	      END IF;
+ 16  	      RETURN v_insert_confirmed;
+ 17  END FactureInsert;
+ 18  
+ 19  FUNCTION FactureGet( xDate in DATE, xHeure in DATE,xNomClient IN VARCHAR)RETURN NUMBER
+ 20  AS
+ 21  	      v_id NUMBER;
+ 22  BEGIN
+ 23  	      SELECT FACT_ID INTO v_id FROM FACTURE_SPA WHERE FACT_DATE = xDate AND FACT_HEURE = xHeure AND FACT_NOMCLIENT = xNomClient;
+ 24  	      RETURN v_id;
+ 25  END FactureGet;
+ 26  
+ 27  FUNCTION FactureSetData(xAgeId IN NUMBER, xDate in DATE, xHeure in DATE, xNomClient IN VARCHAR, xTypeSeance IN VARCHAR, xPrix IN NUMBER, xPaye IN NUMBER)RETURN NUMBER
+ 28  AS
+ 29  	      v_edit_confirmed NUMBER;
+ 30  	      v_id NUMBER;
+ 31  BEGIN
+ 32  	      SELECT FACT_ID INTO v_id FROM FACTURE_SPA WHERE FACT_DATE = xDate AND FACT_HEURE = xHeure AND FACT_NOMCLIENT = xNomClient;
+ 33  	      IF v_id  is not null THEN
+ 34  		 UPDATE FACTURE_SPA SET AGE_ID = xAgeId, FACT_DATE = xDate, FACT_HEURE = xHeure, FACT_NOMCLIENT = xNomClient, FACT_TYPESEANCE = xTypeSeance, FACT_PRIX = xPrix, FACT_PAYE = xPaye  WHERE FACT_ID = v_id;
+ 35  		 v_edit_confirmed := 1;
+ 36  	      ELSE
+ 37  		 v_edit_confirmed := 0;
+ 38  	      END IF;
+ 39  	      RETURN v_edit_confirmed;
+ 40  END FactureSetData;
+ 41  END pkg_insertFacture;
+ 42  /
+
+Corps de package créé.
+
+SQL> sho err
+Pas d'erreur.
+SQL> /
+
+Corps de package créé.
+
+SQL> GRANT EXECUTE ON pkg_insertFacture TO role_iSpa_Data;
+
+Autorisation de privilèges (GRANT) acceptée.
+
+SQL> SPOOL OFF

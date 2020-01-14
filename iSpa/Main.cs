@@ -18,14 +18,17 @@ namespace iSpa
         private String dir = "";
         private Boolean canEdit, isReduc;
         private DataTable _CurrentDataTable;
+        private DataGridViewRow _CurrentRowSelected;
         private String _CurrentTitle;
         private String[] _CurrentHeaders;
+        private String _Usrname;
         private String _Role;
         private object _OldValue;
         private int _OldValuePos;
 
-        public Main(String xRole)
+        public Main(String xUsrname,String xRole)
         {
+            _Usrname = xUsrname;
             _Role = xRole;
             InitializeComponent();
             RunComponent();
@@ -57,7 +60,7 @@ namespace iSpa
             this.changeEditButton();
             // read datas and put them in datagridview1
             string pathName = dir + "/datas/" + xFileName + ".csv";
-            //DataSet data = new DataSet();
+
             System.IO.StreamReader sr = new System.IO.StreamReader(pathName, Encoding.Default,true);
 
             //bdd access
@@ -386,16 +389,17 @@ namespace iSpa
 
         private void dgv_cellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+            int rowSelected = e.RowIndex;
             if (e.Button == MouseButtons.Right)
             {
                 this.dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                int rowSelected = e.RowIndex;
+
                 if (e.RowIndex != -1)
                 {
                     this.dgv.ClearSelection();
                     this.dgv.Rows[rowSelected].Selected = true;
                     
-                    String prenomNom = this.dgv.Rows[rowSelected].Cells[1].Value.ToString() + " " + this.dgv.Rows[rowSelected].Cells[2].Value.ToString();
+                    String prenomNom = this.dgv.Rows[rowSelected].Cells[0].Value.ToString() + " " + this.dgv.Rows[rowSelected].Cells[1].Value.ToString();
                     String nom = this.dgv.Rows[rowSelected].Cells[2].Value.ToString();
                     String type = this.dgv.Rows[rowSelected].Cells[3].Value.ToString();
                     if (_CurrentTitle.Equals("clients"))
@@ -414,6 +418,7 @@ namespace iSpa
             else
             {
                 this.dgv.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                _CurrentRowSelected = this.dgv.Rows[rowSelected];
             }
 
         }
@@ -432,6 +437,105 @@ namespace iSpa
             arr.Add(xType);
             loadDataInGrid("factures");
             openAddRow(arr);
+        }
+
+        private void btnChangePass_Click(object sender, EventArgs e)
+        {
+            if (_Role.Equals("admin"))
+            {
+                openChangePassUser();
+                return;
+            }
+            ArrayList myAL = new ArrayList();
+            myAL.Add(_Usrname);
+            openChangePass(myAL);
+        }
+        private void openChangePassUser()
+        {
+            Form editPass = new AddRow(this, "changer de mot de passe", new String[4] { "Nom utilisateur","Ancien mot de passe", "Nouveau mot de passe", "Répéter nouveau mot de passe" }, 4);
+            editPass.ShowDialog();
+        }
+        private void openChangePass(ArrayList xArrayParam)
+        {
+            Form editPass = new AddRow(this, "changer de mot de passe", new String[3] { "Ancien mot de passe", "Nouveau mot de passe", "Répéter nouveau mot de passe" }, 3, xArrayParam);
+            editPass.ShowDialog();
+        }
+
+        private void picDel_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow dgr = _CurrentRowSelected;
+            //TODO HERE
+            /*switch (_CurrentTitle)
+            {
+                case "agenda":
+
+                    Console.WriteLine(dgr);
+                    DataSetISpaDataTableAdapters.VW_AGENDATableAdapter tableAdapter1 = new DataSetISpaDataTableAdapters.VW_AGENDATableAdapter();
+                    DateTime date = Convert.ToDateTime(arr[0]);
+                    DateTime time = Convert.ToDateTime(arr[1]);
+
+                    DateTime dateKey = Convert.ToDateTime(primaryKeys[0]);
+                    DateTime timeKey = Convert.ToDateTime(primaryKeys[1]);
+                    //Convert.ToDateTime(arrParam[0]), Convert.ToDateTime(arrParam[1]) , arrParam[2].ToString(), arrParam[3].ToString()
+                    tableAdapter1.DeleteQuery(Convert.ToDateTime(arrParam[0]), Convert.ToDateTime(arrParam[1]), arrParam[2].ToString(), arrParam[3].ToString());
+                    break;
+                case "clients":
+
+                    // pos 3 est la valeur de la cle primaire
+                    posKey = 3;
+                    primaryKey = arr[posKey];
+
+                    DataSetISpaDataTableAdapters.VW_CLIENTTableAdapter tableAdapte2 = new DataSetISpaDataTableAdapters.VW_CLIENTTableAdapter();
+                    tableAdapte2.DeleteQuery(arrParam[0].ToString(), arrParam[1].ToString(), Convert.ToDateTime(arrParam[2]), arrParam[3].ToString(), arrParam[4].ToString());
+                    //
+                    break;
+                case "products":
+                    // pos 0 et 2 Sont les valeurs de la cle primaire
+                    primaryKeys = new String[3];
+
+                    primaryKeys[0] = arr[0];
+                    primaryKeys[2] = arr[2];
+
+                    for (int i = 0; i < primaryKeys.Length; i++)
+                    {
+                        if (i == _OldValuePos)
+                        {
+                            primaryKeys[i] = _OldValue.ToString();
+                        }
+                    }
+
+                    DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter tableAdapter3 = new DataSetISpaDataTableAdapters.VW_PRODUITTableAdapter();
+                    tableAdapter3.DeleteQuery(arrParam[0].ToString(), arrParam[1].ToString(), arrParam[2].ToString(), arrParam[3].ToString());
+                    break;
+                case "factures":
+                    // pos 0 1 et 2 Sont les valeurs de la cle primaire
+                    primaryKeys = new String[3];
+
+                    primaryKeys[0] = arr[0];
+                    primaryKeys[1] = arr[1];
+                    primaryKeys[2] = arr[2];
+
+                    for (int i = 0; i < primaryKeys.Length; i++)
+                    {
+                        if (i == _OldValuePos)
+                        {
+                            primaryKeys[i] = _OldValue.ToString();
+                        }
+                    }
+                    DateTime date2 = Convert.ToDateTime(arr[0]);
+                    DateTime time2 = Convert.ToDateTime(arr[1]);
+
+                    DateTime dateKey2 = Convert.ToDateTime(primaryKeys[0]);
+                    DateTime timeKey2 = Convert.ToDateTime(primaryKeys[1]);
+
+                    DataSetISpaDataTableAdapters.VW_FACTURETableAdapter tableAdapte4 = new DataSetISpaDataTableAdapters.VW_FACTURETableAdapter();
+                    tableAdapte4.DeleteQuery(date1, time1, arrParam[2].ToString(), arrParam[3].ToString(), arrParam[4].ToString(), Convert.ToDecimal(arrParam[5]));
+                    break;
+                case "users":
+                    DataSetISpaDataTableAdapters.VW_USERTableAdapter tableAdapter5 = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
+                    tableAdapter5.DeleteQuery(arr[0].ToString(), arr[1].ToString(), arr[2].ToString(), Convert.ToDecimal(arr[3]));
+                    break;
+            }*/
         }
 
         private void btnAgrandir_Click(object sender, EventArgs e)

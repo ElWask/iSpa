@@ -267,24 +267,30 @@ namespace iSpa
             loginCred();
         }
 
-        private bool controlAccess(string usr, string pass)
+        private String controlAccess(string usr, string pass)
         {
             DataSetISpaDataTableAdapters.VW_USERTableAdapter tableAdapter = new DataSetISpaDataTableAdapters.VW_USERTableAdapter();
             DataSetISpaData.VW_USERDataTable dataTable = tableAdapter.GetDataByUser(usr);
             if (dataTable.Rows.Count == 0)
-                return false;
+                return null;
 
             DataRow row = dataTable.Rows[0];
             if (row != null)
             {
                 if (row["XNOM"].ToString().Trim() == usr.Trim() && row["XPASSWORD"].ToString().Trim() == pass.Trim())
                 {
+                    if(row["XACTIF"].ToString().Trim() == "0")
+                    {
+                        lblError.Text = "Votre compte à été désactivé, veuillez contacter l'admin";
+                        return null;
+                    }
                     Console.WriteLine("cred ok " + usr + " " + pass);
-                    return true;
+                    return row["XTYPE"].ToString().Trim();
                 }
             }
+            lblError.Text = "Erreur d'identifiant, veuillez réessayer";
             Console.WriteLine("cred not ok " + usr + " " + pass);
-            return false;
+            return null;
         }
 
         private void txtBoxPass_KeyUp(object sender, KeyEventArgs e)
@@ -304,12 +310,12 @@ namespace iSpa
                 lblError.Text = "Erreur d'identifiant, veuillez remplir tout les champs requis";
                 return;
             }
-            if (!controlAccess(txtBoxUsername.Text, txtBoxPass.Text))
+            String role = controlAccess(txtBoxUsername.Text, txtBoxPass.Text);
+            if (role == null)
             {
-                lblError.Text = "Erreur d'identifiant, veuillez réessayer";
                 return;
             }
-            Form main = new Main(txtBoxUsername.Text);
+            Form main = new Main(txtBoxUsername.Text, role);
             this.Hide();
             main.ShowDialog();
             this.Close();
